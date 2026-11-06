@@ -1,10 +1,10 @@
 import { notFound } from "next/navigation";
+import { posts } from "@/data/posts";
 
 const profile = {
   username: "jxx_gro_ovy",
   displayName: "홍진우",
   bio: "",
-  posts: 6,
   followers: 422,
   following: 462,
 };
@@ -36,7 +36,7 @@ export default async function ProfilePage({
           <h1 className="break-all text-xl font-semibold">{profile.username}</h1>
 
           <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-sm">
-            <li>게시물 <strong>{profile.posts}</strong></li>
+            <li>게시물 <strong>{posts.length}</strong></li>
             <li>팔로워 <strong>{profile.followers}</strong></li>
             <li>팔로잉 <strong>{profile.following}</strong></li>
           </ul>
@@ -45,6 +45,22 @@ export default async function ProfilePage({
           <p className="mt-1 text-sm">{profile.bio}</p>
         </div>
       </header>
+
+      <section aria-labelledby="posts-heading" className="mt-8 border-t border-gray-200">
+        <h2 id="posts-heading" className="py-4 text-center text-sm font-semibold">
+          게시물
+        </h2>
+        <ul role="list" className="grid grid-cols-3 gap-1">
+          {posts.map((post) => (
+            <li
+              key={post.id}
+              className="aspect-square bg-gray-100"
+            >
+              <span className="sr-only">{post.title}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
     </section>
   );
 }
