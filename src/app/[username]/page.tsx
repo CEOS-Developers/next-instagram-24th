@@ -1,26 +1,22 @@
 import { notFound } from "next/navigation";
 import { posts } from "@/data/posts";
-
-const profile = {
-  username: "jxx_gro_ovy",
-  displayName: "홍진우",
-  bio: "",
-  followers: 422,
-  following: 462,
-};
+import { profiles } from "@/data/profiles";
 
 export function generateStaticParams() {
-  return [{ username: profile.username }];
+  return profiles.map(({ username }) => ({ username }));
 }
 
 export default async function ProfilePage({
   params,
 }: PageProps<"/[username]">) {
   const { username } = await params;
+  const profile = profiles.find((profile) => profile.username === username);
 
-  if (username !== profile.username) {
+  if (!profile) {
     notFound();
   }
+
+  const profilePosts = posts.filter((post) => post.authorUsername === username);
 
   return (
     <section className="mx-auto max-w-4xl px-4 py-8 md:px-8 md:py-12">
@@ -37,7 +33,7 @@ export default async function ProfilePage({
           <p className="mt-2 text-sm font-semibold">{profile.displayName}</p>
 
           <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-sm">
-            <li>게시물 <strong>{posts.length}</strong></li>
+            <li>게시물 <strong>{profilePosts.length}</strong></li>
             <li>팔로워 <strong>{profile.followers}</strong></li>
             <li>팔로잉 <strong>{profile.following}</strong></li>
           </ul>
@@ -51,7 +47,7 @@ export default async function ProfilePage({
           게시물
         </h2>
         <ul role="list" className="grid grid-cols-3 gap-1">
-          {posts.map((post) => (
+          {profilePosts.map((post) => (
             <li
               key={post.id}
               className="aspect-square bg-gray-100"
