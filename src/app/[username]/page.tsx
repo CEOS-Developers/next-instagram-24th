@@ -34,6 +34,7 @@ export default async function ProfilePage({
 
         <div className="min-w-0">
           <h1 className="break-all text-xl font-semibold">{profile.username}</h1>
+          <p className="mt-2 text-sm font-semibold">{profile.displayName}</p>
 
           <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-sm">
             <li>게시물 <strong>{posts.length}</strong></li>
@@ -41,7 +42,6 @@ export default async function ProfilePage({
             <li>팔로잉 <strong>{profile.following}</strong></li>
           </ul>
 
-          <p className="mt-4 text-sm font-semibold">{profile.displayName}</p>
           <p className="mt-1 text-sm">{profile.bio}</p>
         </div>
       </header>
