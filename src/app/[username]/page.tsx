@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { posts } from "@/data/posts";
-import { profiles } from "@/data/profiles";
+import { currentUser, profiles } from "@/data/profiles";
+import ProfileHeader from "@/components/ProfileHeader";
 
 export function generateStaticParams() {
   return profiles.map(({ username }) => ({ username }));
@@ -21,27 +22,12 @@ export default async function ProfilePage({
 
   return (
     <section className="mx-auto max-w-4xl px-4 py-8 md:px-8 md:py-12">
-      <header className="flex items-start gap-4 sm:gap-10">
-        <div
-          aria-hidden="true"
-          className="grid size-16 shrink-0 place-items-center rounded-full bg-gray-100 text-xl font-semibold text-gray-500 sm:size-32 sm:text-3xl"
-        >
-          {profile.username[0].toUpperCase()}
-        </div>
-
-        <div className="min-w-0">
-          <h1 className="break-all text-xl font-semibold">{profile.username}</h1>
-          <p className="mt-2 text-sm font-semibold">{profile.displayName}</p>
-
-          <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-sm">
-            <li>게시물 <strong>{profilePosts.length}</strong></li>
-            <li>팔로워 <strong>{profile.followers}</strong></li>
-            <li>팔로잉 <strong>{profile.following}</strong></li>
-          </ul>
-
-          <p className="mt-1 text-sm">{profile.bio}</p>
-        </div>
-      </header>
+      <ProfileHeader
+        profile={profile}
+        postCount={profilePosts.length}
+        isOwnProfile={profile.username === currentUser.username}
+        isFollowing={currentUser.followingUsernames.includes(profile.username)}
+      />
 
       <section aria-labelledby="posts-heading" className="mt-8 border-t border-gray-200">
         <h2 id="posts-heading" className="py-4 text-center text-sm font-semibold">
@@ -59,6 +45,9 @@ export default async function ProfilePage({
             </li>
           ))}
         </ul>
+        {profilePosts.length === 0 && (
+          <p className="py-12 text-center text-sm text-gray-500">아직 게시물이 없습니다.</p>
+        )}
       </section>
     </section>
   );

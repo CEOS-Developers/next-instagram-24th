@@ -15,6 +15,7 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import HomeIcon from "@/components/HomeIcon";
+import { currentUser } from "@/data/profiles";
 
 const menuItems: { label: string; icon: LucideIcon; href?: string }[] = [
   { label: "홈", icon: House, href: "/" },
@@ -23,7 +24,7 @@ const menuItems: { label: string; icon: LucideIcon; href?: string }[] = [
   { label: "검색", icon: Search },
   { label: "알림", icon: Heart },
   { label: "만들기", icon: Plus },
-  { label: "프로필", icon: CircleUserRound, href: "/jxx_gro_ovy" },
+  { label: "프로필", icon: CircleUserRound, href: `/${currentUser.username}` },
 ];
 
 export default function SidebarMenu({ collapsed = false }: { collapsed?: boolean }) {
@@ -64,12 +65,11 @@ export default function SidebarMenu({ collapsed = false }: { collapsed?: boolean
                   <button
                     type="button"
                     disabled
-                    title={`${item.label}: 준비 중`}
+                    title={`${item.label}`}
                     className={`${itemClassName} cursor-not-allowed text-gray-500`}
                   >
                     <ItemIcon size={24} strokeWidth={1.8} aria-hidden="true" className="shrink-0" />
                     <span className={labelClassName}>{item.label}</span>
-                    <span className="sr-only"> (준비 중)</span>
                   </button>
                 )}
               </li>
@@ -82,22 +82,20 @@ export default function SidebarMenu({ collapsed = false }: { collapsed?: boolean
         <button
           type="button"
           disabled
-          title="더 보기: 준비 중"
+          title="더 보기"
           className={`${itemClassName} cursor-not-allowed text-gray-500`}
         >
           <Menu size={24} strokeWidth={1.8} aria-hidden="true" className="shrink-0" />
           <span className={labelClassName}>더 보기</span>
-          <span className="sr-only"> (준비 중)</span>
         </button>
         <button
           type="button"
           disabled
-          title="Meta의 다른 앱: 준비 중"
+          title="Meta의 다른 앱"
           className={`${itemClassName} cursor-not-allowed text-gray-500`}
         >
           <LayoutGrid size={24} strokeWidth={1.8} aria-hidden="true" className="shrink-0" />
           <span className={labelClassName}>Meta의 다른 앱</span>
-          <span className="sr-only"> (준비 중)</span>
         </button>
       </div>
     </div>

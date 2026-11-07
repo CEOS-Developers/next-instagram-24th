@@ -3,6 +3,7 @@
 import {
   ArrowLeft,
   AtSign,
+  Ellipsis,
   ChevronDown,
   CircleUserRound,
   Clapperboard,
@@ -17,7 +18,7 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import HomeIcon from "@/components/HomeIcon";
-import { profiles } from "@/data/profiles";
+import { currentUser, profiles } from "@/data/profiles";
 import { posts } from "@/data/posts";
 
 const menuItems: { label: string; icon: LucideIcon; href?: string }[] = [
@@ -26,7 +27,7 @@ const menuItems: { label: string; icon: LucideIcon; href?: string }[] = [
   { label: "릴스", icon: Clapperboard },
   { label: "만들기", icon: Plus },
   { label: "메시지", icon: Send },
-  { label: "프로필", icon: CircleUserRound, href: "/jxx_gro_ovy" },
+  { label: "프로필", icon: CircleUserRound, href: `/${currentUser.username}` },
 ];
 
 const controlClassName =
@@ -42,27 +43,43 @@ export default function MobileNavigation() {
       <header className="fixed inset-x-0 top-0 z-20 h-14 border-b border-gray-200 bg-white px-3">
         {profile ? (
           <div className="grid h-full grid-cols-[44px_minmax(0,1fr)_44px] items-center gap-2">
-            <button
-              type="button"
-              disabled
-              aria-label="설정 (준비 중)"
-              title="설정: 준비 중"
-              className={`${controlClassName} cursor-not-allowed`}
-            >
-              <Settings size={24} strokeWidth={1.8} aria-hidden="true" />
-            </button>
+            {profile.username === currentUser.username ? (
+              <button
+                type="button"
+                disabled
+                aria-label="설정"
+                title="설정"
+                className={`${controlClassName} cursor-not-allowed`}
+              >
+                <Settings size={24} strokeWidth={1.8} aria-hidden="true" />
+              </button>
+            ) : (
+              <Link
+                href={`/${currentUser.username}`}
+                aria-label="내 프로필로 돌아가기"
+                className={controlClassName}
+              >
+                <ArrowLeft size={24} strokeWidth={1.8} aria-hidden="true" />
+              </Link>
+            )}
             <div className="flex min-w-0 items-center justify-center gap-1">
               <span className="truncate text-base font-semibold">{profile.username}</span>
-              <ChevronDown size={16} aria-hidden="true" className="shrink-0" />
+              {profile.username === currentUser.username && (
+                <ChevronDown size={16} aria-hidden="true" className="shrink-0" />
+              )}
             </div>
             <button
               type="button"
               disabled
-              aria-label="Threads (준비 중)"
-              title="Threads: 준비 중"
+              aria-label={profile.username === currentUser.username ? "Threads" : "더 보기"}
+              title={profile.username === currentUser.username ? "Threads" : "더 보기"}
               className={`${controlClassName} cursor-not-allowed`}
             >
-              <AtSign size={24} strokeWidth={1.8} aria-hidden="true" />
+              {profile.username === currentUser.username ? (
+                <AtSign size={24} strokeWidth={1.8} aria-hidden="true" />
+              ) : (
+                <Ellipsis size={24} strokeWidth={1.8} aria-hidden="true" />
+              )}
             </button>
           </div>
         ) : post ? (
@@ -84,8 +101,8 @@ export default function MobileNavigation() {
             <button
               type="button"
               disabled
-              aria-label="알림 (준비 중)"
-              title="알림: 준비 중"
+              aria-label="알림"
+              title="알림"
               className={`${controlClassName} cursor-not-allowed`}
             >
               <Heart size={26} strokeWidth={1.8} aria-hidden="true" />
@@ -124,11 +141,11 @@ export default function MobileNavigation() {
                   <button
                     type="button"
                     disabled
-                    title={`${item.label}: 준비 중`}
+                    title={`${item.label}`}
                     className={`${controlClassName} cursor-not-allowed text-gray-500`}
                   >
                     {icon}
-                    <span className="sr-only">{item.label} (준비 중)</span>
+                    <span className="sr-only">{item.label}</span>
                   </button>
                 )}
               </li>
