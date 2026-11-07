@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { posts } from "@/data/posts";
+import PostGallery from "@/components/PostGallery";
 
 export function generateStaticParams() {
   return posts.map(({ id }) => ({ id }));
@@ -16,7 +17,7 @@ export default async function PostPage({ params }: PageProps<"/posts/[id]">) {
 
   return (
     <article className="mx-auto grid max-w-4xl border border-gray-200 lg:mt-8 lg:grid-cols-[3fr_2fr]">
-      <div aria-hidden="true" className="aspect-square bg-gray-100" />
+      <PostGallery key={post.id} images={post.images} />
       <div className="min-w-0">
         <header className="border-b border-gray-200 px-4 py-3">
           <Link

@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Copy } from "lucide-react";
+import PostPhoto from "@/components/PostPhoto";
 import { posts } from "@/data/posts";
 import { currentUser, profiles } from "@/data/profiles";
 import ProfileHeader from "@/components/ProfileHeader";
@@ -46,9 +48,21 @@ export default async function ProfilePage({
             <li key={post.id}>
               <Link
                 href={`/posts/${post.id}`}
-                className="block aspect-[3/4] bg-gray-100 hover:bg-gray-200 focus-visible:outline-2 focus-visible:-outline-offset-2"
+                aria-label={`${post.title}${post.images.length > 1 ? `, 사진 ${post.images.length}장` : ""}`}
+                className="group relative block aspect-[3/4] overflow-hidden bg-gray-100 focus-visible:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2"
               >
-                <span className="sr-only">{post.title}</span>
+                <PostPhoto
+                  image={post.images[0]}
+                  sizes="(min-width: 1280px) 272px, (min-width: 768px) calc((100vw - 136px) / 3), 33vw"
+                />
+                {post.images.length > 1 && (
+                  <Copy
+                    size={20}
+                    aria-hidden="true"
+                    className="absolute top-2 right-2 fill-white text-white drop-shadow-md sm:top-3 sm:right-3"
+                  />
+                )}
+                <span aria-hidden="true" className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/15" />
               </Link>
             </li>
           ))}
