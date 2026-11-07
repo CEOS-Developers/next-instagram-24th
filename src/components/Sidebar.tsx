@@ -14,6 +14,12 @@ export default function Sidebar() {
         >
           홈
         </Link>
+        <Link
+          href="/jxx_gro_ovy"
+          className="block rounded-lg px-3 py-4 hover:bg-gray-100"
+        >
+          프로필
+        </Link>
       </nav>
     </aside>
   );
