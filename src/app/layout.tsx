@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/components/Sidebar";
+import { Suspense } from "react";
+import MobileNavigation from "@/components/MobileNavigation";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +29,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col">
         <div className="flex min-h-screen bg-white text-black">
           <Sidebar />
-          <main className="min-w-0 flex-1">{children}</main>
+          <Suspense fallback={null}>
+            <MobileNavigation />
+          </Suspense>
+          <main className="min-w-0 flex-1 pt-14 pb-[calc(4rem+env(safe-area-inset-bottom))] md:pt-0 md:pb-0">{children}</main>
         </div>
       </body>
     </html>

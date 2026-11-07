@@ -7,17 +7,17 @@ import SidebarMenu from "@/components/SidebarMenu";
 
 export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
-  const widthClassName = collapsed ? "w-18" : "w-60";
+  const widthClassName = collapsed ? "md:w-18 xl:w-18" : "md:w-18 xl:w-60";
   const ToggleIcon = collapsed ? PanelLeftOpen : PanelLeftClose;
 
   return (
-    <aside className={`${widthClassName} shrink-0 motion-safe:transition-[width] motion-safe:duration-200`}>
+    <aside className={`hidden ${widthClassName} shrink-0 md:block motion-safe:transition-[width] motion-safe:duration-200`}>
       <div className={`fixed inset-y-0 left-0 z-10 flex ${widthClassName} flex-col overflow-x-hidden overflow-y-auto border-r border-gray-200 bg-white px-3 pt-6 pb-4 text-[#0f1419] motion-safe:transition-[width] motion-safe:duration-200`}>
-        <div className={`mb-12 flex min-h-13 items-center ${collapsed ? "justify-center" : "justify-between"}`}>
+        <div className={`mb-12 flex min-h-13 items-center justify-center ${collapsed ? "" : "xl:justify-between"}`}>
           <Link
             href="/"
             aria-label="Instagram 홈"
-            className={`${collapsed ? "hidden" : "block"} w-fit rounded-lg p-3 hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2`}
+            className={`${collapsed ? "xl:hidden" : ""} block w-fit rounded-lg p-3 hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2`}
           >
             <svg
               viewBox="0 0 24 24"
@@ -41,7 +41,7 @@ export default function Sidebar() {
             aria-controls="sidebar-menu"
             aria-label={collapsed ? "사이드바 펼치기" : "사이드바 접기"}
             title={collapsed ? "사이드바 펼치기" : "사이드바 접기"}
-            className="shrink-0 rounded-lg p-2.5 hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2"
+            className="hidden shrink-0 rounded-lg p-2.5 hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2 xl:block"
           >
             <ToggleIcon size={24} strokeWidth={1.8} aria-hidden="true" />
           </button>

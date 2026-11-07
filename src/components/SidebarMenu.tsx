@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import HomeIcon from "@/components/HomeIcon";
 
 const menuItems: { label: string; icon: LucideIcon; href?: string }[] = [
   { label: "홈", icon: House, href: "/" },
@@ -27,7 +28,8 @@ const menuItems: { label: string; icon: LucideIcon; href?: string }[] = [
 
 export default function SidebarMenu({ collapsed = false }: { collapsed?: boolean }) {
   const pathname = usePathname();
-  const itemClassName = `flex min-h-12 w-full items-center rounded-lg py-3 text-left text-base focus-visible:outline-2 focus-visible:outline-offset-2 ${collapsed ? "justify-center" : "gap-4 px-3"}`;
+  const itemClassName = `flex min-h-12 w-full items-center justify-center rounded-lg py-3 text-left text-base focus-visible:outline-2 focus-visible:outline-offset-2 ${collapsed ? "" : "xl:justify-start xl:gap-4 xl:px-3"}`;
+  const labelClassName = collapsed ? "sr-only" : "sr-only xl:not-sr-only";
 
   return (
     <div id="sidebar-menu" className="flex min-h-0 flex-1 flex-col">
@@ -43,21 +45,11 @@ export default function SidebarMenu({ collapsed = false }: { collapsed?: boolean
                   <Link
                     href={item.href}
                     aria-current={active ? "page" : undefined}
-                    title={collapsed ? item.label : undefined}
+                    title={item.label}
                     className={`${itemClassName} hover:bg-gray-100 ${active ? "font-bold" : ""}`}
                   >
-                    {active && item.icon === House ? (
-                      <svg
-                        viewBox="0 0 24 24"
-                        width="24"
-                        height="24"
-                        fill="currentColor"
-                        aria-hidden="true"
-                        focusable="false"
-                        className="shrink-0"
-                      >
-                        <path d="M10.1 3.2a3 3 0 0 1 3.8 0L20 8.3a3 3 0 0 1 1 2.3V19a2 2 0 0 1-2 2h-4v-6a3 3 0 0 0-6 0v6H5a2 2 0 0 1-2-2v-8.4a3 3 0 0 1 1-2.3Z" />
-                      </svg>
+                    {item.icon === House ? (
+                      <HomeIcon active={active} />
                     ) : (
                       <ItemIcon
                         size={24}
@@ -66,7 +58,7 @@ export default function SidebarMenu({ collapsed = false }: { collapsed?: boolean
                         className="shrink-0"
                       />
                     )}
-                    <span className={collapsed ? "sr-only" : undefined}>{item.label}</span>
+                    <span className={labelClassName}>{item.label}</span>
                   </Link>
                 ) : (
                   <button
@@ -76,7 +68,7 @@ export default function SidebarMenu({ collapsed = false }: { collapsed?: boolean
                     className={`${itemClassName} cursor-not-allowed text-gray-500`}
                   >
                     <ItemIcon size={24} strokeWidth={1.8} aria-hidden="true" className="shrink-0" />
-                    <span className={collapsed ? "sr-only" : undefined}>{item.label}</span>
+                    <span className={labelClassName}>{item.label}</span>
                     <span className="sr-only"> (준비 중)</span>
                   </button>
                 )}
@@ -94,7 +86,7 @@ export default function SidebarMenu({ collapsed = false }: { collapsed?: boolean
           className={`${itemClassName} cursor-not-allowed text-gray-500`}
         >
           <Menu size={24} strokeWidth={1.8} aria-hidden="true" className="shrink-0" />
-          <span className={collapsed ? "sr-only" : undefined}>더 보기</span>
+          <span className={labelClassName}>더 보기</span>
           <span className="sr-only"> (준비 중)</span>
         </button>
         <button
@@ -104,7 +96,7 @@ export default function SidebarMenu({ collapsed = false }: { collapsed?: boolean
           className={`${itemClassName} cursor-not-allowed text-gray-500`}
         >
           <LayoutGrid size={24} strokeWidth={1.8} aria-hidden="true" className="shrink-0" />
-          <span className={collapsed ? "sr-only" : undefined}>Meta의 다른 앱</span>
+          <span className={labelClassName}>Meta의 다른 앱</span>
           <span className="sr-only"> (준비 중)</span>
         </button>
       </div>
