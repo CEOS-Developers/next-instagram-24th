@@ -25,14 +25,12 @@ const menuItems: { label: string; icon: LucideIcon; href?: string }[] = [
   { label: "프로필", icon: CircleUserRound, href: "/jxx_gro_ovy" },
 ];
 
-const itemClassName =
-  "flex min-h-12 w-full items-center gap-4 rounded-lg px-3 py-3 text-left text-base focus-visible:outline-2 focus-visible:outline-offset-2";
-
-export default function SidebarMenu() {
+export default function SidebarMenu({ collapsed = false }: { collapsed?: boolean }) {
   const pathname = usePathname();
+  const itemClassName = `flex min-h-12 w-full items-center rounded-lg py-3 text-left text-base focus-visible:outline-2 focus-visible:outline-offset-2 ${collapsed ? "justify-center" : "gap-4 px-3"}`;
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col">
+    <div id="sidebar-menu" className="flex min-h-0 flex-1 flex-col">
       <nav aria-label="주요 메뉴">
         <ul className="space-y-2">
           {menuItems.map((item) => {
@@ -45,6 +43,7 @@ export default function SidebarMenu() {
                   <Link
                     href={item.href}
                     aria-current={active ? "page" : undefined}
+                    title={collapsed ? item.label : undefined}
                     className={`${itemClassName} hover:bg-gray-100 ${active ? "font-bold" : ""}`}
                   >
                     {active && item.icon === House ? (
@@ -67,7 +66,7 @@ export default function SidebarMenu() {
                         className="shrink-0"
                       />
                     )}
-                    <span>{item.label}</span>
+                    <span className={collapsed ? "sr-only" : undefined}>{item.label}</span>
                   </Link>
                 ) : (
                   <button
@@ -77,7 +76,7 @@ export default function SidebarMenu() {
                     className={`${itemClassName} cursor-not-allowed text-gray-500`}
                   >
                     <ItemIcon size={24} strokeWidth={1.8} aria-hidden="true" className="shrink-0" />
-                    <span>{item.label}</span>
+                    <span className={collapsed ? "sr-only" : undefined}>{item.label}</span>
                     <span className="sr-only"> (준비 중)</span>
                   </button>
                 )}
@@ -95,7 +94,7 @@ export default function SidebarMenu() {
           className={`${itemClassName} cursor-not-allowed text-gray-500`}
         >
           <Menu size={24} strokeWidth={1.8} aria-hidden="true" className="shrink-0" />
-          <span>더 보기</span>
+          <span className={collapsed ? "sr-only" : undefined}>더 보기</span>
           <span className="sr-only"> (준비 중)</span>
         </button>
         <button
@@ -105,7 +104,7 @@ export default function SidebarMenu() {
           className={`${itemClassName} cursor-not-allowed text-gray-500`}
         >
           <LayoutGrid size={24} strokeWidth={1.8} aria-hidden="true" className="shrink-0" />
-          <span>Meta의 다른 앱</span>
+          <span className={collapsed ? "sr-only" : undefined}>Meta의 다른 앱</span>
           <span className="sr-only"> (준비 중)</span>
         </button>
       </div>
