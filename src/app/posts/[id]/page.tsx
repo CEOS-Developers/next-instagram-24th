@@ -1,13 +1,19 @@
+import { Suspense } from "react";
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 import { posts } from "@/data/posts";
-import PostGallery from "@/components/PostGallery";
+import PostDetails from "@/components/PostDetails";
 
 export function generateStaticParams() {
   return posts.map(({ id }) => ({ id }));
 }
 
-export default async function PostPage({ params }: PageProps<"/posts/[id]">) {
+export default function PostPage({ params }: PageProps<"/posts/[id]">) {
+  return <Suspense fallback={null}><PostContent params={params} /></Suspense>;
+}
+
+async function PostContent({ params }: Pick<PageProps<"/posts/[id]">, "params">) {
   const { id } = await params;
   const post = posts.find((post) => post.id === id);
 
@@ -16,19 +22,11 @@ export default async function PostPage({ params }: PageProps<"/posts/[id]">) {
   }
 
   return (
-    <article className="mx-auto grid max-w-4xl border border-gray-200 lg:mt-8 lg:grid-cols-[3fr_2fr]">
-      <PostGallery key={post.id} images={post.images} />
-      <div className="min-w-0">
-        <header className="border-b border-gray-200 px-4 py-3">
-          <Link
-            href={`/${post.authorUsername}`}
-            className="break-all text-sm font-semibold hover:underline"
-          >
-            {post.authorUsername}
-          </Link>
-        </header>
-        <h1 className="px-4 py-4 text-sm font-medium">{post.title}</h1>
-      </div>
-    </article>
+    <div className="mx-auto max-w-6xl px-3 py-4 md:px-8">
+      <Link href={`/${post.authorUsername}`} className="mb-4 inline-flex items-center gap-2 text-sm font-semibold hover:underline">
+        <ArrowLeft size={18} aria-hidden="true" />프로필로 돌아가기
+      </Link>
+      <PostDetails post={post} />
+    </div>
   );
 }

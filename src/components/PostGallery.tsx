@@ -16,10 +16,10 @@ export default function PostGallery({ images }: PostGalleryProps) {
   const [imageIndex, setImageIndex] = useState(0);
 
   return (
-    <section aria-label="게시물 사진" className="relative aspect-[3/4] min-w-0 bg-gray-100">
+    <section aria-label="게시물 사진" className="relative aspect-[4/5] w-full min-w-0 shrink-0 self-start bg-gray-100">
       <PostPhoto
         image={images[imageIndex]}
-        sizes="(min-width: 1024px) 538px, (min-width: 768px) calc(100vw - 72px), 100vw"
+        sizes="(min-width: 768px) 60vw, (min-width: 640px) 50vw, 100vw"
       />
       {images.length > 1 && (
         <>

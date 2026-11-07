@@ -7,12 +7,16 @@ export type Post = {
   id: string;
   authorUsername: string;
   title: string;
+  publishedAt: string;
+  likeCount: number;
   images: [PostImage, ...PostImage[]];
 };
 
 export const posts: Post[] = [
   {
     id: "1",
+    publishedAt: "2026-09-20",
+    likeCount: 42,
     authorUsername: "jxx_gro_ovy",
     title: "무대 위에서",
     images: [
@@ -21,6 +25,8 @@ export const posts: Post[] = [
   },
   {
     id: "2",
+    publishedAt: "2026-07-24",
+    likeCount: 31,
     authorUsername: "jxx_gro_ovy",
     title: "음악을 들으며 걷던 날",
     images: [
@@ -29,6 +35,8 @@ export const posts: Post[] = [
   },
   {
     id: "3",
+    publishedAt: "2026-03-15",
+    likeCount: 58,
     authorUsername: "jxx_gro_ovy",
     title: "도쿄의 밤",
     images: [
@@ -38,6 +46,8 @@ export const posts: Post[] = [
   },
   {
     id: "4",
+    publishedAt: "2026-03-10",
+    likeCount: 24,
     authorUsername: "jxx_gro_ovy",
     title: "꽃이 있는 자리",
     images: [
@@ -46,6 +56,8 @@ export const posts: Post[] = [
   },
   {
     id: "5",
+    publishedAt: "2026-02-20",
+    likeCount: 46,
     authorUsername: "jxx_gro_ovy",
     title: "오타루에서",
     images: [
@@ -55,6 +67,8 @@ export const posts: Post[] = [
   },
   {
     id: "6",
+    publishedAt: "2026-04-03",
+    likeCount: 67,
     authorUsername: "jxx_gro_ovy",
     title: "성북천 벚꽃",
     images: [
@@ -63,6 +77,8 @@ export const posts: Post[] = [
   },
   {
     id: "7",
+    publishedAt: "2026-04-12",
+    likeCount: 28,
     authorUsername: "film_archive",
     title: "봄의 산책",
     images: [
@@ -71,6 +87,8 @@ export const posts: Post[] = [
   },
   {
     id: "8",
+    publishedAt: "2026-03-05",
+    likeCount: 35,
     authorUsername: "film_archive",
     title: "산책 중 만난 사슴",
     images: [
@@ -79,6 +97,8 @@ export const posts: Post[] = [
   },
   {
     id: "9",
+    publishedAt: "2026-02-14",
+    likeCount: 19,
     authorUsername: "film_archive",
     title: "창밖의 고양이",
     images: [
@@ -87,6 +107,8 @@ export const posts: Post[] = [
   },
   {
     id: "10",
+    publishedAt: "2026-02-10",
+    likeCount: 41,
     authorUsername: "film_archive",
     title: "운하를 따라",
     images: [
@@ -95,6 +117,8 @@ export const posts: Post[] = [
   },
   {
     id: "11",
+    publishedAt: "2026-10-11",
+    likeCount: 83,
     authorUsername: "live.archive",
     title: "무대 가까이에서",
     images: [
@@ -103,6 +127,8 @@ export const posts: Post[] = [
   },
   {
     id: "12",
+    publishedAt: "2026-09-21",
+    likeCount: 62,
     authorUsername: "live.archive",
     title: "푸른 조명으로 가득한 밤",
     images: [
@@ -111,6 +137,8 @@ export const posts: Post[] = [
   },
   {
     id: "13",
+    publishedAt: "2026-06-08",
+    likeCount: 75,
     authorUsername: "live.archive",
     title: "공연이 끝난 뒤",
     images: [
@@ -119,6 +147,8 @@ export const posts: Post[] = [
   },
   {
     id: "14",
+    publishedAt: "2026-05-03",
+    likeCount: 54,
     authorUsername: "live.archive",
     title: "공연을 기다리며",
     images: [
