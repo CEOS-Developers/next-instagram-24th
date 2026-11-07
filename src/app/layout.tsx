@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   description: "사진과 일상을 공유하는 인스타그램 클론 프로젝트",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children, modal }: LayoutProps<"/">) {
   return (
     <html
       lang="ko"
@@ -34,6 +34,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           </Suspense>
           <main className="min-w-0 flex-1 pt-14 pb-[calc(4rem+env(safe-area-inset-bottom))] md:pt-0 md:pb-0">{children}</main>
         </div>
+        {modal}
       </body>
     </html>
   );
