@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { posts } from "@/data/posts";
 import { profiles } from "@/data/profiles";
@@ -48,11 +49,13 @@ export default async function ProfilePage({
         </h2>
         <ul role="list" className="grid grid-cols-3 gap-1">
           {profilePosts.map((post) => (
-            <li
-              key={post.id}
-              className="aspect-square bg-gray-100"
-            >
-              <span className="sr-only">{post.title}</span>
+            <li key={post.id}>
+              <Link
+                href={`/posts/${post.id}`}
+                className="block aspect-square bg-gray-100 hover:bg-gray-200 focus-visible:outline-2 focus-visible:-outline-offset-2"
+              >
+                <span className="sr-only">{post.title}</span>
+              </Link>
             </li>
           ))}
         </ul>
