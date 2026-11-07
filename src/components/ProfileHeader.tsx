@@ -18,7 +18,7 @@ export default function ProfileHeader({
   isFollowing,
 }: ProfileHeaderProps) {
   return (
-    <header className="mx-auto max-w-3xl">
+    <header className="mx-4 max-w-3xl md:mx-auto">
       <div className="flex items-center gap-5 sm:gap-8">
         <div
           aria-hidden="true"
