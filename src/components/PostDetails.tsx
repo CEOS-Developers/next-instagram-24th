@@ -1,26 +1,10 @@
-import { io } from "next/cache";
+import PostDate from "@/components/PostDate";
 import Link from "next/link";
 import { Bookmark, Ellipsis, Heart, UserRound } from "lucide-react";
 import type { Post } from "@/data/posts";
 import PostGallery from "@/components/PostGallery";
 
-export default async function PostDetails({ post }: { post: Post }) {
-  await io();
-
-  const publishedAt = new Date(post.publishedAt);
-  const yearFormatter = new Intl.DateTimeFormat("ko-KR", {
-    year: "numeric",
-    timeZone: "Asia/Seoul",
-  });
-  const isCurrentYear =
-    yearFormatter.format(publishedAt) === yearFormatter.format(new Date());
-  const publishedDate = new Intl.DateTimeFormat("ko-KR", {
-    year: isCurrentYear ? undefined : "numeric",
-    month: "long",
-    day: "numeric",
-    timeZone: "Asia/Seoul",
-  }).format(publishedAt);
-
+export default function PostDetails({ post }: { post: Post }) {
   return (
     <article
       aria-labelledby={`post-title-${post.id}`}
@@ -71,7 +55,7 @@ export default async function PostDetails({ post }: { post: Post }) {
             </button>
           </div>
           <p className="text-sm font-semibold">좋아요 {post.likeCount}개</p>
-          <time dateTime={post.publishedAt} className="mt-1 block text-xs text-gray-500">{publishedDate}</time>
+          <PostDate publishedAt={post.publishedAt} />
         </footer>
       </div>
     </article>

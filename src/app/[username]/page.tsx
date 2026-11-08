@@ -8,7 +8,6 @@ import { currentUser, profiles } from "@/data/profiles";
 import ProfileHeader from "@/components/ProfileHeader";
 import ProfileHighlights from "@/components/ProfileHighlights";
 import ProfileTabs from "@/components/ProfileTabs";
-import ProfileSuggestions from "@/components/ProfileSuggestions";
 import { highlights } from "@/data/highlights";
 
 export function generateStaticParams() {
@@ -49,11 +48,6 @@ async function ProfileContent({
         highlights={profileHighlights}
         isOwnProfile={isOwnProfile}
       />
-      {isOwnProfile && (
-        <ProfileSuggestions
-          profiles={profiles.filter((item) => item.username !== currentUser.username)}
-        />
-      )}
 
       <section aria-labelledby="posts-heading" className="mt-8">
         <h2 id="posts-heading" className="sr-only">게시물</h2>

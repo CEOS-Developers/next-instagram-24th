@@ -6,9 +6,12 @@ export type Profile = {
   following: number;
 };
 
-export const currentUser = {
+export const currentUser: {
+  username: string;
+  followingUsernames: string[];
+} = {
   username: "jxx_gro_ovy",
-  followingUsernames: ["film_archive"],
+  followingUsernames: [],
 };
 
 export const profiles: Profile[] = [
