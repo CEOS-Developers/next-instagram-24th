@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Copy } from "lucide-react";
 import PostPhoto from "@/components/PostPhoto";
-import { posts } from "@/data/posts";
+import { getPostsByUsername } from "@/data/posts";
 import { currentUser, profiles } from "@/data/profiles";
 import ProfileHeader from "@/components/ProfileHeader";
 import ProfileHighlights from "@/components/ProfileHighlights";
@@ -33,7 +33,7 @@ async function ProfileContent({
     notFound();
   }
 
-  const profilePosts = posts.filter((post) => post.authorUsername === username);
+  const profilePosts = getPostsByUsername(username);
   const profileHighlights = highlights.filter((highlight) => highlight.username === username);
   const isOwnProfile = profile.username === currentUser.username;
 
@@ -64,7 +64,7 @@ async function ProfileContent({
               <Link
                 href={`/posts/${post.id}`}
                 scroll={false}
-                aria-label={`${post.title}${post.images.length > 1 ? `, 사진 ${post.images.length}장` : ""}`}
+                aria-label={`${post.images[0].alt}${post.images.length > 1 ? `, 사진 ${post.images.length}장` : ""}`}
                 className="group relative block aspect-[3/4] overflow-hidden bg-gray-100 focus-visible:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2"
               >
                 <PostPhoto

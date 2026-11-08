@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
-import { posts } from "@/data/posts";
+import { getPostsByUsername, posts } from "@/data/posts";
 import PostDetails from "@/components/PostDetails";
 import PostModal from "@/components/PostModal";
 
@@ -17,7 +17,7 @@ async function ModalContent({ params }: { params: Promise<{ id: string }> }) {
   const post = posts.find((post) => post.id === id);
   if (!post) notFound();
 
-  const authorPosts = posts.filter((item) => item.authorUsername === post.authorUsername);
+  const authorPosts = getPostsByUsername(post.authorUsername);
   const index = authorPosts.findIndex((item) => item.id === post.id);
 
   return (

@@ -1,21 +1,32 @@
+import { io } from "next/cache";
 import Link from "next/link";
 import { Bookmark, Ellipsis, Heart, UserRound } from "lucide-react";
 import type { Post } from "@/data/posts";
 import PostGallery from "@/components/PostGallery";
 
-export default function PostDetails({ post }: { post: Post }) {
+export default async function PostDetails({ post }: { post: Post }) {
+  await io();
+
+  const publishedAt = new Date(post.publishedAt);
+  const yearFormatter = new Intl.DateTimeFormat("ko-KR", {
+    year: "numeric",
+    timeZone: "Asia/Seoul",
+  });
+  const isCurrentYear =
+    yearFormatter.format(publishedAt) === yearFormatter.format(new Date());
   const publishedDate = new Intl.DateTimeFormat("ko-KR", {
+    year: isCurrentYear ? undefined : "numeric",
     month: "long",
     day: "numeric",
-    timeZone: "UTC",
-  }).format(new Date(post.publishedAt));
+    timeZone: "Asia/Seoul",
+  }).format(publishedAt);
 
   return (
     <article
       aria-labelledby={`post-title-${post.id}`}
       className="mx-auto flex w-full flex-col overflow-hidden rounded-xl border border-gray-200 bg-white sm:grid sm:max-w-[min(1200px,calc(84dvh*1.44))] sm:grid-cols-[minmax(0,1fr)_minmax(260px,0.8fr)]"
     >
-      <h1 id={`post-title-${post.id}`} className="sr-only">{post.title}</h1>
+      <h1 id={`post-title-${post.id}`} className="sr-only">{post.authorUsername}님의 게시물</h1>
       <PostGallery key={post.id} images={post.images} />
       <div className="flex min-h-0 min-w-0 flex-col">
         <header className="flex shrink-0 items-center gap-3 border-b border-gray-200 px-4 py-3">
@@ -33,10 +44,20 @@ export default function PostDetails({ post }: { post: Post }) {
           </button>
         </header>
 
-        <section aria-label="댓글 목록" className="grid min-h-40 flex-1 place-items-center overflow-y-auto p-5 text-center sm:min-h-0">
-          <div>
-            <h2 className="text-xl font-bold sm:text-2xl">아직 댓글이 없습니다.</h2>
-            <p className="mt-2 text-sm">댓글을 남겨보세요.</p>
+        <section aria-label="게시물 본문 및 댓글" className="flex min-h-40 flex-1 flex-col overflow-y-auto sm:min-h-0">
+          {post.caption && (
+            <div className="shrink-0 px-4 py-4 text-sm">
+              <Link href={`/${post.authorUsername}`} className="mr-2 font-semibold hover:underline">
+                {post.authorUsername}
+              </Link>
+              <span className="whitespace-pre-wrap break-words">{post.caption}</span>
+            </div>
+          )}
+          <div className="grid flex-1 place-items-center p-5 text-center">
+            <div>
+              <h2 className="text-xl font-bold sm:text-2xl">아직 댓글이 없습니다.</h2>
+              <p className="mt-2 text-sm">댓글을 남겨보세요.</p>
+            </div>
           </div>
         </section>
 
