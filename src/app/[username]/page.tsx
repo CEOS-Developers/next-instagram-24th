@@ -3,9 +3,7 @@ import { notFound } from "next/navigation";
 import { getPostsByUsername, posts } from "@/data/posts";
 import { currentUser, profiles } from "@/data/profiles";
 import ProfileHeader from "@/components/ProfileHeader";
-import ProfileHighlights from "@/components/ProfileHighlights";
 import ProfilePosts from "@/components/ProfilePosts";
-import { highlights } from "@/data/highlights";
 
 export function generateStaticParams() {
   return profiles.map(({ username }) => ({ username }));
@@ -30,7 +28,6 @@ async function ProfileContent({
   }
 
   const profilePosts = getPostsByUsername(username);
-  const profileHighlights = highlights.filter((highlight) => highlight.username === username);
   const isOwnProfile = profile.username === currentUser.username;
 
   return (
@@ -38,10 +35,6 @@ async function ProfileContent({
       <ProfileHeader
         profile={profile}
         postCount={profilePosts.length}
-        isOwnProfile={isOwnProfile}
-      />
-      <ProfileHighlights
-        highlights={profileHighlights}
         isOwnProfile={isOwnProfile}
       />
 
