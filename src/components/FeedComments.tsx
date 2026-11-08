@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import CommentForm from "@/components/CommentForm";
+import CommentItem from "@/components/CommentItem";
 import { usePostInteractions } from "@/hooks/usePostInteractions";
 
 export default function FeedComments({ postId }: { postId: string }) {
@@ -15,10 +16,9 @@ export default function FeedComments({ postId }: { postId: string }) {
         {comments.length ? `댓글 ${comments.length}개 모두 보기` : "댓글 보기"}
       </Link>
       {latestComment && (
-        <p className="mt-2 text-sm">
-          <Link href={`/${latestComment.username}`} className="mr-2 font-semibold hover:underline">{latestComment.username}</Link>
-          <span className="whitespace-pre-wrap break-words">{latestComment.text}</span>
-        </p>
+        <div className="mt-2">
+          <CommentItem key={latestComment.id} postId={postId} comment={latestComment} showAvatar={false} />
+        </div>
       )}
       <CommentForm postId={postId} />
     </>

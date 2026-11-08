@@ -84,7 +84,9 @@ function updatePost(id: string, update: (value: PostInteraction) => PostInteract
   if (!/^\d+$/.test(id)) return;
   const interactions = readInteractions(getSnapshot());
   const previous = interactions[id] ?? { liked: false, saved: false, comments: [] };
-  interactions[id] = update(previous);
+  const next = update(previous);
+  if (next === previous) return;
+  interactions[id] = next;
   memorySnapshot = JSON.stringify(interactions);
   try {
     window.localStorage.setItem(storageKey, memorySnapshot);
@@ -115,8 +117,38 @@ function addComment(id: string, text: string) {
   return true;
 }
 
+function editComment(postId: string, commentId: string, text: string) {
+  const trimmedText = text.trim();
+  if (!trimmedText || trimmedText.length > 2200) return false;
+  let edited = false;
+
+  updatePost(postId, (value) => {
+    const ownComment = value.comments.find(
+      (comment) => comment.id === commentId && comment.username === currentUser.username,
+    );
+    if (!ownComment) return value;
+    edited = true;
+    return {
+      ...value,
+      comments: value.comments.map((comment) =>
+        comment === ownComment ? { ...comment, text: trimmedText } : comment,
+      ),
+    };
+  });
+  return edited;
+}
+
+function deleteComment(postId: string, commentId: string) {
+  updatePost(postId, (value) => {
+    const comments = value.comments.filter(
+      (comment) => !(comment.id === commentId && comment.username === currentUser.username),
+    );
+    return comments.length === value.comments.length ? value : { ...value, comments };
+  });
+}
+
 export function usePostInteractions() {
   const snapshot = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
   const interactions = useMemo(() => readInteractions(snapshot), [snapshot]);
-  return { interactions, toggleLike, toggleSave, addComment };
+  return { interactions, toggleLike, toggleSave, addComment, editComment, deleteComment };
 }
