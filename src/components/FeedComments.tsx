@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import CommentForm from "@/components/CommentForm";
 import CommentItem from "@/components/CommentItem";
 import { usePostInteractions } from "@/hooks/usePostInteractions";
 
@@ -20,7 +19,6 @@ export default function FeedComments({ postId }: { postId: string }) {
           <CommentItem key={latestComment.id} postId={postId} comment={latestComment} showAvatar={false} />
         </div>
       )}
-      <CommentForm postId={postId} />
     </>
   );
 }
