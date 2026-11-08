@@ -1,11 +1,14 @@
-import { ChevronDown, Ellipsis, Settings, UserPlus, UserRound } from "lucide-react";
+"use client";
+
+import { Ellipsis, Settings, UserPlus, UserRound } from "lucide-react";
 import type { Profile } from "@/data/profiles";
+import { currentUser } from "@/data/profiles";
+import { useFollowing } from "@/hooks/useFollowing";
 
 type ProfileHeaderProps = {
   profile: Profile;
   postCount: number;
   isOwnProfile: boolean;
-  isFollowing: boolean;
 };
 
 const buttonClassName =
@@ -15,8 +18,15 @@ export default function ProfileHeader({
   profile,
   postCount,
   isOwnProfile,
-  isFollowing,
 }: ProfileHeaderProps) {
+  const { followingUsernames, toggleFollow } = useFollowing();
+  const isFollowing = followingUsernames.includes(profile.username);
+  const wasFollowing = currentUser.followingUsernames.includes(profile.username);
+  const followerCount = profile.followers + Number(isFollowing) - Number(wasFollowing);
+  const followingCount = isOwnProfile
+    ? profile.following + followingUsernames.length - currentUser.followingUsernames.length
+    : profile.following;
+
   return (
     <header className="mx-4 max-w-3xl md:mx-auto">
       <div className="flex items-center gap-5 sm:gap-8">
@@ -50,8 +60,8 @@ export default function ProfileHeader({
 
           <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm sm:mt-4 sm:gap-x-6">
             <li className="whitespace-nowrap">게시물 <strong>{postCount}</strong></li>
-            <li className="whitespace-nowrap">팔로워 <strong>{profile.followers}</strong></li>
-            <li className="whitespace-nowrap">팔로우 <strong>{profile.following}</strong></li>
+            <li className="whitespace-nowrap">팔로워 <strong>{followerCount}</strong></li>
+            <li className="whitespace-nowrap">팔로우 <strong>{followingCount}</strong></li>
           </ul>
 
           {profile.bio && (
@@ -83,13 +93,13 @@ export default function ProfileHeader({
         <div className={`mt-6 grid gap-2 ${isFollowing ? "grid-cols-[minmax(0,1fr)_minmax(0,1fr)_44px]" : "grid-cols-[minmax(0,1fr)_44px]"}`}>
           <button
             type="button"
-            disabled
-            title={isFollowing ? "팔로잉 관리" : "팔로우"}
-            className={`${buttonClassName} ${isFollowing ? "bg-gray-100" : "bg-[#4a5df9] text-white"}`}
+            onClick={() => toggleFollow(profile.username)}
+            aria-label={`${profile.username} ${isFollowing ? "팔로우 취소" : "팔로우"}`}
+            aria-pressed={isFollowing}
+            title={isFollowing ? "팔로우 취소" : "팔로우"}
+            className={`flex min-h-11 min-w-0 cursor-pointer items-center justify-center rounded-xl px-3 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 ${isFollowing ? "bg-gray-100 hover:bg-gray-200" : "bg-[#4a5df9] text-white hover:bg-[#3f50df]"}`}
           >
-            {isFollowing ? (
-              <>팔로잉 <ChevronDown size={16} aria-hidden="true" /></>
-            ) : "팔로우"}
+            {isFollowing ? "팔로잉" : "팔로우"}
           </button>
           {isFollowing && (
             <button

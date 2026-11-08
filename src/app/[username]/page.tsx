@@ -42,7 +42,6 @@ async function ProfileContent({
         profile={profile}
         postCount={profilePosts.length}
         isOwnProfile={isOwnProfile}
-        isFollowing={currentUser.followingUsernames.includes(profile.username)}
       />
       <ProfileHighlights
         highlights={profileHighlights}

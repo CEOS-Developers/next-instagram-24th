@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { Bookmark, Ellipsis, Heart, MessageCircle, Send, UserRound } from "lucide-react";
 import type { Post } from "@/data/posts";
+import FeedRecommendation from "@/components/FeedRecommendation";
 import PostDate from "@/components/PostDate";
 import PostGallery from "@/components/PostGallery";
 
-export default function FeedPost({ post, isRecommended }: { post: Post; isRecommended: boolean }) {
+export default function FeedPost({ post }: { post: Post }) {
   return (
     <article aria-label={`${post.authorUsername}의 게시물`} className="min-w-0 border-b border-gray-200 pb-5">
       <header className="flex items-center gap-3 px-3 py-3 sm:px-0">
@@ -14,7 +15,7 @@ export default function FeedPost({ post, isRecommended }: { post: Post; isRecomm
           </span>
           <span className="min-w-0">
             <span className="block truncate hover:underline">{post.authorUsername}</span>
-            {isRecommended && <span className="mt-0.5 block text-xs font-normal text-gray-500">회원님을 위한 추천</span>}
+            <FeedRecommendation username={post.authorUsername} />
           </span>
         </Link>
         <button type="button" disabled aria-label="게시물 더 보기" className="grid size-9 cursor-not-allowed place-items-center">

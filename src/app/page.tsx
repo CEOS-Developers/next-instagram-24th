@@ -11,8 +11,7 @@ export default function Home() {
     .filter((post) => post.authorUsername !== currentUser.username)
     .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
   const suggestedProfiles = profiles.filter(
-    (profile) => profile.username !== currentUser.username &&
-      !currentUser.followingUsernames.includes(profile.username),
+    (profile) => profile.username !== currentUser.username,
   );
   const ownProfile = profiles.find((profile) => profile.username === currentUser.username);
 
@@ -24,7 +23,7 @@ export default function Home() {
           <ul className="space-y-4">
             {feedPosts.map((post) => (
               <li key={post.id}>
-                <FeedPost post={post} isRecommended={!currentUser.followingUsernames.includes(post.authorUsername)} />
+                <FeedPost post={post} />
               </li>
             ))}
           </ul>
