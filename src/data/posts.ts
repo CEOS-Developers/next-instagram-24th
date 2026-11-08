@@ -16,7 +16,7 @@ export const posts: Post[] = [
   {
     id: "1",
     publishedAt: "2026-09-20",
-    likeCount: 42,
+    likeCount: 112,
     authorUsername: "jxx_gro_ovy",
     caption: "깔루아 9공",
     images: [
@@ -26,7 +26,7 @@ export const posts: Post[] = [
   {
     id: "2",
     publishedAt: "2026-02-24",
-    likeCount: 31,
+    likeCount: 76,
     authorUsername: "jxx_gro_ovy",
     caption: "교토 가모강 산책",
     images: [
@@ -36,7 +36,7 @@ export const posts: Post[] = [
   {
     id: "3",
     publishedAt: "2025-12-15",
-    likeCount: 58,
+    likeCount: 98,
     authorUsername: "jxx_gro_ovy",
     caption: "2년째 크리스마스 시즌에 방문한 롯폰기 케이키자카 거리 일루미네이션",
     images: [
@@ -47,7 +47,7 @@ export const posts: Post[] = [
   {
     id: "4",
     publishedAt: "2026-03-10",
-    likeCount: 24,
+    likeCount: 58,
     authorUsername: "jxx_gro_ovy",
     caption: "내 방 꾸미기",
     images: [
@@ -57,7 +57,7 @@ export const posts: Post[] = [
   {
     id: "5",
     publishedAt: "2025-05-20",
-    likeCount: 46,
+    likeCount: 87,
     authorUsername: "jxx_gro_ovy",
     caption: "오타루 운하",
     images: [
@@ -68,7 +68,7 @@ export const posts: Post[] = [
   {
     id: "6",
     publishedAt: "2026-04-03",
-    likeCount: 67,
+    likeCount: 93,
     authorUsername: "jxx_gro_ovy",
     caption: "성북천 벚꽃 구경",
     images: [
@@ -109,7 +109,7 @@ export const posts: Post[] = [
   {
     id: "10",
     publishedAt: "2025-01-02",
-    likeCount: 83,
+    likeCount: 23,
     authorUsername: "live.archive",
     caption: "한로로 콘서트",
     images: [
@@ -119,7 +119,7 @@ export const posts: Post[] = [
   {
     id: "12",
     publishedAt: "2025-04-16",
-    likeCount: 62,
+    likeCount: 34,
     authorUsername: "live.archive",
     caption: "콜드플레이 내한 첫콘",
     images: [
@@ -129,7 +129,7 @@ export const posts: Post[] = [
   {
     id: "13",
     publishedAt: "2026-09-26",
-    likeCount: 75,
+    likeCount: 18,
     authorUsername: "live.archive",
     caption: "리도어 memory 콘서트",
     images: [
@@ -139,7 +139,7 @@ export const posts: Post[] = [
   {
     id: "14",
     publishedAt: "2025-05-09",
-    likeCount: 54,
+    likeCount: 27,
     authorUsername: "live.archive",
     caption: "장충체육관 검치 앵콜콘",
     images: [
