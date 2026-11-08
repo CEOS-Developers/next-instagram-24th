@@ -1,13 +1,10 @@
 import { Suspense } from "react";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Copy } from "lucide-react";
-import PostPhoto from "@/components/PostPhoto";
-import { getPostsByUsername } from "@/data/posts";
+import { getPostsByUsername, posts } from "@/data/posts";
 import { currentUser, profiles } from "@/data/profiles";
 import ProfileHeader from "@/components/ProfileHeader";
 import ProfileHighlights from "@/components/ProfileHighlights";
-import ProfileTabs from "@/components/ProfileTabs";
+import ProfilePosts from "@/components/ProfilePosts";
 import { highlights } from "@/data/highlights";
 
 export function generateStaticParams() {
@@ -48,38 +45,12 @@ async function ProfileContent({
         isOwnProfile={isOwnProfile}
       />
 
-      <section aria-labelledby="posts-heading" className="mt-8">
-        <h2 id="posts-heading" className="sr-only">게시물</h2>
-        <ProfileTabs isOwnProfile={isOwnProfile} />
-        <ul role="list" className="grid grid-cols-3 gap-px xl:grid-cols-4">
-          {profilePosts.map((post) => (
-            <li key={post.id}>
-              <Link
-                href={`/posts/${post.id}`}
-                scroll={false}
-                aria-label={`${post.images[0].alt}${post.images.length > 1 ? `, 사진 ${post.images.length}장` : ""}`}
-                className="group relative block aspect-[3/4] overflow-hidden bg-gray-100 focus-visible:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2"
-              >
-                <PostPhoto
-                  image={post.images[0]}
-                  sizes="(min-width: 1280px) 272px, (min-width: 768px) calc((100vw - 136px) / 3), 33vw"
-                />
-                {post.images.length > 1 && (
-                  <Copy
-                    size={20}
-                    aria-hidden="true"
-                    className="absolute top-2 right-2 fill-white text-white drop-shadow-md sm:top-3 sm:right-3"
-                  />
-                )}
-                <span aria-hidden="true" className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/15" />
-              </Link>
-            </li>
-          ))}
-        </ul>
-        {profilePosts.length === 0 && (
-          <p className="py-12 text-center text-sm text-gray-500">아직 게시물이 없습니다.</p>
-        )}
-      </section>
+      <ProfilePosts
+        key={username}
+        profilePosts={profilePosts}
+        allPosts={isOwnProfile ? posts : []}
+        isOwnProfile={isOwnProfile}
+      />
     </section>
   );
 }

@@ -1,11 +1,19 @@
+"use client";
+
 import { Bookmark, ContactRound, Grid3X3, Repeat2 } from "lucide-react";
 
-export default function ProfileTabs({ isOwnProfile }: { isOwnProfile: boolean }) {
+export type ProfileTab = "posts" | "saved";
+
+export default function ProfileTabs({ isOwnProfile, selectedTab, onTabChange }: {
+  isOwnProfile: boolean;
+  selectedTab: ProfileTab;
+  onTabChange: (tab: ProfileTab) => void;
+}) {
   const tabs = [
-    { label: "게시물", icon: Grid3X3, selected: true },
-    ...(isOwnProfile ? [{ label: "저장됨", icon: Bookmark, selected: false }] : []),
-    { label: "리포스트", icon: Repeat2, selected: false },
-    { label: "태그됨", icon: ContactRound, selected: false },
+    { label: "게시물", icon: Grid3X3, id: "posts" as const },
+    ...(isOwnProfile ? [{ label: "저장됨", icon: Bookmark, id: "saved" as const }] : []),
+    { label: "리포스트", icon: Repeat2, id: null },
+    { label: "태그됨", icon: ContactRound, id: null },
   ];
   const itemClassName =
     "mx-auto flex h-14 w-full max-w-24 items-center justify-center border-b-2 sm:h-16";
@@ -15,29 +23,21 @@ export default function ProfileTabs({ isOwnProfile }: { isOwnProfile: boolean })
       <ul className="flex">
         {tabs.map((tab) => {
           const TabIcon = tab.icon;
+          const selected = tab.id === selectedTab;
 
           return (
             <li key={tab.label} className="min-w-0 flex-1">
-              {tab.selected ? (
-                <span
-                  aria-current="true"
-                  title={tab.label}
-                  className={`${itemClassName} border-black text-black`}
-                >
-                  <TabIcon size={24} strokeWidth={2.5} aria-hidden="true" />
-                  <span className="sr-only">{tab.label}</span>
-                </span>
-              ) : (
-                <button
-                  type="button"
-                  disabled
-                  title={tab.label}
-                  className={`${itemClassName} cursor-not-allowed border-transparent text-gray-400`}
-                >
-                  <TabIcon size={24} strokeWidth={1.8} aria-hidden="true" />
-                  <span className="sr-only">{tab.label}</span>
-                </button>
-              )}
+              <button
+                type="button"
+                disabled={tab.id === null}
+                aria-pressed={tab.id !== null ? selected : undefined}
+                onClick={() => { if (tab.id) onTabChange(tab.id); }}
+                title={tab.label}
+                className={`${itemClassName} focus-visible:outline-2 focus-visible:-outline-offset-2 ${selected ? "border-black text-black" : "border-transparent text-gray-400"} ${tab.id ? "cursor-pointer hover:text-black" : "cursor-not-allowed"}`}
+              >
+                <TabIcon size={24} strokeWidth={selected ? 2.5 : 1.8} aria-hidden="true" />
+                <span className="sr-only">{tab.label}</span>
+              </button>
             </li>
           );
         })}
