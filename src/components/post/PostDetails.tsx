@@ -1,6 +1,7 @@
-import { Bookmark, Ellipsis, Heart, MessageCircle, Smile } from "lucide-react";
+import { Ellipsis, Smile } from "lucide-react";
 import Link from "next/link";
 import Avatar from "@/components/Avatar";
+import PostActions from "@/components/post/PostActions";
 import PostGallery from "@/components/post/PostGallery";
 import type { Post } from "@/data/posts";
 
@@ -53,18 +54,7 @@ export default function PostDetails({ post }: { post: Post }) {
         </section>
 
         <footer className="shrink-0 border-t border-neutral-200 px-4 py-3 text-sm">
-          <div className="mb-2 flex items-center gap-2">
-            <button type="button" disabled aria-label="좋아요" className="grid size-8 place-items-center">
-              <Heart aria-hidden="true" className="size-6" />
-            </button>
-            <button type="button" disabled aria-label="댓글 작성" className="grid size-8 place-items-center">
-              <MessageCircle aria-hidden="true" className="size-6" />
-            </button>
-            <button type="button" disabled aria-label="게시물 저장" className="ml-auto grid size-8 place-items-center">
-              <Bookmark aria-hidden="true" className="size-6" />
-            </button>
-          </div>
-          <p className="font-semibold">좋아요 {post.likeCount.toLocaleString("ko-KR")}개</p>
+          <PostActions postId={post.id} likeCount={post.likeCount} />
           <time dateTime={post.publishedAt} className="mt-1 block text-neutral-500">
             {dateFormatter.format(new Date(post.publishedAt))}
           </time>
