@@ -23,7 +23,7 @@ const dateFormatter = new Intl.DateTimeFormat("ko-KR", {
 });
 
 export default function FeedPost({ post, isFirst = false }: FeedPostProps) {
-  const { liked, saved, comments, toggleLike, toggleSave } =
+  const { liked, saved, toggleLike, toggleSave } =
     usePostInteractions(post.id);
 
   const postHref = `/posts/${post.id}`;
@@ -110,16 +110,6 @@ export default function FeedPost({ post, isFirst = false }: FeedPostProps) {
         >
           {dateFormatter.format(new Date(post.publishedAt))}
         </time>
-
-        <Link
-          href={postHref}
-          scroll={false}
-          className="mt-3 inline-block text-sm text-neutral-500"
-        >
-          {comments.length > 0
-            ? `댓글 ${comments.length.toLocaleString("ko-KR")}개 모두 보기`
-            : "댓글 보기"}
-        </Link>
       </div>
     </article>
   );
