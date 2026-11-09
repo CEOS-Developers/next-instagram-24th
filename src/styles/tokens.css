@@ -1,0 +1,32 @@
+/* 팀 공통 디자인 값. Tailwind 유틸리티와 CSS 변수에서 함께 사용합니다. */
+@theme static {
+  --color-surface: #ffffff;
+  --color-surface-muted: #efefef;
+  --color-surface-hover: #e2e2e2;
+  --color-text-primary: #262626;
+  --color-text-secondary: #737373;
+  --color-border: #dbdbdb;
+  --color-brand: #0064e0;
+  --color-brand-hover: #0052b8;
+  --color-like-active: #ff3040;
+  --color-danger: #d92d20;
+
+  --font-sans: Arial, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --text-caption: 12px;
+  --text-caption--line-height: 16px;
+  --text-body: 14px;
+  --text-body--line-height: 20px;
+  --text-nav: 16px;
+  --text-nav--line-height: 24px;
+  --text-username: 20px;
+  --text-username--line-height: 28px;
+
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+  --spacing: 4px;
+  --spacing-sidebar: 244px;
+  --container-profile: 936px;
+  --container-desktop: 1440px;
+  --radius-button: 8px;
+  --radius-avatar: 9999px;
+}
