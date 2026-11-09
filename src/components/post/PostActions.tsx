@@ -6,7 +6,13 @@ import { usePostInteractions } from "@/hooks/usePostInteractions";
 const buttonClassName = "grid size-8 place-items-center rounded-md";
 const activeButtonClassName = `${buttonClassName} cursor-pointer hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-2`;
 
-export default function PostActions({ postId, likeCount }: { postId: string; likeCount: number }) {
+type PostActionsProps = {
+  postId: string;
+  likeCount: number;
+  onComment?: () => void;
+};
+
+export default function PostActions({ postId, likeCount, onComment }: PostActionsProps) {
   const { liked, saved, toggleLike, toggleSave } = usePostInteractions(postId);
 
   return (
@@ -21,7 +27,7 @@ export default function PostActions({ postId, likeCount }: { postId: string; lik
         >
           <Heart aria-hidden="true" className="size-6" fill={liked ? "currentColor" : "none"} />
         </button>
-        <button type="button" disabled aria-label="댓글 작성" className={buttonClassName}>
+        <button type="button" disabled={!onComment} aria-label="댓글 작성" onClick={onComment} className={activeButtonClassName}>
           <MessageCircle aria-hidden="true" className="size-6" />
         </button>
         <button

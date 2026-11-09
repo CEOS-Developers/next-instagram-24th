@@ -1,7 +1,7 @@
-import { Ellipsis, Smile } from "lucide-react";
+import { Ellipsis } from "lucide-react";
 import Link from "next/link";
 import Avatar from "@/components/Avatar";
-import PostActions from "@/components/post/PostActions";
+import PostDiscussion from "@/components/post/PostDiscussion";
 import PostGallery from "@/components/post/PostGallery";
 import type { Post } from "@/data/posts";
 
@@ -33,7 +33,16 @@ export default function PostDetails({ post }: { post: Post }) {
           </button>
         </header>
 
-        <section aria-label="게시물 본문 및 댓글" className="flex min-h-36 flex-1 flex-col overflow-y-auto md:min-h-0">
+        <PostDiscussion
+          key={post.id}
+          postId={post.id}
+          likeCount={post.likeCount}
+          date={
+            <time dateTime={post.publishedAt} className="mt-1 block text-neutral-500">
+              {dateFormatter.format(new Date(post.publishedAt))}
+            </time>
+          }
+        >
           {post.caption && (
             <div className="flex shrink-0 items-start gap-3 px-4 py-4 text-sm">
               <Avatar className="size-8" />
@@ -45,34 +54,7 @@ export default function PostDetails({ post }: { post: Post }) {
               </p>
             </div>
           )}
-          <div className="grid flex-1 place-items-center px-4 py-6 text-center">
-            <div>
-              <h2 className="text-lg font-bold md:text-2xl">아직 댓글이 없습니다.</h2>
-              <p className="mt-2 text-sm">댓글을 남겨보세요.</p>
-            </div>
-          </div>
-        </section>
-
-        <footer className="shrink-0 border-t border-neutral-200 px-4 py-3 text-sm">
-          <PostActions postId={post.id} likeCount={post.likeCount} />
-          <time dateTime={post.publishedAt} className="mt-1 block text-neutral-500">
-            {dateFormatter.format(new Date(post.publishedAt))}
-          </time>
-        </footer>
-
-        <div className="flex shrink-0 items-center gap-3 border-t border-neutral-200 px-4 py-2 text-sm">
-          <Smile aria-hidden="true" className="size-6 shrink-0" />
-          <input
-            type="text"
-            disabled
-            aria-label="댓글 내용"
-            placeholder="댓글 달기..."
-            className="min-h-9 min-w-0 flex-1 placeholder:text-neutral-500"
-          />
-          <button type="button" disabled className="shrink-0 font-semibold text-blue-600 opacity-40">
-            게시
-          </button>
-        </div>
+        </PostDiscussion>
       </div>
     </article>
   );
