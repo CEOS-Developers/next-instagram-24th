@@ -168,3 +168,9 @@ export function usePostInteractions(postId: string) {
     toggleSave: () => toggleAction(postId, "saved"),
   };
 }
+
+export function useSavedPostIds() {
+  const snapshot = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const interactions = readInteractions(snapshot);
+  return new Set(Object.keys(interactions).filter((id) => getPostInteraction(interactions, id).saved === true));
+}
