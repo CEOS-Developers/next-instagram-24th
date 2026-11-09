@@ -4,7 +4,7 @@ import type { Comment, Post, Story, User } from "@/types";
 // 같은 seed 는 항상 같은 이미지를 돌려주므로 새로고침해도 사진이 바뀌지 않습니다.
 const img = (seed: string, w = 1080, h = 1080) =>
   `https://picsum.photos/seed/${seed}/${w}/${h}`;
-const avatar = (seed: string) => img(`avatar-${seed}`, 150, 150);
+const avatar = (seed: string) => img(`avatar-${seed}`, 320, 320);
 
 // 로그인 기능이 없으므로 "나"를 고정해 둡니다.
 export const CURRENT_USER_ID = "u1";
@@ -32,7 +32,7 @@ export const users: User[] = [
   {
     id: "u3",
     username: "minjun_eats",
-    name: "이민준",
+    name: "김민준",
     avatarUrl: avatar("minjun"),
     bio: "먹는 게 제일 좋아 🍜\n맛집 기록용 계정",
     followerCount: 5621,

@@ -6,6 +6,7 @@ type AvatarProps = {
   user: Pick<User, "username" | "avatarUrl">;
   size?: number; // px
   hasStory?: boolean; // true 면 그라데이션 링 표시
+  eager?: boolean; // 화면 맨 위의 큰 사진이면 true (지연 로딩 없이 바로 불러옴)
   className?: string;
 };
 
@@ -14,6 +15,7 @@ export default function Avatar({
   user,
   size = 32,
   hasStory = false,
+  eager = false,
   className = "",
 }: AvatarProps) {
   const image = (
@@ -22,6 +24,7 @@ export default function Avatar({
       alt={`${user.username}님의 프로필 사진`}
       width={size}
       height={size}
+      loading={eager ? "eager" : undefined}
       className="rounded-full bg-neutral-100 object-cover"
       style={{ width: size, height: size }}
     />
