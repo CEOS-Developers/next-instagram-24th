@@ -61,7 +61,7 @@ async function ProfileContent({ params }: Pick<PageProps<"/[username]">, "params
   return (
     <>
       <ProfileHeader user={user} postCount={posts.length} isMe={isMe} />
-      <ProfilePostGrid posts={posts} />
+      <ProfilePostGrid key={user.id} isMe={isMe} posts={posts} />
     </>
   );
 }
