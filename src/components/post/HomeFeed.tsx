@@ -45,7 +45,7 @@ export default function HomeFeed({ initial }: { initial: Page }) {
   }, [feed.next, load, status]);
 
   return (
-    <div data-home-feed className="mx-auto flex max-w-[680px] flex-col gap-4 px-4 py-6 md:px-0 md:py-8">
+    <div className="mx-auto flex max-w-[680px] flex-col gap-4 px-4 py-6 md:px-0 md:py-8">
       {feed.items.map(({ post, commentCount }, index) => (
         <PostCard key={`${index}-${post.id}`} post={post} commentCount={commentCount} preload={index === 0} />
       ))}

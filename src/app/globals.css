@@ -8,11 +8,3 @@
 body {
   font-family: var(--font-sans);
 }
-
-/* 홈에서는 양쪽 여백을 맞춰 피드를 화면 중앙에 배치한다. */
-@media (min-width: 48rem) {
-  main:has([data-home-feed]) { padding-inline: 72px; }
-  body:has([data-home-feed]) [data-desktop-nav] { width: 72px; }
-  body:has([data-home-feed]) [data-nav-label] { display: none; }
-  body:has([data-home-feed]) [data-nav-logo] { display: block; }
-}
