@@ -12,7 +12,8 @@ import {
   Send,
   SquarePlay,
 } from "lucide-react";
-import { FaHouse, FaInstagram, FaUser } from "react-icons/fa6";
+import { FaHouse, FaInstagram } from "react-icons/fa6";
+import Avatar from "@/components/Avatar";
 
 import { currentUser } from "@/data/profiles";
 
@@ -31,7 +32,9 @@ const FOOTER_ITEMS = [
 ];
 
 const ITEM_CLASS =
-  "group/item flex h-12 w-full shrink-0 items-center overflow-hidden rounded-xl transition-colors hover:bg-neutral-100";
+  "flex h-12 w-full shrink-0 items-center overflow-hidden rounded-xl";
+
+const LINK_CLASS = `${ITEM_CLASS} group/item transition-colors hover:bg-neutral-100`;
 
 const ICON_CLASS =
   "flex h-12 w-14 shrink-0 items-center justify-center transition-transform duration-150 group-hover/item:scale-110 motion-reduce:transform-none";
@@ -47,7 +50,7 @@ export function AppNavigation() {
   return (
     <aside
       aria-label="사이드바"
-      className="group/sidebar fixed inset-y-0 left-0 z-30 flex w-20 flex-col overflow-x-hidden overflow-y-auto bg-white px-3 py-8 text-neutral-950 transition-[width] duration-200 ease-out hover:w-64 motion-reduce:transition-none"
+      className="group/sidebar fixed inset-y-0 left-0 z-30 hidden w-20 flex-col overflow-x-hidden overflow-y-auto bg-white px-3 py-8 text-neutral-950 transition-[width] duration-200 ease-out hover:w-64 motion-reduce:transition-none md:flex"
     >
       <div className="h-16 w-full shrink-0">
         <Link
@@ -90,7 +93,7 @@ export function AppNavigation() {
               href={href}
               aria-label={label}
               aria-current={isActive ? "page" : undefined}
-              className={ITEM_CLASS}
+              className={LINK_CLASS}
             >
               {content}
             </Link>
@@ -105,19 +108,14 @@ export function AppNavigation() {
           href={profileHref}
           aria-label="프로필"
           aria-current={isProfileActive ? "page" : undefined}
-          className={ITEM_CLASS}
+          className={LINK_CLASS}
         >
           <span className={ICON_CLASS} aria-hidden="true">
-            <span
-              className={`relative block h-8 w-8 overflow-hidden rounded-full bg-neutral-200 ${
+            <Avatar
+              className={`size-8 ${
                 isProfileActive ? "ring-2 ring-neutral-950" : ""
               }`}
-            >
-              <FaUser
-                size={26}
-                className="absolute bottom-0 left-1/2 -translate-x-1/2 text-neutral-500"
-              />
-            </span>
+            />
           </span>
 
           <span
