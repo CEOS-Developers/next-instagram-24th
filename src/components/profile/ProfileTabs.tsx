@@ -21,7 +21,8 @@ type ProfileTab = (typeof activeTabs)[number]["id"];
 const tabClassName =
   "relative grid h-14 flex-1 place-items-center text-neutral-400 focus-visible:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 sm:h-16";
 
-export default function ProfileTabs({ posts }: { posts: Post[] }) {
+export default function ProfileTabs({ posts, isOwnProfile }: { posts: Post[]; isOwnProfile: boolean }) {
+  const enabledTabs = isOwnProfile ? activeTabs : activeTabs.slice(0, 1);
   const [selectedTab, setSelectedTab] = useState<ProfileTab>("posts");
   const tabRefs = useRef<Partial<Record<ProfileTab, HTMLButtonElement | null>>>({});
   const id = useId();
@@ -31,6 +32,8 @@ export default function ProfileTabs({ posts }: { posts: Post[] }) {
     : [];
 
   function handleTabKeyDown(event: KeyboardEvent<HTMLButtonElement>, tab: ProfileTab) {
+    if (!isOwnProfile) return;
+
     let nextTab: ProfileTab;
 
     switch (event.key) {
@@ -57,7 +60,7 @@ export default function ProfileTabs({ posts }: { posts: Post[] }) {
     <>
       <div className="border-b border-neutral-200 dark:border-neutral-800">
         <div role="tablist" aria-label="프로필 게시물 분류" className="mx-auto flex max-w-3xl">
-          {activeTabs.map(({ id: tab, label, Icon }) => (
+          {enabledTabs.map(({ id: tab, label, Icon }) => (
             <button
               key={tab}
               ref={(element) => { tabRefs.current[tab] = element; }}
@@ -88,9 +91,11 @@ export default function ProfileTabs({ posts }: { posts: Post[] }) {
       <section id={`${id}-posts-panel`} role="tabpanel" aria-labelledby={`${id}-posts-tab`} hidden={selectedTab !== "posts"}>
         {selectedTab === "posts" && <ProfilePosts posts={posts} />}
       </section>
-      <section id={`${id}-saved-panel`} role="tabpanel" aria-labelledby={`${id}-saved-tab`} hidden={selectedTab !== "saved"}>
-        {selectedTab === "saved" && <ProfilePosts posts={savedPosts} isSaved />}
-      </section>
+      {isOwnProfile && (
+        <section id={`${id}-saved-panel`} role="tabpanel" aria-labelledby={`${id}-saved-tab`} hidden={selectedTab !== "saved"}>
+          {selectedTab === "saved" && <ProfilePosts posts={savedPosts} isSaved />}
+        </section>
+      )}
     </>
   );
 }
