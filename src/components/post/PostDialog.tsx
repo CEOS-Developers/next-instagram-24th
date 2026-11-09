@@ -12,7 +12,7 @@ type PostDialogProps = {
 };
 
 const navigationClassName =
-  "absolute top-1/2 z-20 hidden size-9 -translate-y-1/2 items-center justify-center rounded-full bg-white text-black shadow-sm hover:bg-neutral-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white md:flex";
+  "absolute top-1/2 z-20 hidden size-9 -translate-y-1/2 items-center justify-center rounded-full bg-white text-black shadow-sm hover:bg-neutral-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:flex";
 
 export default function PostDialog({ children, previousId, nextId }: PostDialogProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -65,8 +65,8 @@ export default function PostDialog({ children, previousId, nextId }: PostDialogP
         </Link>
       )}
 
-      <div className="pointer-events-none relative z-10 grid h-full grid-rows-[minmax(0,1fr)] place-items-center px-4 pt-12 pb-4 md:px-14 md:py-6">
-        <div className="pointer-events-auto max-h-full w-full max-w-xl overflow-y-auto rounded-xl md:max-w-[min(75rem,calc((100dvh_-_3rem)*1.44))]">
+      <div className="pointer-events-none relative z-10 grid h-full grid-rows-[minmax(0,1fr)] place-items-center px-4 pt-12 pb-4 sm:px-14 sm:py-6">
+        <div className="pointer-events-auto max-h-full w-full max-w-xl overflow-y-auto rounded-xl [scrollbar-width:none] sm:overflow-hidden sm:max-w-[min(75rem,calc((100dvh_-_3rem)*1.44))]">
           {children}
         </div>
       </div>

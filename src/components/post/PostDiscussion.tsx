@@ -77,7 +77,7 @@ export default function PostDiscussion({ postId, likeCount, date, children }: Po
 
   return (
     <>
-      <section ref={sectionRef} aria-label="게시물 본문 및 댓글" className="flex min-h-36 flex-1 flex-col overflow-y-auto md:min-h-0">
+      <section ref={sectionRef} aria-label="게시물 본문 및 댓글" className="flex min-h-36 flex-1 flex-col overflow-y-auto [scrollbar-width:none] sm:min-h-0">
         {children}
         {rootComments.length > 0 ? (
           <ul aria-label="댓글 목록" aria-live="polite" className="space-y-4 px-4 py-3 text-sm">

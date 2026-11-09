@@ -18,7 +18,7 @@ export default function PostDetails({ post }: { post: Post }) {
   return (
     <article
       aria-label={`${post.authorUsername}님의 게시물`}
-      className="overflow-hidden rounded-xl border border-neutral-200 bg-white text-neutral-950 md:grid md:aspect-[36/25] md:grid-cols-[minmax(0,5fr)_minmax(0,4fr)] md:grid-rows-[minmax(0,1fr)]"
+      className="overflow-hidden rounded-xl border border-neutral-200 bg-white text-neutral-950 sm:grid sm:aspect-[36/25] sm:grid-cols-[minmax(0,5fr)_minmax(0,4fr)] sm:grid-rows-[minmax(0,1fr)]"
     >
       <PostGallery key={post.id} images={post.images} />
 
