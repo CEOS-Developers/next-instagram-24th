@@ -7,17 +7,25 @@ type PostAction = "liked" | "saved";
 
 export const MAX_COMMENT_LENGTH = 2200;
 
-type PostComment = {
+export type PostComment = {
   id: string;
   username: string;
   text: string;
+  createdAt?: number;
+  parentId?: string;
+  replyToUsername?: string;
+  liked?: boolean;
 };
 
 function isPostComment(value: unknown): value is PostComment {
   return isRecord(value) &&
     typeof value.id === "string" &&
     typeof value.username === "string" &&
-    typeof value.text === "string";
+    typeof value.text === "string" &&
+    (value.createdAt === undefined || (typeof value.createdAt === "number" && Number.isFinite(value.createdAt))) &&
+    (value.parentId === undefined || typeof value.parentId === "string") &&
+    (value.replyToUsername === undefined || typeof value.replyToUsername === "string") &&
+    (value.liked === undefined || typeof value.liked === "boolean");
 }
 
 function getComments(post: Record<string, unknown>) {
@@ -78,10 +86,10 @@ function getPostInteraction(interactions: Record<string, unknown>, postId: strin
 function updatePost(postId: string, update: (post: Record<string, unknown>) => Record<string, unknown>) {
   const interactions = readInteractions(getSnapshot());
   const previous = getPostInteraction(interactions, postId);
-  const snapshot = JSON.stringify({
-    ...interactions,
-    [postId]: update(previous),
-  });
+  const next = update(previous);
+  if (next === previous) return false;
+
+  const snapshot = JSON.stringify({ ...interactions, [postId]: next });
 
   try {
     window.localStorage.setItem(storageKey, snapshot);
@@ -91,19 +99,58 @@ function updatePost(postId: string, update: (post: Record<string, unknown>) => R
   }
 
   listeners.forEach((listener) => listener());
+  return true;
 }
 
 function toggleAction(postId: string, action: PostAction) {
   updatePost(postId, (post) => ({ ...post, [action]: post[action] !== true }));
 }
 
-function addComment(postId: string, text: string) {
+function addComment(postId: string, text: string, replyToId?: string) {
   const trimmedText = text.trim();
   if (!trimmedText || trimmedText.length > MAX_COMMENT_LENGTH) return false;
 
-  const comment = { id: crypto.randomUUID(), username: currentUser.username, text: trimmedText };
-  updatePost(postId, (post) => ({ ...post, comments: [...getComments(post), comment] }));
-  return true;
+  return updatePost(postId, (post) => {
+    const comments = getComments(post);
+    const target = comments.find((item) => item.id === replyToId);
+    if (replyToId !== undefined && !target) return post;
+
+    const comment: PostComment = {
+      id: crypto.randomUUID(),
+      username: currentUser.username,
+      text: trimmedText,
+      createdAt: Date.now(),
+      parentId: target?.parentId ?? target?.id,
+      replyToUsername: target?.username,
+    };
+
+    return { ...post, comments: [...comments, comment] };
+  });
+}
+
+function deleteComment(postId: string, commentId: string) {
+  return updatePost(postId, (post) => {
+    const comments = getComments(post);
+    const comment = comments.find((item) => item.id === commentId && item.username === currentUser.username);
+    if (!comment) return post;
+
+    return {
+      ...post,
+      comments: comments.filter((item) => item.id !== commentId && item.parentId !== commentId),
+    };
+  });
+}
+
+function toggleCommentLike(postId: string, commentId: string) {
+  updatePost(postId, (post) => {
+    const comments = getComments(post);
+    if (!comments.some((item) => item.id === commentId)) return post;
+
+    return {
+      ...post,
+      comments: comments.map((item) => item.id === commentId ? { ...item, liked: !item.liked } : item),
+    };
+  });
 }
 
 export function usePostInteractions(postId: string) {
@@ -114,7 +161,9 @@ export function usePostInteractions(postId: string) {
     liked: post.liked === true,
     saved: post.saved === true,
     comments: getComments(post),
-    addComment: (text: string) => addComment(postId, text),
+    addComment: (text: string, replyToId?: string) => addComment(postId, text, replyToId),
+    toggleCommentLike: (commentId: string) => toggleCommentLike(postId, commentId),
+    deleteComment: (commentId: string) => deleteComment(postId, commentId),
     toggleLike: () => toggleAction(postId, "liked"),
     toggleSave: () => toggleAction(postId, "saved"),
   };
