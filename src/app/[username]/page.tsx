@@ -4,6 +4,7 @@ import { Suspense } from "react";
 
 import ProfileHeader from "@/components/profile/ProfileHeader";
 import ProfileHeaderSkeleton from "@/components/profile/ProfileHeaderSkeleton";
+import ProfilePostGrid, { ProfilePostGridSkeleton } from "@/components/profile/ProfilePostGrid";
 import {
   getAllUsers,
   getCurrentUser,
@@ -32,7 +33,14 @@ export async function generateMetadata({
 export default function ProfilePage({ params }: PageProps<"/[username]">) {
   return (
     <div className="mx-auto max-w-[935px] md:px-5">
-      <Suspense fallback={<ProfileHeaderSkeleton />}>
+      <Suspense
+        fallback={
+          <>
+            <ProfileHeaderSkeleton />
+            <ProfilePostGridSkeleton />
+          </>
+        }
+      >
         <ProfileContent params={params} />
       </Suspense>
     </div>
@@ -50,5 +58,10 @@ async function ProfileContent({ params }: Pick<PageProps<"/[username]">, "params
   const posts = getPostsByUserId(user.id);
   const isMe = user.id === getCurrentUser().id;
 
-  return <ProfileHeader user={user} postCount={posts.length} isMe={isMe} />;
+  return (
+    <>
+      <ProfileHeader user={user} postCount={posts.length} isMe={isMe} />
+      <ProfilePostGrid posts={posts} />
+    </>
+  );
 }
