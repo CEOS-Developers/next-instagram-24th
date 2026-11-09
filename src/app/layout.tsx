@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AppNavigation } from "@/components/layout/AppNavigation";
+import { Suspense } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,7 +26,9 @@ export default function RootLayout({ children, modal }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <AppNavigation />
+        <Suspense fallback={null}>
+          <AppNavigation />
+        </Suspense>
 
         <div className="flex min-h-screen flex-1 flex-col pl-20">
           {children}

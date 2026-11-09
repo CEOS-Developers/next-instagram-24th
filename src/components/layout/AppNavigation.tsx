@@ -1,3 +1,6 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import {
   Heart,
@@ -9,7 +12,7 @@ import {
   Send,
   SquarePlay,
 } from "lucide-react";
-import { FaInstagram, FaUser } from "react-icons/fa6";
+import { FaHouse, FaInstagram, FaUser } from "react-icons/fa6";
 
 import { currentUser } from "@/data/profiles";
 
@@ -37,10 +40,14 @@ const LABEL_CLASS =
   "shrink-0 whitespace-nowrap pr-4 opacity-0 transition-opacity duration-150 group-hover/sidebar:opacity-100";
 
 export function AppNavigation() {
+  const pathname = usePathname();
+  const profileHref = `/${currentUser.username}`;
+  const isProfileActive = pathname === profileHref;
+
   return (
     <aside
       aria-label="사이드바"
-      className="group/sidebar fixed inset-y-0 left-0 z-30 flex w-20 flex-col overflow-x-hidden overflow-y-auto border-r border-neutral-200 bg-white px-3 py-8 text-neutral-950 transition-[width] duration-200 ease-out hover:w-64 motion-reduce:transition-none"
+      className="group/sidebar fixed inset-y-0 left-0 z-30 flex w-20 flex-col overflow-x-hidden overflow-y-auto bg-white px-3 py-8 text-neutral-950 transition-[width] duration-200 ease-out hover:w-64 motion-reduce:transition-none"
     >
       <div className="h-16 w-full shrink-0">
         <Link
@@ -59,12 +66,21 @@ export function AppNavigation() {
         className="flex min-h-96 flex-1 translate-y-4 flex-col items-center justify-center gap-2"
       >
         {MENU_ITEMS.map(({ label, Icon, href }) => {
+          const isActive = href !== undefined && pathname === href;
+
           const content = (
             <>
               <span className={ICON_CLASS} aria-hidden="true">
-                <Icon size={28} />
+                {href === "/" && isActive ? (
+                  <FaHouse size={28} />
+                ) : (
+                  <Icon size={28} />
+                )}
               </span>
-              <span className={LABEL_CLASS}>{label}</span>
+
+              <span className={`${LABEL_CLASS} ${isActive ? "font-bold" : ""}`}>
+                {label}
+              </span>
             </>
           );
 
@@ -73,6 +89,7 @@ export function AppNavigation() {
               key={label}
               href={href}
               aria-label={label}
+              aria-current={isActive ? "page" : undefined}
               className={ITEM_CLASS}
             >
               {content}
@@ -85,19 +102,29 @@ export function AppNavigation() {
         })}
 
         <Link
-          href={`/${currentUser.username}`}
+          href={profileHref}
           aria-label="프로필"
+          aria-current={isProfileActive ? "page" : undefined}
           className={ITEM_CLASS}
         >
           <span className={ICON_CLASS} aria-hidden="true">
-            <span className="relative block h-8 w-8 overflow-hidden rounded-full bg-neutral-200">
+            <span
+              className={`relative block h-8 w-8 overflow-hidden rounded-full bg-neutral-200 ${
+                isProfileActive ? "ring-2 ring-neutral-950" : ""
+              }`}
+            >
               <FaUser
                 size={26}
                 className="absolute bottom-0 left-1/2 -translate-x-1/2 text-neutral-500"
               />
             </span>
           </span>
-          <span className={LABEL_CLASS}>프로필</span>
+
+          <span
+            className={`${LABEL_CLASS} ${isProfileActive ? "font-bold" : ""}`}
+          >
+            프로필
+          </span>
         </Link>
       </nav>
 
