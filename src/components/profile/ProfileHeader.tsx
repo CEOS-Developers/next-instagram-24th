@@ -1,3 +1,6 @@
+"use client";
+
+import ProfileEditor, { useProfileFields } from "./ProfileEditor";
 import ProfileNote from "./ProfileNote";
 import Avatar from "@/components/Avatar";
 import { formatCount } from "@/lib/format";
@@ -10,8 +13,8 @@ type ProfileHeaderProps = {
 };
 
 // 프로필 상단: 사진, 아이디, 버튼, 게시물/팔로워/팔로잉 수, 이름, 소개
-// 버튼은 아직 동작하지 않는 정적인 UI 입니다. (팔로우는 선택 요건에서 Client Component 로 분리 예정)
 export default function ProfileHeader({ user, postCount, isMe }: ProfileHeaderProps) {
+  const fields = useProfileFields(user, isMe);
   const stats = [
     { label: "게시물", value: postCount },
     { label: "팔로워", value: user.followerCount },
@@ -19,12 +22,7 @@ export default function ProfileHeader({ user, postCount, isMe }: ProfileHeaderPr
   ];
 
   const button = isMe ? (
-    <button
-      type="button"
-      className="rounded-lg bg-neutral-100 w-full px-4 py-2.5 text-sm font-semibold hover:bg-neutral-200"
-    >
-      프로필 편집
-    </button>
+    <ProfileEditor id={user.id} fields={fields} />
   ) : (
     <button
       type="button"
@@ -44,7 +42,7 @@ export default function ProfileHeader({ user, postCount, isMe }: ProfileHeaderPr
         </div>
         <div className="min-w-0 md:self-end">
           <h1 className="break-words text-2xl font-bold tracking-tight md:text-3xl">{user.username}</h1>
-          <p className="mt-1 text-sm md:text-base">{user.name}</p>
+          <p className="mt-1 text-sm md:text-base">{fields.name}</p>
         </div>
         <div className="col-span-2 min-w-0 space-y-3 text-sm md:col-span-1 md:self-start">
           <ul className="flex flex-wrap gap-x-5 gap-y-1 md:text-base">
@@ -53,17 +51,13 @@ export default function ProfileHeader({ user, postCount, isMe }: ProfileHeaderPr
             ))}
           </ul>
           <div className="break-words">
-          {user.bio && <p className="whitespace-pre-line">{user.bio}</p>}
-          {user.website && (
-            <a
-              href={user.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-semibold text-sky-900 hover:underline"
-            >
-              {user.website.replace(/^https?:\/\//, "")}
-            </a>
-          )}
+            {fields.bio && <p className="whitespace-pre-line">
+              {fields.bio.split(/(https?:\/\/[^\s<>]+)/gi).map((part, index) =>
+                /^https?:\/\//i.test(part)
+                  ? <a key={index} href={part} target="_blank" rel="noopener noreferrer" className="font-semibold text-sky-900 hover:underline">{part}</a>
+                  : part
+              )}
+            </p>}
           </div>
         </div>
       </div>
