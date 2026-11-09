@@ -10,18 +10,30 @@ const arrowClassName =
 
 export default function PostGallery({ images }: { images: Post["images"] }) {
   const [index, setIndex] = useState(0);
-  const image = images[index];
 
   return (
-    <section aria-label="게시물 사진" className="relative aspect-[4/5] overflow-hidden bg-neutral-100 md:aspect-auto">
-      <Image
-        src={image.src}
-        alt={image.alt}
-        fill
-        loading="eager"
-        sizes="(min-width: 1280px) 667px, (min-width: 768px) 56vw, 100vw"
-        className="object-cover"
-      />
+    <section aria-label="게시물 사진" className="relative aspect-[4/5] overflow-hidden bg-neutral-100 sm:aspect-auto">
+      <div
+        className="absolute inset-0 flex transition-transform duration-300 ease-out motion-reduce:transition-none"
+        style={{ transform: `translateX(${-index * 100}%)` }}
+      >
+        {images.map((photo, photoIndex) => (
+          <div
+            key={`${photo.src}-${photoIndex}`}
+            aria-hidden={photoIndex !== index}
+            className="relative w-full shrink-0"
+          >
+            <Image
+              src={photo.src}
+              alt={photo.alt}
+              fill
+              loading={photoIndex === 0 ? "eager" : "lazy"}
+              sizes="(min-width: 1280px) 667px, (min-width: 640px) 56vw, 100vw"
+              className="object-cover"
+            />
+          </div>
+        ))}
+      </div>
 
       {images.length > 1 && (
         <>
