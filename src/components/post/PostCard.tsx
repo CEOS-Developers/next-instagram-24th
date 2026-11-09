@@ -1,10 +1,12 @@
+import { CommentCount } from "./PostComments";
+import { LikeButton, LikeCount } from "@/components/post/PostLike";
 import Image from "next/image";
 import Link from "next/link";
 
 import Avatar from "@/components/Avatar";
-import { BookmarkIcon, CommentIcon, HeartIcon, SendIcon } from "@/components/icons";
+import { BookmarkIcon, CommentIcon, SendIcon } from "@/components/icons";
 import UserLink from "@/components/UserLink";
-import { formatCount, formatDate } from "@/lib/format";
+import { formatDate } from "@/lib/format";
 import type { PostWithAuthor } from "@/types";
 
 type PostCardProps = {
@@ -14,7 +16,6 @@ type PostCardProps = {
 };
 
 // 홈 피드의 게시물 카드
-// 지금은 버튼이 동작하지 않는 정적인 UI 입니다. (좋아요/저장은 선택 요건에서 Client Component 로 분리 예정)
 export default function PostCard({ post, commentCount, preload = false }: PostCardProps) {
   const postHref = `/p/${post.id}`;
 
@@ -42,7 +43,7 @@ export default function PostCard({ post, commentCount, preload = false }: PostCa
       </Link>
 
       <div className="flex items-center gap-4 pt-3">
-        <HeartIcon className="size-6" />
+        <LikeButton id={post.id} />
         <Link href={postHref} aria-label="댓글 보기">
           <CommentIcon className="size-6" />
         </Link>
@@ -50,7 +51,7 @@ export default function PostCard({ post, commentCount, preload = false }: PostCa
         <BookmarkIcon className="ml-auto size-6" />
       </div>
 
-      <p className="pt-2 text-sm font-semibold">좋아요 {formatCount(post.likeCount)}개</p>
+      <p className="pt-2 text-sm font-semibold">좋아요 <LikeCount id={post.id} count={post.likeCount} />개</p>
 
       {post.caption && (
         <p className="pt-1 text-sm whitespace-pre-line">
@@ -58,11 +59,7 @@ export default function PostCard({ post, commentCount, preload = false }: PostCa
         </p>
       )}
 
-      {commentCount > 0 && (
-        <Link href={postHref} className="block pt-1 text-sm text-neutral-500">
-          댓글 {commentCount}개 모두 보기
-        </Link>
-      )}
+      <CommentCount id={post.id} base={commentCount} link />
     </article>
   );
 }

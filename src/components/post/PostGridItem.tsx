@@ -1,8 +1,9 @@
+import { LikeCount } from "@/components/post/PostLike";
 import Image from "next/image";
 import Link from "next/link";
 
 import { CommentIcon, HeartIcon, MultipleIcon } from "@/components/icons";
-import { formatCount } from "@/lib/format";
+import { CommentCount } from "./PostComments";
 import type { Post } from "@/types";
 
 type PostGridItemProps = {
@@ -35,11 +36,11 @@ export default function PostGridItem({ post, commentCount }: PostGridItemProps) 
       <div className="absolute inset-0 hidden items-center justify-center gap-6 bg-black/30 font-semibold text-white group-hover:flex">
         <span className="flex items-center gap-1.5">
           <HeartIcon filled className="size-5" />
-          {formatCount(post.likeCount)}
+          <LikeCount id={post.id} count={post.likeCount} />
         </span>
         <span className="flex items-center gap-1.5">
           <CommentIcon className="size-5 fill-white" />
-          {formatCount(commentCount)}
+          <CommentCount id={post.id} base={commentCount} />
         </span>
       </div>
     </Link>
