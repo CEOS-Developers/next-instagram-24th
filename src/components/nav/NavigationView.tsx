@@ -41,23 +41,29 @@ export default function NavigationView({ currentUser, pathname }: NavigationView
   return (
     <>
       {/* 데스크톱 사이드바 */}
-      <nav className="fixed inset-y-0 left-0 z-20 hidden w-[72px] flex-col border-r border-neutral-200 bg-white px-3 pt-8 pb-5 md:flex xl:w-[244px]">
-        <Link href="/" className="mb-8 px-3 py-3">
-          <span className="hidden text-2xl font-semibold tracking-tight italic xl:inline">
+      <nav data-desktop-nav className="fixed inset-y-0 left-0 z-20 hidden w-[72px] flex-col border-r border-neutral-200 bg-white px-3 pt-8 pb-5 md:flex xl:w-[244px]">
+        <Link href="/" aria-label="Instagram 홈" className="mb-8 px-3 py-3">
+          <span data-nav-label className="hidden text-2xl font-semibold tracking-tight italic xl:inline">
             Instagram
           </span>
-          <span className="text-2xl font-semibold italic xl:hidden">I</span>
+          <svg data-nav-logo aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="size-6 xl:hidden">
+            <rect x="3" y="3" width="18" height="18" rx="5" />
+            <circle cx="12" cy="12" r="4" />
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+          </svg>
         </Link>
         <ul className="flex flex-col gap-2">
           {items.map((item) => (
             <li key={item.href}>
               <Link
                 href={item.href}
+                aria-label={item.label}
+                title={item.label}
                 aria-current={item.active ? "page" : undefined}
                 className="flex items-center gap-4 rounded-lg p-3 transition-colors hover:bg-neutral-100"
               >
                 {item.icon}
-                <span className={`hidden xl:inline ${item.active ? "font-bold" : ""}`}>
+                <span data-nav-label className={`hidden xl:inline ${item.active ? "font-bold" : ""}`}>
                   {item.label}
                 </span>
               </Link>

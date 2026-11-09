@@ -30,12 +30,12 @@ export default function PostCard({ post, commentCount, preload = false }: PostCa
         </div>
       </header>
 
-      <Link href={postHref} className="relative block aspect-square overflow-hidden rounded-sm bg-neutral-100">
+      <Link href={postHref} className="relative block aspect-[4/5] overflow-hidden rounded-sm bg-neutral-100">
         <Image
           src={post.imageUrls[0]}
           alt={post.caption || `${post.author.username}님의 게시물`}
           fill
-          sizes="(max-width: 470px) 100vw, 470px"
+          sizes="(max-width: 680px) 100vw, 680px"
           className="object-cover"
           preload={preload}
         />
