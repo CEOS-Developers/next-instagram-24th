@@ -36,4 +36,11 @@ export const profiles: Profile[] = [
     followers: 56,
     following: 42,
   },
+    {
+    username: "baek9min_",
+    displayName: "백규민",
+    bio: "",
+    followers: 230,
+    following: 252,
+  },
 ];

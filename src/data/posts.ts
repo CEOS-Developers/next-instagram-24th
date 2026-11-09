@@ -146,6 +146,27 @@ export const posts: Post[] = [
       { src: "/images/live_4.jpg", alt: "검정치마 공연 안내문 앞에서 들고 있는 티켓 두 장" },
     ],
   },
+    {
+    id: "baek9min-1",
+    authorUsername: "baek9min_",
+    caption: "",
+    publishedAt: "2026-11-09",
+    likeCount: 25,
+    images: [
+      {
+        src: "/images/baek9min-01.png",
+        alt: "안녕하세요두리입니다잘부탁드립니다",
+      },
+      {
+        src: "/images/baek9min-02.png",
+        alt: "안녕하세요무무입니다잘부탁드립니다",
+      },
+      {
+        src: "/images/baek9min-03.png",
+        alt: "안녕하세요무무입니다잘부탁드립니다",
+      },
+    ],
+  },
 ];
 
 export function getPostsByUsername(username: string): Post[] {
