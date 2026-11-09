@@ -1,4 +1,5 @@
 import { Ellipsis, Heart } from "lucide-react";
+import Link from "next/link";
 import { useRef, type ReactNode } from "react";
 import Avatar from "@/components/Avatar";
 import { currentUser } from "@/data/profiles";
@@ -43,7 +44,12 @@ export default function PostCommentItem({ comment, onDelete, onReply, onLike, no
           <p className="min-h-8 content-center whitespace-pre-wrap wrap-break-word">
             <span className="font-semibold">{comment.username}</span>{" "}
             {comment.replyToUsername && (
-              <><span className="text-blue-700">@{comment.replyToUsername}</span>{" "}</>
+              <>
+                <Link href={`/${encodeURIComponent(comment.replyToUsername)}`} className="text-blue-700 hover:underline focus-visible:outline-2">
+                  @{comment.replyToUsername}
+                </Link>
+                {" "}
+              </>
             )}
             {comment.text}
           </p>
