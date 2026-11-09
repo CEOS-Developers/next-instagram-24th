@@ -1,5 +1,6 @@
 import { Camera } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import type { Post } from "@/data/posts";
 
 export default function ProfilePosts({ posts }: { posts: Post[] }) {
@@ -21,14 +22,19 @@ export default function ProfilePosts({ posts }: { posts: Post[] }) {
       ) : (
         <ul className="grid grid-cols-3 gap-1 xl:grid-cols-4">
           {posts.map(({ id, images: [cover] }) => (
-            <li key={id} className="relative aspect-[3/4] overflow-hidden bg-neutral-100 dark:bg-neutral-800">
-              <Image
-                src={cover.src}
-                alt={cover.alt}
-                fill
-                sizes="(min-width: 1280px) 256px, (min-width: 1024px) 341px, 33vw"
-                className="object-cover"
-              />
+            <li key={id}>
+              <Link
+                href={`/posts/${id}`}
+                className="relative block aspect-[3/4] overflow-hidden bg-neutral-100 focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 dark:bg-neutral-800"
+              >
+                <Image
+                  src={cover.src}
+                  alt={cover.alt}
+                  fill
+                  sizes="(min-width: 1280px) 256px, (min-width: 1024px) 341px, 33vw"
+                  className="object-cover"
+                />
+              </Link>
             </li>
           ))}
         </ul>
