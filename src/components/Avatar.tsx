@@ -1,16 +1,12 @@
-import { UserRound } from "lucide-react";
+import { FaUser } from "react-icons/fa6";
 
 export default function Avatar({ className }: { className: string }) {
   return (
     <span
       aria-hidden="true"
-      className={`flex shrink-0 items-center justify-center overflow-hidden rounded-full border border-neutral-200 bg-neutral-100 text-gray-500/85 ${className}`}
+      className={`relative block shrink-0 overflow-hidden rounded-full border border-neutral-200 bg-neutral-100 text-gray-500/85 ${className}`}
     >
-      <UserRound
-        fill="currentColor"
-        stroke="none"
-        className="size-[110%] max-w-none shrink-0 translate-y-[9%]"
-      />
+      <FaUser className="absolute bottom-0 left-1/2 h-[81.25%] w-[81.25%] -translate-x-1/2" />
     </span>
   );
 }
