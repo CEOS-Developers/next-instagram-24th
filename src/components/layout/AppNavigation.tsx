@@ -56,9 +56,9 @@ export function AppNavigation() {
         <Link
           href="/"
           aria-label="Instagram 홈"
-          className="flex h-12 items-center overflow-hidden"
+          className={`${LINK_CLASS} max-w-14`}
         >
-          <span className="flex h-12 w-14 shrink-0 items-center justify-center">
+          <span className={ICON_CLASS}>
             <FaInstagram size={28} aria-hidden="true" />
           </span>
         </Link>
