@@ -1,4 +1,4 @@
-import { UserRound } from "lucide-react";
+import Avatar from "@/components/Avatar";
 import type { Profile } from "@/data/profiles";
 
 type ProfileHeaderProps = {
@@ -15,14 +15,7 @@ export default function ProfileHeader({ profile, postCount }: ProfileHeaderProps
 
   return (
     <header className="flex items-start gap-4 px-4 py-8 sm:items-center sm:gap-8 sm:px-8 sm:py-12">
-      <div className="flex size-20 shrink-0 items-center justify-center overflow-hidden rounded-full border border-neutral-200 bg-neutral-100 text-gray-500/85 sm:size-32 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-400">
-        <UserRound
-          aria-hidden="true"
-          fill="currentColor"
-          stroke="none"
-          className="size-[110%] max-w-none shrink-0 translate-y-[9%]"
-        />
-      </div>
+      <Avatar className="size-20 sm:size-32 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-400" />
       <div className="min-w-0">
         <h1 className="text-xl font-semibold wrap-break-word sm:text-2xl">
           {profile.username}

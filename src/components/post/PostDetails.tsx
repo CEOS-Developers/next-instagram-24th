@@ -1,5 +1,6 @@
-import { Bookmark, Ellipsis, Heart, UserRound } from "lucide-react";
+import { Bookmark, Ellipsis, Heart, MessageCircle, Smile } from "lucide-react";
 import Link from "next/link";
+import Avatar from "@/components/Avatar";
 import PostGallery from "@/components/post/PostGallery";
 import type { Post } from "@/data/posts";
 
@@ -23,9 +24,7 @@ export default function PostDetails({ post }: { post: Post }) {
       <div className="flex min-h-0 min-w-0 flex-col">
         <header className="flex shrink-0 items-center justify-between gap-3 border-b border-neutral-200 px-4 py-3">
           <Link href={authorHref} className="flex min-w-0 items-center gap-3 text-sm font-semibold hover:underline">
-            <span className="grid size-9 shrink-0 place-items-center rounded-full border border-neutral-200 bg-neutral-100 text-neutral-500">
-              <UserRound aria-hidden="true" className="size-6 fill-current" />
-            </span>
+            <Avatar className="size-9" />
             <span className="truncate">{post.authorUsername}</span>
           </Link>
           <button type="button" disabled aria-label="게시물 더 보기" className="grid size-9 shrink-0 place-items-center">
@@ -35,24 +34,33 @@ export default function PostDetails({ post }: { post: Post }) {
 
         <section aria-label="게시물 본문 및 댓글" className="flex min-h-36 flex-1 flex-col overflow-y-auto md:min-h-0">
           {post.caption && (
-            <p className="shrink-0 px-4 py-4 text-sm whitespace-pre-wrap wrap-break-word">
-              <Link href={authorHref} className="mr-2 font-semibold hover:underline">
-                {post.authorUsername}
-              </Link>
-              {post.caption}
-            </p>
+            <div className="flex shrink-0 items-start gap-3 px-4 py-4 text-sm">
+              <Avatar className="size-8" />
+              <p className="min-h-8 min-w-0 content-center whitespace-pre-wrap wrap-break-word">
+                <Link href={authorHref} className="mr-2 font-semibold hover:underline">
+                  {post.authorUsername}
+                </Link>
+                {post.caption}
+              </p>
+            </div>
           )}
           <div className="grid flex-1 place-items-center px-4 py-6 text-center">
-            <h2 className="text-lg font-bold md:text-2xl">아직 댓글이 없습니다.</h2>
+            <div>
+              <h2 className="text-lg font-bold md:text-2xl">아직 댓글이 없습니다.</h2>
+              <p className="mt-2 text-sm">댓글을 남겨보세요.</p>
+            </div>
           </div>
         </section>
 
         <footer className="shrink-0 border-t border-neutral-200 px-4 py-3 text-sm">
-          <div className="mb-2 flex justify-between">
+          <div className="mb-2 flex items-center gap-2">
             <button type="button" disabled aria-label="좋아요" className="grid size-8 place-items-center">
               <Heart aria-hidden="true" className="size-6" />
             </button>
-            <button type="button" disabled aria-label="게시물 저장" className="grid size-8 place-items-center">
+            <button type="button" disabled aria-label="댓글 작성" className="grid size-8 place-items-center">
+              <MessageCircle aria-hidden="true" className="size-6" />
+            </button>
+            <button type="button" disabled aria-label="게시물 저장" className="ml-auto grid size-8 place-items-center">
               <Bookmark aria-hidden="true" className="size-6" />
             </button>
           </div>
@@ -61,6 +69,20 @@ export default function PostDetails({ post }: { post: Post }) {
             {dateFormatter.format(new Date(post.publishedAt))}
           </time>
         </footer>
+
+        <div className="flex shrink-0 items-center gap-3 border-t border-neutral-200 px-4 py-2 text-sm">
+          <Smile aria-hidden="true" className="size-6 shrink-0" />
+          <input
+            type="text"
+            disabled
+            aria-label="댓글 내용"
+            placeholder="댓글 달기..."
+            className="min-h-9 min-w-0 flex-1 placeholder:text-neutral-500"
+          />
+          <button type="button" disabled className="shrink-0 font-semibold text-blue-600 opacity-40">
+            게시
+          </button>
+        </div>
       </div>
     </article>
   );
