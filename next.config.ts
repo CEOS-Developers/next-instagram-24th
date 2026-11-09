@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  devIndicators: false,
   cacheComponents: true,
   // next/image 로 picsum.photos 이미지를 불러오기 위한 허용 목록
   // (picsum 은 fastly.picsum.photos 로 리다이렉트하므로 둘 다 허용)
