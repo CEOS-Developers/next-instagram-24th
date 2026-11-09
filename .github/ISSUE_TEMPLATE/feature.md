@@ -1,7 +1,7 @@
 ---
 name: Feature
 about: 새로운 기능 구현
-title: "Feat: 담당자-기능설명"
+title: "Feat: "
 labels: feature
 assignees: ''
 ---
