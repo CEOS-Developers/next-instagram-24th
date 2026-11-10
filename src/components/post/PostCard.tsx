@@ -4,7 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 import Avatar from "@/components/Avatar";
-import { BookmarkIcon, CommentIcon, SendIcon } from "@/components/icons";
+import { CommentIcon, SendIcon } from "@/components/icons";
+import { SaveButton } from "@/components/post/PostSave";
 import UserLink from "@/components/UserLink";
 import { formatDate } from "@/lib/format";
 import type { PostWithAuthor } from "@/types";
@@ -48,7 +49,7 @@ export default function PostCard({ post, commentCount, preload = false }: PostCa
           <CommentIcon className="size-6" />
         </Link>
         <SendIcon className="size-6" />
-        <BookmarkIcon className="ml-auto size-6" />
+        <SaveButton id={post.id} className="ml-auto" />
       </div>
 
       <p className="pt-2 text-sm font-semibold">좋아요 <LikeCount id={post.id} count={post.likeCount} />개</p>

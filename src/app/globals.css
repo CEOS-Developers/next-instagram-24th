@@ -88,3 +88,71 @@ body {
   .desktop-rail svg { width: 3.8vw; height: 3.8vw; }
   .desktop-rail img { width: 4vw !important; height: 4vw !important; }
 }
+
+/* ---------- 사이드바 hover 확장 (실제 인스타그램처럼) ----------
+   - 사이드바(.desktop-rail)에 마우스를 올리면 흰 패널이 본문 위로 펼쳐지고 메뉴 이름(.rail-label)이 보임
+   - 메뉴 하나(.rail-item)에 올리면 그 줄이 회색으로 강조됨
+   - 아이콘 위치/크기는 그대로 두고, 이름·강조는 모두 absolute 로 얹기만 해서 레이아웃이 흔들리지 않음
+   변수: --rail 사이드바 폭, --slotw 아이콘 칸 폭, --panel 펼쳐진 패널 폭, --x 아이콘 칸의 왼쪽 여백 */
+.desktop-rail {
+  --rail: 72px;
+  --slotw: 44px;
+  --panel: 244px;
+  --x: calc((var(--rail) - var(--slotw)) / 2);
+}
+@media (48rem <= width < 80rem) {
+  .desktop-rail { --rail: 8.2vw; }
+}
+@media (min-width: 80rem) {
+  .desktop-rail {
+    --rail: 5.25vw;
+    --slotw: var(--slot);
+    --panel: clamp(244px, 16vw, 380px);
+  }
+}
+
+/* 펼쳐지는 흰 패널 */
+.desktop-rail::before {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  z-index: -1;
+  width: var(--panel);
+  background: white;
+  box-shadow: 4px 0 24px rgb(0 0 0 / 0.08);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s;
+}
+.desktop-rail:hover { overflow: visible; }
+.desktop-rail:hover::before { opacity: 1; pointer-events: auto; }
+
+/* 메뉴 이름 */
+.rail-label {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 14px);
+  translate: 0 -50%;
+  white-space: nowrap;
+  font-size: 16px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s;
+}
+@media (min-width: 80rem) {
+  .rail-label { font-size: clamp(16px, 1.05vw, 24px); left: calc(100% + 0.9vw); }
+}
+.desktop-rail:hover .rail-label { opacity: 1; }
+
+/* 메뉴 줄 강조 (패널 폭만큼 회색 배경) */
+.rail-item::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  left: calc(12px - var(--x));
+  z-index: -1;
+  width: calc(var(--panel) - 24px);
+  border-radius: 10px;
+}
+.desktop-rail:hover .rail-item:hover::after { background: rgb(0 0 0 / 0.05); }

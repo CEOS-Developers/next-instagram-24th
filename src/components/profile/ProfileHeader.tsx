@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import Link from "next/link";
-import FollowButton from "@/components/FollowButton";
+import FollowButton, { useFollowing } from "@/components/FollowButton";
 import ProfileEditor, { useProfileFields } from "./ProfileEditor";
 import ProfileNote from "./ProfileNote";
 import Avatar from "@/components/Avatar";
@@ -20,9 +20,11 @@ type ProfileHeaderProps = {
 export default function ProfileHeader({ user, postCount, isMe, suggestions = [] }: ProfileHeaderProps) {
   const archive = useRef<HTMLDialogElement>(null);
   const fields = useProfileFields(user, isMe);
+  // 팔로우하면 이 사람의 팔로워 수 +1 (버튼과 같은 상태를 보므로 누르는 즉시 반영)
+  const { following } = useFollowing(user.id);
   const stats = [
     { label: "게시물", value: postCount },
-    { label: "팔로워", value: user.followerCount },
+    { label: "팔로워", value: user.followerCount + (!isMe && following ? 1 : 0) },
     { label: "팔로잉", value: user.followingCount },
   ];
 
@@ -36,11 +38,16 @@ export default function ProfileHeader({ user, postCount, isMe, suggestions = [] 
       </dialog>
     </div>
   ) : (
+    // [팔로우] [메시지 보내기] [추천 계정] 한 줄 (메시지 보내기는 화면만 있는 버튼)
     <div className="relative flex items-stretch gap-2">
       <FollowButton userId={user.id} wide />
+      <button type="button" className="flex-[1.12] rounded-xl bg-neutral-100 py-2.5 font-semibold hover:bg-neutral-200">
+        메시지 보내기
+      </button>
       <details>
-        <summary aria-label="추천 계정 보기" title="추천 계정 보기" className="grid h-full w-12 cursor-pointer list-none place-items-center rounded-xl bg-neutral-100">
-          <svg aria-hidden="true" viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="9" cy="8" r="3"/><path d="M2 20v-2a6 6 0 0112 0v2m4-15v8m-4-4h8"/></svg>
+        <summary aria-label="추천 계정 보기" title="추천 계정 보기" className="grid h-full w-12 cursor-pointer list-none place-items-center rounded-xl bg-neutral-100 hover:bg-neutral-200 md:w-[52px]">
+          {/* 왼쪽 + / 오른쪽 사람 모양 (실제 인스타그램 추천 계정 버튼과 같은 배치) */}
+          <svg aria-hidden="true" viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round"><path d="M1.5 12.5h6M4.5 9.5v6"/><circle cx="15" cy="7.5" r="3.6"/><path d="M8.8 20.2c.4-3.9 3-6.3 6.2-6.3s5.8 2.4 6.2 6.3a.8.8 0 0 1-.8.8H9.6a.8.8 0 0 1-.8-.8z"/></svg>
         </summary>
         <div className="absolute right-0 z-10 mt-2 grid gap-2 rounded-xl border border-neutral-200 bg-white p-4 text-sm shadow">
           <strong>추천 계정</strong>

@@ -11,7 +11,7 @@ import {
   getUserByUsername,
 } from "@/lib/data";
 
-// 동적 라우트: /ceos.front, /jiwoo.kim ...
+// 동적 라우트: /ceos24.front, /jiwoo.kim ...
 // 빌드할 때 어떤 username 이 있는지 미리 알려주면 각 프로필을 정적 HTML 로 만들어 둡니다.
 export function generateStaticParams() {
   return getAllUsers().map((user) => ({ username: user.username }));

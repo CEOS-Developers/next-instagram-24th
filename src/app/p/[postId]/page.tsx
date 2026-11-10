@@ -4,6 +4,7 @@ import PostComments from "@/components/post/PostComments";
 import Avatar from "@/components/Avatar";
 import UserLink from "@/components/UserLink";
 import PostGallery from "@/components/post/PostGallery";
+import PostCloseButton from "@/components/post/PostCloseButton";
 import { getCommentsByPostId, getCurrentUser, getFeedPosts, getPostById } from "@/lib/data";
 import { formatDate } from "@/lib/format";
 
@@ -26,6 +27,7 @@ export default async function PostPage({ params }: PageProps<"/p/[postId]">) {
           <header className="flex items-center gap-3 border-b border-neutral-200 p-4">
             <Avatar user={post.author} size={36} />
             <UserLink user={post.author} />
+            <PostCloseButton fallbackHref={`/${post.author.username}`} />
           </header>
           <div className="space-y-3 p-4 text-sm">
             <p className="whitespace-pre-line">{post.caption}</p>

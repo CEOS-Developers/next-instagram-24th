@@ -38,7 +38,11 @@ export default function NavigationView({ currentUser, pathname }: NavigationView
     },
   ];
 
-  const railItem = "relative grid size-11 shrink-0 place-items-center rounded-xl [&>svg]:size-7";
+  const railItem = "rail-item relative grid size-11 shrink-0 place-items-center rounded-xl [&>svg]:size-7";
+  // 사이드바에 마우스를 올리면 보이는 메뉴 이름 (globals.css 의 .rail-* 참고)
+  const hoverText = (label: string, active = false) => (
+    <span aria-hidden="true" className={`rail-label ${active ? "font-bold" : ""}`}>{label}</span>
+  );
   const glyph = (path: string) => (
     <svg aria-hidden="true" viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
       <path d={path} />
@@ -52,9 +56,10 @@ export default function NavigationView({ currentUser, pathname }: NavigationView
     ["만들기", glyph("M12 3v18M3 12h18")],
   ] as const;
   const railLink = (item: (typeof items)[number]) => (
-    <Link href={item.href} title={item.label} aria-label={item.label}
-      aria-current={item.active ? "page" : undefined} className={railItem + " hover:bg-neutral-100"}>
+    <Link href={item.href} aria-label={item.label}
+      aria-current={item.active ? "page" : undefined} className={railItem}>
       {item.icon}
+      {hoverText(item.label, item.active)}
     </Link>
   );
 
@@ -72,19 +77,22 @@ export default function NavigationView({ currentUser, pathname }: NavigationView
         <div className="mt-[clamp(16px,8vh,88px)] flex shrink-0 flex-col items-center gap-[clamp(2px,1vh,10px)]">
           {railLink(items[0])}
           {shortcuts.map(([label, icon]) => (
-            <span key={label} role="img" aria-label={label} title={label} className={railItem}>
+            <span key={label} role="img" aria-label={label} className={railItem}>
               {icon}
               {label === "메시지" && <span aria-hidden="true" className="absolute top-5 left-6 rounded-full border-2 border-white bg-red-500 px-1 text-[10px] font-bold leading-4 text-white">9+</span>}
+              {hoverText(label)}
             </span>
           ))}
           {railLink(items[1])}
         </div>
         <div className="mt-auto flex shrink-0 flex-col gap-2 pt-4">
-          <span role="img" aria-label="더 보기" title="더 보기" className={railItem}>
+          <span role="img" aria-label="더 보기" className={railItem}>
             {glyph("M3 5h18M3 12h18M3 19h18")}
+            {hoverText("더 보기")}
           </span>
-          <span role="img" aria-label="기타 앱" title="기타 앱" className={railItem}>
+          <span role="img" aria-label="Meta의 다른 앱" className={railItem}>
             {glyph("M9 2h6v7H9z M2 14h7v7H2z M15 14h7v7h-7z")}
+            {hoverText("Meta의 다른 앱")}
           </span>
         </div>
       </nav>
