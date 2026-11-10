@@ -1,6 +1,8 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import ProfileClient from "@/components/profile/ProfileClient";
+import ProfilePosts from "@/components/profile/ProfilePosts";
+import { comments } from "@/mocks/comments";
 import { posts } from "@/mocks/posts";
 import { users } from "@/mocks/users";
 
@@ -18,9 +20,26 @@ async function ProfileContent({ params }: ProfilePageProps) {
 
   if (!user) notFound();
 
-  const postCount = posts.filter((post) => post.authorId === user.id).length;
+  // 최신 게시물이 먼저 오도록 정렬합니다.
+  const userPosts = posts
+    .filter((post) => post.authorId === user.id)
+    .toSorted((a, b) => b.createdAt.localeCompare(a.createdAt));
 
-  return <ProfileClient key={user.id} user={user} postCount={postCount} />;
+  const commentCounts: Record<string, number> = {};
+  for (const comment of comments) {
+    commentCounts[comment.postId] = (commentCounts[comment.postId] ?? 0) + 1;
+  }
+
+  return (
+    <>
+      <ProfileClient key={user.id} user={user} postCount={userPosts.length} />
+      <ProfilePosts
+        posts={userPosts}
+        username={user.username}
+        commentCounts={commentCounts}
+      />
+    </>
+  );
 }
 
 export default function ProfilePage({ params }: ProfilePageProps) {
