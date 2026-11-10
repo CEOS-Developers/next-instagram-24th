@@ -24,7 +24,13 @@ async function PostContent({ params }: PostPageProps) {
   // 게시물이 없거나, URL의 username이 실제 작성자와 다르면 404를 보여줍니다.
   if (!result) notFound();
 
-  return <PostDetail post={result.post} author={result.author} />;
+  return (
+    <PostDetail
+      post={result.post}
+      author={result.author}
+      comments={result.comments}
+    />
+  );
 }
 
 // 주소로 직접 들어오거나 새로고침했을 때 보이는 상세 페이지입니다.
