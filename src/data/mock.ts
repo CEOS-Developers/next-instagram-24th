@@ -41,7 +41,7 @@ export const users: User[] = [
   },
   {
     id: "u4",
-    username: "sumin0423",
+    username: "sum_elng",
     name: "최수민",
     avatarUrl: DEFAULT_AVATAR,
     bio: "귀여운게 최고다. 프론트의 앙마😈",
@@ -63,7 +63,7 @@ export const users: User[] = [
 export const initialFollowingIds: User["id"][] = ["u2", "u3", "u4"];
 
 export const posts: Post[] = [
-  // u4 sumin0423
+  // u4 sum_elng
   {
     id: "sumin0423",
     authorId: "u4",
