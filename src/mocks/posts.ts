@@ -1,4 +1,4 @@
-import type { Post } from "@/types/instagram";
+import type { Post } from "@/types/post";
 
 // 이미지 파일은 public/images/에서 관리합니다.
 export const posts: Post[] = [
