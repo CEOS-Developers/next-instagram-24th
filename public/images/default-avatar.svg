@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150">
+  <!-- 프로필 사진이 없는 계정에 쓰는 기본 프로필 -->
+  <rect width="150" height="150" fill="#dbdbdb"/>
+  <circle cx="75" cy="58" r="27" fill="#fafafa"/>
+  <path d="M22 150c4-33 25-52 53-52s49 19 53 52z" fill="#fafafa"/>
+</svg>
