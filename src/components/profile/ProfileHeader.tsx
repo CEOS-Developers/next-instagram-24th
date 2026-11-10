@@ -8,6 +8,7 @@ export type ProfileHeaderProps = {
   postCount: number;
   isFollowing: boolean;
   onToggleFollow: () => void;
+  onMessage?: () => void;
 };
 
 export default function ProfileHeader({
@@ -15,41 +16,48 @@ export default function ProfileHeader({
   postCount,
   isFollowing,
   onToggleFollow,
+  onMessage,
 }: ProfileHeaderProps) {
   // 목데이터의 팔로워 수에 현재 상태와 초기 상태의 차이만 반영합니다.
   const followerCount =
     user.followerCount + Number(isFollowing) - Number(user.isFollowedByMe);
 
   return (
-    <header className="mx-auto flex w-full max-w-profile flex-col gap-6 font-sans text-text-primary sm:flex-row sm:gap-10">
-      <Avatar
-        src={user.avatarUrl}
-        alt={`${user.displayName} 프로필 사진`}
-        size="lg"
-      />
-
-      <div className="min-w-0 flex-1 space-y-6">
-        <div className="flex flex-wrap items-center gap-4">
-          <h1 className="min-w-0 break-all text-username font-regular">
-            {user.username}
-          </h1>
-          <ProfileActions
-            isFollowing={isFollowing}
-            onToggleFollow={onToggleFollow}
+    <header className="mx-auto w-full max-w-profile-header space-y-6 font-sans text-text-primary">
+      <div className="flex flex-col gap-5 sm:flex-row sm:gap-7">
+        <div className="shrink-0 self-center sm:self-start">
+          <Avatar
+            src={user.avatarUrl}
+            alt={`${user.displayName} 프로필 사진`}
+            size="profile"
           />
         </div>
 
-        <ProfileStats
-          postCount={postCount}
-          followerCount={followerCount}
-          followingCount={user.followingCount}
-        />
+        <div className="min-w-0 flex-1 space-y-3">
+          <div className="space-y-1">
+            <h1 className="break-all text-profile-title font-semibold">
+              {user.username}
+            </h1>
+            <p className="wrap-anywhere text-body">{user.displayName}</p>
+          </div>
 
-        <div className="space-y-1 text-body">
-          <p className="wrap-anywhere font-semibold">{user.displayName}</p>
-          <p className="whitespace-pre-wrap wrap-anywhere">{user.bio}</p>
+          <ProfileStats
+            postCount={postCount}
+            followerCount={followerCount}
+            followingCount={user.followingCount}
+          />
+
+          <p className="whitespace-pre-wrap wrap-anywhere text-body">
+            {user.bio}
+          </p>
         </div>
       </div>
+
+      <ProfileActions
+        isFollowing={isFollowing}
+        onToggleFollow={onToggleFollow}
+        onMessage={onMessage}
+      />
     </header>
   );
 }

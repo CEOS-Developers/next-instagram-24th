@@ -23,8 +23,8 @@ export default function ProfileStats({
     <dl
       aria-label="프로필 통계"
       className={[
-        "flex flex-wrap items-center gap-x-6 gap-y-2",
-        "font-sans text-nav text-text-primary",
+        "flex flex-wrap items-center gap-x-5 gap-y-2",
+        "font-sans text-body text-text-primary",
         className,
       ].join(" ")}
     >
