@@ -1,6 +1,6 @@
 import { CommentCount } from "./PostComments";
 import { LikeButton, LikeCount } from "@/components/post/PostLike";
-import Image from "next/image";
+import PostGallery from "./PostGallery";
 import Link from "next/link";
 
 import Avatar from "@/components/Avatar";
@@ -32,16 +32,8 @@ export default function PostCard({ post, commentCount, preload = false }: PostCa
         </div>
       </header>
 
-      <Link href={postHref} className="relative block aspect-[4/5] overflow-hidden rounded-sm bg-neutral-100">
-        <Image
-          src={post.imageUrls[0]}
-          alt={post.caption || `${post.author.username}님의 게시물`}
-          fill
-          sizes="(min-width: 1280px) 31vw, (max-width: 680px) 100vw, 680px"
-          className="object-cover"
-          preload={preload}
-        />
-      </Link>
+      <PostGallery images={post.imageUrls} caption={post.caption || `${post.author.username}님의 게시물`}
+        postHref={postHref} preload={preload} />
 
       <div className="flex items-center gap-4 pt-3">
         <LikeButton id={post.id} />

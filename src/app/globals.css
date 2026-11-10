@@ -125,8 +125,8 @@ body {
   pointer-events: none;
   transition: opacity 0.15s;
 }
-.desktop-rail:hover { overflow: visible; }
-.desktop-rail:hover::before { opacity: 1; pointer-events: auto; }
+.desktop-rail:is(:hover, :focus-within) { overflow: visible; }
+.desktop-rail:is(:hover, :focus-within)::before { opacity: 1; pointer-events: auto; }
 
 /* 메뉴 이름 */
 .rail-label {
@@ -143,7 +143,7 @@ body {
 @media (min-width: 80rem) {
   .rail-label { font-size: clamp(16px, 1.05vw, 24px); left: calc(100% + 0.9vw); }
 }
-.desktop-rail:hover .rail-label { opacity: 1; }
+.desktop-rail:is(:hover, :focus-within) .rail-label { opacity: 1; }
 
 /* 메뉴 줄 강조 (패널 폭만큼 회색 배경) */
 .rail-item::after {
@@ -157,7 +157,28 @@ body {
 }
 .desktop-rail:hover .rail-item:hover::after { background: rgb(0 0 0 / 0.05); }
 
+@media (min-width: 80rem) {
+  .desktop-rail { width: var(--panel); align-items: flex-start; }
+  .desktop-rail > a, .desktop-rail > div { left: var(--x); }
+  .desktop-rail::before { display: none; }
+  .desktop-rail .rail-label { opacity: 1; pointer-events: auto; }
+  .desktop-rail .rail-item[aria-current="page"]::after,
+  .desktop-rail .rail-item:focus-visible::after { background: rgb(0 0 0 / 0.05); }
+  main { padding-left: clamp(244px, 16vw, 380px); padding-right: 0; }
+  .profile-page { left: auto; }
+}
+
 /* Safari 가 펼침 메뉴(<details>/<summary>)에 기본으로 붙이는 ▶ 표시 숨기기 */
 summary { list-style: none; }
 summary::-webkit-details-marker { display: none; }
 summary::marker { content: ""; }
+html:has(.post-dialog[open]) { overflow: hidden; }
+.post-dialog { position: fixed; inset: 0; width: 100%; height: 100%; max-width: none; max-height: none; background: transparent; }
+.post-dialog[open] { display: grid; place-items: center; }
+.post-dialog::backdrop { background: rgb(0 0 0 / 65%); }
+.post-dialog .post-detail { width: min(92vw, 1100px); max-height: 84dvh; overflow: auto; border-radius: 12px; background: white; }
+@media (min-width: 48rem) {
+  .post-dialog .post-detail { width: min(86.5vw, 115dvh, 1100px); }
+  .post-dialog .post-detail > .grid { height: min(60vw, 80dvh, 764px); }
+  .post-dialog .post-detail > .grid > :first-child { height: 100%; width: 100%; aspect-ratio: auto; }
+}

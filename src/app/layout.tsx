@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   description: "CEOS 24기 Next.js 인스타그램 클론",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children, modal }: LayoutProps<"/">) {
   // layout 은 Server Component 이므로 데이터를 바로 읽어서 내려줄 수 있습니다.
   const currentUser = getCurrentUser();
 
@@ -34,6 +34,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </Suspense>
 
         <main className="pb-12 md:pb-0 md:px-[72px]">{children}</main>
+        {modal}
       </body>
     </html>
   );
