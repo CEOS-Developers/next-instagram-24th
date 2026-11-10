@@ -18,6 +18,10 @@ export const posts: Post[] = [
     authorId: "user-1",
     imageUrl: "/images/post-walk.svg",
     imageAlt: "나무 사이로 이어진 산책길을 표현한 샘플 일러스트",
+    extraImages: [
+      { url: "/images/post-cafe.svg", alt: "창가 테이블 위 커피잔을 표현한 샘플 일러스트" },
+      { url: "/images/siu.png", alt: "호날두 프로필 사진" },
+    ],
     caption: "도망갈래",
     likeCount: 48,
     isLikedByMe: false,
@@ -98,6 +102,11 @@ export const posts: Post[] = [
     authorId: "user-2",
     imageUrl: "/images/angrymessi.png",
     imageAlt: "아르헨티나 유니폼을 입고 주먹을 쥔 채 소리치는 메시",
+    extraImages: [
+      { url: "/images/funnymessi.png", alt: "잔디를 배경으로 활짝 웃는 메시" },
+      { url: "/images/messigimotti.jpeg", alt: "메시 프로필 사진" },
+      { url: "/images/thegoat.png", alt: "손을 내민 메시와 무릎을 꿇은 호날두 사이로 빛이 나는 합성 이미지" },
+    ],
     caption: "1",
     likeCount: 512,
     isLikedByMe: true,

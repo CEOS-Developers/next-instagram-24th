@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import Icon from "@/components/ui/Icon";
 import type { Post } from "@/types/post";
 import type { User } from "@/types/user";
+import PostThumbnailStats from "./PostThumbnailStats";
 
 export type PostThumbnailProps = {
   post: Post;
@@ -30,20 +30,23 @@ export default function PostThumbnail({
         className="object-cover"
       />
 
-      {/* 호버 또는 키보드 포커스 시 좋아요·댓글 수를 보여줍니다. */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 flex items-center justify-center gap-7 bg-black/30 text-body font-semibold text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
-      >
-        <span className="flex items-center gap-1.5">
-          <Icon name="heart" size={20} filled />
-          {post.likeCount.toLocaleString()}
-        </span>
-        <span className="flex items-center gap-1.5">
-          <Icon name="comment" size={20} className="fill-current" />
-          {commentCount.toLocaleString()}
-        </span>
-      </div>
+      {/* 여러 장 게시물 표시 */}
+      {post.extraImages && post.extraImages.length > 0 && (
+        <svg
+          width={20}
+          height={20}
+          viewBox="0 0 24 24"
+          fill="white"
+          aria-hidden="true"
+          focusable="false"
+          className="absolute top-2 right-2 drop-shadow"
+        >
+          <path d="M8 2h11a3 3 0 0 1 3 3v11a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3Z" />
+          <path d="M3 7.5V19a2 2 0 0 0 2 2h11.5" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" />
+        </svg>
+      )}
+
+      <PostThumbnailStats post={post} commentCount={commentCount} />
     </Link>
   );
 }
