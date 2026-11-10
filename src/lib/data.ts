@@ -111,13 +111,10 @@ export function getFeedPage(offset = 0): {
   next: number | null;
 } {
   const posts = getFeedPosts();
-  if (!posts.length) return { items: [], next: null };
-
-  // 데모 피드는 마지막 게시물 다음에 첫 게시물부터 다시 이어진다.
-  const start = offset % posts.length;
-  const page = Array.from({ length: 4 }, (_, i) => posts[(start + i) % posts.length]);
+  const page = posts.slice(offset, offset + 4);
+  const end = offset + page.length;
   return {
     items: page.map(post => ({ post, commentCount: getCommentCount(post.id) })),
-    next: (start + page.length) % posts.length,
+    next: end < posts.length ? end : null,
   };
 }

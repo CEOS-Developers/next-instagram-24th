@@ -1,6 +1,6 @@
 export default function ProfileHeaderSkeleton() {
   return (
-    <div aria-hidden className="motion-safe:animate-pulse px-4 pt-8 pb-10 md:px-0 md:pt-16 md:pb-16">
+    <div aria-hidden className="mx-auto w-full max-w-[740px] motion-safe:animate-pulse px-4 pt-8 pb-10 md:px-0 md:pt-16 md:pb-16">
       <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-5 gap-y-4 md:gap-x-12 md:px-5">
         <div className="size-[77px] rounded-full bg-neutral-200 md:row-span-2 md:size-[150px]" />
         <div className="space-y-2 md:self-end">

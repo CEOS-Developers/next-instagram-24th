@@ -45,7 +45,7 @@ export default function HomeFeed({ initial }: { initial: Page }) {
   }, [feed.next, load, status]);
 
   return (
-    <div className="mx-auto flex max-w-[680px] flex-col gap-4 px-4 py-6 md:px-0 md:py-8">
+    <div className="mx-auto flex w-full max-w-[680px] xl:w-[31vw] xl:max-w-none flex-col gap-4 px-4 py-6 md:px-0 md:py-8">
       {feed.items.map(({ post, commentCount }, index) => (
         <PostCard key={`${index}-${post.id}`} post={post} commentCount={commentCount} preload={index === 0} />
       ))}
@@ -53,7 +53,7 @@ export default function HomeFeed({ initial }: { initial: Page }) {
         <span role="status">
           {status === "loading" && <><span aria-hidden className="mr-2 inline-block size-4 rounded-full border-2 border-neutral-200 border-t-neutral-600 align-middle motion-safe:animate-spin" />게시물 불러오는 중…</>}
           {status === "error" && "게시물을 불러오지 못했어요. "}
-          {feed.next === null && "아직 게시물이 없어요."}
+          {feed.items.length === 0 && "아직 게시물이 없어요."}
         </span>
         {feed.next !== null && status !== "loading" && (
           <button onClick={load} className="underline">{status === "error" ? "다시 시도" : "더 보기"}</button>

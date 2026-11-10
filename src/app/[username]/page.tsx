@@ -22,7 +22,7 @@ export function generateStaticParams() {
 // 링크를 눌렀을 때 스켈레톤이 즉시 보이고 내용이 이어서 채워집니다. (partialPrefetching)
 export default function ProfilePage({ params }: PageProps<"/[username]">) {
   return (
-    <div className="mx-auto max-w-[935px] md:px-5">
+    <div className="profile-page mx-auto max-w-[1200px] md:px-5">
       <Suspense
         fallback={
           <>
@@ -50,7 +50,7 @@ async function ProfileContent({ params }: Pick<PageProps<"/[username]">, "params
 
   return (
     <>
-      <ProfileHeader user={user} postCount={posts.length} isMe={isMe} />
+      <ProfileHeader user={user} postCount={posts.length} isMe={isMe} suggestions={isMe ? [] : getAllUsers().filter(u => u.id !== user.id && u.id !== getCurrentUser().id).slice(0, 3).map(({ username }) => ({ username }))} />
       <ProfilePostGrid key={user.id} isMe={isMe} posts={posts} />
     </>
   );
