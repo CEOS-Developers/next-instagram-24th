@@ -1,6 +1,8 @@
 import Image from "next/image";
+import type { CommentWithAuthor } from "@/lib/posts";
 import type { Post } from "@/types/post";
 import type { User } from "@/types/user";
+import CommentList from "./CommentList";
 import PostActions from "./PostActions";
 import PostAuthorHeader from "./PostAuthorHeader";
 import PostCaption from "./PostCaption";
@@ -8,6 +10,7 @@ import PostCaption from "./PostCaption";
 export type PostDetailProps = {
   post: Post;
   author: User;
+  comments: CommentWithAuthor[];
   /** page: 단독 상세 페이지, modal: 프로필 위에 뜨는 모달 */
   variant?: "page" | "modal";
 };
@@ -31,6 +34,7 @@ const layoutClassNames = {
 export default function PostDetail({
   post,
   author,
+  comments,
   variant = "page",
 }: PostDetailProps) {
   const classNames = layoutClassNames[variant];
@@ -65,6 +69,7 @@ export default function PostDetail({
           {/* 본문과 댓글 목록 */}
           <div className="min-h-0 flex-1 overflow-y-auto px-4 py-4">
             <PostCaption post={post} author={author} />
+            <CommentList comments={comments} />
           </div>
 
           {/* 좋아요·저장 버튼, 좋아요 수, 작성일 */}
