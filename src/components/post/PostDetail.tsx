@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { Post } from "@/types/post";
 import type { User } from "@/types/user";
+import PostActions from "./PostActions";
 import PostAuthorHeader from "./PostAuthorHeader";
 import PostCaption from "./PostCaption";
 
@@ -33,6 +34,8 @@ export default function PostDetail({
   variant = "page",
 }: PostDetailProps) {
   const classNames = layoutClassNames[variant];
+  // 댓글 버튼을 누르면 이 id의 입력창으로 포커스를 옮깁니다.
+  const commentInputId = `comment-input-${post.id}`;
 
   return (
     <article
@@ -67,8 +70,10 @@ export default function PostDetail({
           {/* 좋아요·저장 버튼, 좋아요 수, 작성일 */}
           <section
             aria-label="게시물 반응"
-            className="shrink-0 border-t border-border px-4 py-3"
-          />
+            className="shrink-0 border-t border-border px-4 pt-1.5 pb-3"
+          >
+            <PostActions post={post} commentInputId={commentInputId} />
+          </section>
 
           {/* 댓글 입력 */}
           <div className="flex min-h-[52px] shrink-0 items-center border-t border-border px-4" />
