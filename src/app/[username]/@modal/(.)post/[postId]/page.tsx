@@ -14,7 +14,14 @@ async function PostModalContent({ params }: PostModalPageProps) {
 
   if (!result) notFound();
 
-  return <PostDetail post={result.post} author={result.author} variant="modal" />;
+  return (
+    <PostDetail
+      post={result.post}
+      author={result.author}
+      comments={result.comments}
+      variant="modal"
+    />
+  );
 }
 
 // 프로필에서 썸네일을 눌러 이동하면 상세 페이지 대신 이 모달이 열립니다.
