@@ -12,4 +12,14 @@ export const users: User[] = [
     followingCount: 85,
     isFollowedByMe: false,
   },
+  {
+    id: "user-2",
+    username: "messi",
+    displayName: "메시",
+    avatarUrl: "/images/profile.svg",
+    bio: "안녕하세요",
+    followerCount: 980,
+    followingCount: 12,
+    isFollowedByMe: true,
+  },
 ];
