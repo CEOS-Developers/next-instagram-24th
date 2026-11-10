@@ -16,7 +16,7 @@ export default function PostGrid({
   commentCounts = {},
 }: PostGridProps) {
   return (
-    <ul className="grid grid-cols-3 gap-1">
+    <ul className="grid grid-cols-4 gap-0.5">
       {posts.map((post) => (
         <li key={post.id}>
           <PostThumbnail

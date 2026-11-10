@@ -13,15 +13,15 @@ export type ProfilePostsProps = {
   commentCounts?: Record<Post["id"], number>;
 };
 
-// 저장됨·태그됨은 데이터가 없어 빈 상태만 보여줍니다.
+// 리포스트·태그됨은 데이터가 없어 빈 상태만 보여줍니다.
 const emptyMessages: Record<ProfileTab, { title: string; description: string }> = {
   posts: {
     title: "게시물 없음",
     description: "아직 공유한 사진이 없습니다.",
   },
-  saved: {
-    title: "저장된 게시물 없음",
-    description: "다시 보고 싶은 게시물을 저장해보세요.",
+  reposts: {
+    title: "리포스트 없음",
+    description: "리포스트한 게시물이 여기에 표시됩니다.",
   },
   tagged: {
     title: "태그된 사진 없음",
@@ -41,7 +41,7 @@ export default function ProfilePosts({
   const emptyMessage = emptyMessages[activeTab];
 
   return (
-    <section aria-label="게시물" className="mt-11">
+    <section aria-label="게시물" className="mt-8">
       <ProfileTabs
         activeTab={activeTab}
         onChange={setActiveTab}

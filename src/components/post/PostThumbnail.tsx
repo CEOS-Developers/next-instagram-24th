@@ -26,7 +26,7 @@ export default function PostThumbnail({
         src={post.imageUrl}
         alt={post.imageAlt}
         fill
-        sizes="(min-width: 1024px) 309px, 33vw"
+        sizes="(min-width: 1024px) 234px, 25vw"
         className="object-cover"
       />
 
