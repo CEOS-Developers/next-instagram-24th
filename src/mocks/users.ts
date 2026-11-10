@@ -7,7 +7,7 @@ export const users: User[] = [
     username: "cristiano",
     displayName: "호날두",
     avatarUrl: "/images/siu.png",
-    bio: "나 국대 안해.",
+    bio: "국대 은퇴합니다.",
     followerCount: 7,
     followingCount: 85,
     followedByIds: ["user-2"],
