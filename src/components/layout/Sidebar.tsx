@@ -1,5 +1,6 @@
 import Avatar from "@/components/ui/Avatar";
 import Icon, { type IconName } from "@/components/ui/Icon";
+import { currentUser } from "@/mocks/users";
 import SidebarItem from "./SidebarItem";
 
 const menuItems: { icon: IconName; label: string; active?: boolean }[] = [
@@ -45,7 +46,10 @@ export default function Sidebar() {
             active={active}
           />
         ))}
-        <SidebarItem icon={<Avatar alt="" size="sm" />} label="프로필" />
+        <SidebarItem
+          icon={<Avatar src={currentUser.avatarUrl} alt="" size="sm" />}
+          label="프로필"
+        />
       </ul>
 
       <ul
