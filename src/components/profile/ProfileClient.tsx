@@ -12,9 +12,14 @@ import ProfileHeader from "./ProfileHeader";
 export type ProfileClientProps = {
   user: User;
   postCount: number;
+  followedByUsers: User[];
 };
 
-export default function ProfileClient({ user, postCount }: ProfileClientProps) {
+export default function ProfileClient({
+  user,
+  postCount,
+  followedByUsers,
+}: ProfileClientProps) {
   const isFollowing = useSyncExternalStore(
     subscribeFollowState,
     () => getFollowState(user.id, user.isFollowedByMe),
@@ -31,6 +36,7 @@ export default function ProfileClient({ user, postCount }: ProfileClientProps) {
     <ProfileHeader
       user={user}
       postCount={postCount}
+      followedByUsers={followedByUsers}
       isFollowing={isFollowing}
       onToggleFollow={handleToggleFollow}
     />

@@ -20,6 +20,11 @@ async function ProfileContent({ params }: ProfilePageProps) {
 
   if (!user) notFound();
 
+  const followedByUsers = users.filter(
+    (candidate) =>
+      candidate.id !== user.id && user.followedByIds.includes(candidate.id),
+  );
+
   // 최신 게시물이 먼저 오도록 정렬합니다.
   const userPosts = posts
     .filter((post) => post.authorId === user.id)
@@ -32,7 +37,12 @@ async function ProfileContent({ params }: ProfilePageProps) {
 
   return (
     <>
-      <ProfileClient key={user.id} user={user} postCount={userPosts.length} />
+      <ProfileClient
+        key={user.id}
+        user={user}
+        postCount={userPosts.length}
+        followedByUsers={followedByUsers}
+      />
       <ProfilePosts
         posts={userPosts}
         username={user.username}
