@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Suspense } from "react";
-import { profileImage } from "../../_lib/profile";
+import { profileImage } from "../_lib/profile";
 import ProfileTabs from "./_components/ProfileTabs";
 
 const profileStats = [
@@ -11,7 +11,7 @@ const profileStats = [
 
 async function Profile({
   params,
-}: Pick<PageProps<"/mypage/[username]">, "params">) {
+}: Pick<PageProps<"/[username]">, "params">) {
   const { username } = await params;
 
   return (
@@ -80,7 +80,7 @@ async function Profile({
   );
 }
 
-export default function MyPage({ params }: PageProps<"/mypage/[username]">) {
+export default function MyPage({ params }: PageProps<"/[username]">) {
   return (
     <main className="mx-auto w-full max-w-3xl">
       <section aria-label="프로필" className="mt-4 mb-2 h-48.5">
