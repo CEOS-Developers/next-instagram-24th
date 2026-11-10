@@ -17,7 +17,7 @@ export default function ProfileFollowedBy({ users }: ProfileFollowedByProps) {
       {users.map((user) => (
         <li
           key={user.id}
-          className="flex items-center gap-1 text-body text-text-secondary"
+          className="flex items-center gap-1 text-body text-text-primary"
         >
           <Link
             href={`/${encodeURIComponent(user.username)}`}
