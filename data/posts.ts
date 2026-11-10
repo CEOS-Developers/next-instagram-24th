@@ -1,4 +1,4 @@
-import type { Post } from "./definitions";
+import type { Post } from "@/types/post";
 const posts: Post[] = [
   {
     id: "1",

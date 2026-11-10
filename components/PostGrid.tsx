@@ -1,6 +1,5 @@
 import Image from "next/image";
-import { getPosts } from "@/lib/data";
-
+import { getPosts } from "@/data/posts";
 // 프로필 아래 게시물 그리드 (한 줄에 3칸, 3:4 비율)
 export default function PostGrid() {
   const posts = getPosts();
