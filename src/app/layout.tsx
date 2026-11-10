@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import Sidebar from "@/components/layout/Sidebar";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = {
@@ -11,7 +12,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ko">
       <body className="bg-surface font-sans text-body text-text-primary">
-        {children}
+        <Sidebar />
+        <div className="ml-[72px]">{children}</div>
       </body>
     </html>
   );
