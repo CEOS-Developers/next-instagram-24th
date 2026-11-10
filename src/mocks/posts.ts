@@ -52,14 +52,21 @@ export const posts: Post[] = [
   {
     id: "post-10",
     authorId: "user-2",
-    imageUrl: "/images/angrymessi.png",
-    imageAlt: "아르헨티나 유니폼을 입고 주먹을 쥔 채 소리치는 메시",
+    imageUrl: "/images/messi-celebration.png",
+    imageAlt:
+      "아르헨티나 유니폼 상의를 걷어 올리고 고개를 젖힌 채 세리머니하는 메시",
     extraImages: [
-      { url: "/images/funnymessi.png", alt: "잔디를 배경으로 활짝 웃는 메시" },
-      { url: "/images/messigimotti.jpeg", alt: "메시 프로필 사진" },
-      { url: "/images/thegoat.png", alt: "손을 내민 메시와 무릎을 꿇은 호날두 사이로 빛이 나는 합성 이미지" },
+      {
+        url: "/images/messi-dolphin.png",
+        alt: "바다에서 돌고래의 지느러미를 잡고 웃는 메시",
+      },
+      {
+        url: "/images/messi-escort.png",
+        alt: "붉은 베레모를 쓴 경호원들 사이로 이동하는 메시",
+      },
     ],
-    caption: "1",
+    caption:
+      "여행을 떠나기 전, 바다에서 돌고래와 함께 수영하며 즐거운 시간을 보냈습니다. 그리고 여행 중에는 경호원들과 함께 안전하게 이동하며 다양한 경험을 했습니다. 이번 여행은 정말 잊지 못할 추억이 될 것 같습니다.",
     likeCount: 512,
     isLikedByMe: true,
     createdAt: "2026-11-07T10:00:00Z",
@@ -69,7 +76,7 @@ export const posts: Post[] = [
     authorId: "user-2",
     imageUrl: "/images/funnymessi.png",
     imageAlt: "잔디를 배경으로 활짝 웃는 메시",
-    caption: "2",
+    caption: "안녕~",
     likeCount: 347,
     isLikedByMe: false,
     createdAt: "2026-11-02T06:30:00Z",
@@ -79,7 +86,7 @@ export const posts: Post[] = [
     authorId: "user-2",
     imageUrl: "/images/mylove.png",
     imageAlt: "간식을 든 두 사람이 장난스러운 표정으로 함께 찍은 셀카",
-    caption: "3",
+    caption: "오늘은 사랑하는 사람과 함께한 즐거운 하루였습니다!",
     likeCount: 689,
     isLikedByMe: false,
     createdAt: "2026-10-26T09:15:00Z",
@@ -88,8 +95,9 @@ export const posts: Post[] = [
     id: "post-13",
     authorId: "user-2",
     imageUrl: "/images/thegoat.png",
-    imageAlt: "손을 내민 메시와 무릎을 꿇은 호날두 사이로 빛이 나는 합성 이미지",
-    caption: "4",
+    imageAlt:
+      "손을 내민 메시와 무릎을 꿇은 호날두 사이로 빛이 나는 합성 이미지",
+    caption: "더럽게 수고했다. 마이 베스트 삐에로",
     likeCount: 1010,
     isLikedByMe: false,
     createdAt: "2026-10-20T08:30:00Z",
