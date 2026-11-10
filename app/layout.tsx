@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import AppHeader from "@/components/Header";
 import BottomNav from "@/components/BottomNav";
 import "./globals.css";
 
@@ -26,7 +25,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
-        <AppHeader />
         <div className="flex flex-1 flex-col">{children}</div>
         <BottomNav />
       </body>
