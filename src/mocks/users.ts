@@ -7,7 +7,7 @@ export const users: User[] = [
     username: "goat",
     displayName: "고트",
     avatarUrl: "/images/profile.svg",
-    bio: "일상을 기록합니다 📷\n커피와 산책을 좋아해요.",
+    bio: "안녕하세요인생최고의고생을하고있는autedi프론트엔드팀입니다.",
     followerCount: 120,
     followingCount: 85,
     isFollowedByMe: false,

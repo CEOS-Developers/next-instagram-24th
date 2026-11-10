@@ -21,6 +21,5 @@ export type Post = {
   /** 초기 좋아요 수이며, isLikedByMe가 true라면 내 좋아요도 포함합니다. */
   likeCount: number;
   isLikedByMe: boolean;
-  /** ISO 8601 형식의 작성 시각입니다. */
   createdAt: string;
 };
