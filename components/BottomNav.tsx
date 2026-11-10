@@ -38,7 +38,11 @@ export default function BottomNav() {
           return (
             <li key={label}>
               {href ? (
-                <Link href={href} aria-label={label} className={itemClassName}>
+                <Link
+                  href={href}
+                  aria-label={label}
+                  className={`${itemClassName} cursor-pointer`}
+                >
                   {icon}
                 </Link>
               ) : (
@@ -46,7 +50,7 @@ export default function BottomNav() {
                   type="button"
                   disabled
                   aria-label={label}
-                  className={itemClassName}
+                  className={`${itemClassName} enabled:cursor-pointer disabled:cursor-not-allowed`}
                 >
                   {icon}
                 </button>

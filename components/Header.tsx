@@ -14,13 +14,20 @@ function HeaderUsername() {
 export default function AppHeader() {
   return (
     <header className="sticky top-0 z-10 grid h-[44px] shrink-0 grid-cols-[24px_minmax(0,1fr)_24px] items-center gap-3 bg-background px-[16px]">
-      <Image
-        src="/icons/option.svg"
-        alt="설정"
-        width={24}
-        height={24}
-        className="dark:invert"
-      />
+      <button
+        type="button"
+        disabled
+        aria-label="설정"
+        className="flex items-center justify-center enabled:cursor-pointer disabled:cursor-not-allowed"
+      >
+        <Image
+          src="/icons/option.svg"
+          alt=""
+          width={24}
+          height={24}
+          className="dark:invert"
+        />
+      </button>
       <button
         type="button"
         disabled
@@ -37,13 +44,20 @@ export default function AppHeader() {
           className="shrink-0 rotate-180 dark:invert"
         />
       </button>
-      <Image
-        src="/icons/thread.svg"
-        alt="Threads"
-        width={24}
-        height={24}
-        className="dark:invert"
-      />
+      <button
+        type="button"
+        disabled
+        aria-label="Threads"
+        className="flex items-center justify-center enabled:cursor-pointer disabled:cursor-not-allowed"
+      >
+        <Image
+          src="/icons/thread.svg"
+          alt=""
+          width={24}
+          height={24}
+          className="dark:invert"
+        />
+      </button>
     </header>
   );
 }
