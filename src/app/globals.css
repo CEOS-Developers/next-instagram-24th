@@ -156,3 +156,8 @@ body {
   border-radius: 10px;
 }
 .desktop-rail:hover .rail-item:hover::after { background: rgb(0 0 0 / 0.05); }
+
+/* Safari 가 펼침 메뉴(<details>/<summary>)에 기본으로 붙이는 ▶ 표시 숨기기 */
+summary { list-style: none; }
+summary::-webkit-details-marker { display: none; }
+summary::marker { content: ""; }
