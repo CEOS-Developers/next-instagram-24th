@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { Post } from "@/types/post";
 import type { User } from "@/types/user";
+import PostAuthorHeader from "./PostAuthorHeader";
 
 export type PostDetailProps = {
   post: Post;
@@ -29,7 +30,9 @@ export default function PostDetail({ post, author }: PostDetailProps) {
       <div className="relative border-border max-lg:border-t lg:border-l">
         <div className="flex h-full flex-col lg:absolute lg:inset-0">
           {/* 작성자 헤더 */}
-          <header className="flex min-h-[70px] shrink-0 items-center border-b border-border px-4" />
+          <header className="flex min-h-[70px] shrink-0 items-center border-b border-border px-4">
+            <PostAuthorHeader author={author} />
+          </header>
 
           {/* 본문과 댓글 목록 */}
           <div className="min-h-0 flex-1 overflow-y-auto px-4 py-4" />
