@@ -1,7 +1,9 @@
 import Image from "next/image";
 import type { CommentWithAuthor } from "@/lib/posts";
+import { currentUser } from "@/mocks/users";
 import type { Post } from "@/types/post";
 import type { User } from "@/types/user";
+import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
 import PostActions from "./PostActions";
 import PostAuthorHeader from "./PostAuthorHeader";
@@ -69,7 +71,11 @@ export default function PostDetail({
           {/* 본문과 댓글 목록 */}
           <div className="min-h-0 flex-1 overflow-y-auto px-4 py-4">
             <PostCaption post={post} author={author} />
-            <CommentList comments={comments} />
+            <CommentList
+              postId={post.id}
+              comments={comments}
+              currentUser={currentUser}
+            />
           </div>
 
           {/* 좋아요·저장 버튼, 좋아요 수, 작성일 */}
@@ -81,7 +87,13 @@ export default function PostDetail({
           </section>
 
           {/* 댓글 입력 */}
-          <div className="flex min-h-[52px] shrink-0 items-center border-t border-border px-4" />
+          <div className="flex min-h-[52px] shrink-0 items-center border-t border-border px-4">
+            <CommentForm
+              postId={post.id}
+              author={currentUser}
+              inputId={commentInputId}
+            />
+          </div>
         </div>
       </div>
     </article>

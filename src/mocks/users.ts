@@ -25,3 +25,17 @@ export const users: User[] = [
     isFollowedByMe: true,
   },
 ];
+
+// 지금 화면을 보고 있는 사용자입니다. 댓글 작성자로 사용합니다.
+// 프로필 페이지가 없는 계정이라 users 목록에는 넣지 않습니다.
+export const currentUser: User = {
+  id: "user-guest",
+  username: "은가누",
+  displayName: "은가누",
+  avatarUrl: "/images/ngannou.png",
+  bio: "",
+  followerCount: 0,
+  followingCount: 0,
+  followedByIds: [],
+  isFollowedByMe: false,
+};
