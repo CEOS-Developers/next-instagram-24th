@@ -1,6 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useSyncExternalStore } from "react";
+import {
+  getFollowState,
+  setFollowState,
+  subscribeFollowState,
+} from "@/lib/followStorage";
 import type { User } from "@/types/user";
 import ProfileHeader from "./ProfileHeader";
 
@@ -10,10 +15,16 @@ export type ProfileClientProps = {
 };
 
 export default function ProfileClient({ user, postCount }: ProfileClientProps) {
-  const [isFollowing, setIsFollowing] = useState(user.isFollowedByMe);
+  const isFollowing = useSyncExternalStore(
+    subscribeFollowState,
+    () => getFollowState(user.id, user.isFollowedByMe),
+    // 서버와 첫 클라이언트 렌더링은 같은 초기값을 사용합니다.
+    () => user.isFollowedByMe,
+  );
 
   function handleToggleFollow() {
-    setIsFollowing((previous) => !previous);
+    const currentValue = getFollowState(user.id, user.isFollowedByMe);
+    setFollowState(user.id, !currentValue);
   }
 
   return (
