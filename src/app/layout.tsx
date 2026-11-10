@@ -33,7 +33,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Navigation currentUser={currentUser} />
         </Suspense>
 
-        <main className="pb-12 md:pb-0 md:pl-[72px] xl:pl-[244px]">{children}</main>
+        <main className="pb-12 md:pb-0 md:px-[72px]">{children}</main>
       </body>
     </html>
   );

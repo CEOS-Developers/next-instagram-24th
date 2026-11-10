@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
@@ -16,15 +15,6 @@ import {
 // 빌드할 때 어떤 username 이 있는지 미리 알려주면 각 프로필을 정적 HTML 로 만들어 둡니다.
 export function generateStaticParams() {
   return getAllUsers().map((user) => ({ username: user.username }));
-}
-
-// 브라우저 탭 제목: "김지우(@jiwoo.kim) • Instagram"
-export async function generateMetadata({
-  params,
-}: PageProps<"/[username]">): Promise<Metadata> {
-  const { username } = await params;
-  const user = getUserByUsername(username);
-  return { title: user ? `${user.name}(@${user.username})` : "페이지를 찾을 수 없음" };
 }
 
 // 페이지 자체는 params 를 기다리지 않고 바로 껍데기(App Shell)를 그립니다.
@@ -61,7 +51,7 @@ async function ProfileContent({ params }: Pick<PageProps<"/[username]">, "params
   return (
     <>
       <ProfileHeader user={user} postCount={posts.length} isMe={isMe} />
-      <ProfilePostGrid posts={posts} />
+      <ProfilePostGrid key={user.id} isMe={isMe} posts={posts} />
     </>
   );
 }
