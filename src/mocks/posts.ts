@@ -1,7 +1,7 @@
 import type { Post } from "@/types/post";
 
 // 이미지 파일은 public/images/에서 관리합니다.
-// 레이아웃 확인용으로 샘플 이미지 2개를 번갈아 사용합니다.
+// 메시는 저장된 사진을, 호날두는 레이아웃 확인용 샘플 이미지를 사용합니다.
 export const posts: Post[] = [
   {
     id: "post-1",
@@ -96,9 +96,9 @@ export const posts: Post[] = [
   {
     id: "post-10",
     authorId: "user-2",
-    imageUrl: "/images/post-walk.svg",
-    imageAlt: "나무 사이로 이어진 산책길을 표현한 샘플 일러스트",
-    caption: "훈련 끝나고 산책",
+    imageUrl: "/images/angrymessi.png",
+    imageAlt: "아르헨티나 유니폼을 입고 주먹을 쥔 채 소리치는 메시",
+    caption: "1",
     likeCount: 512,
     isLikedByMe: true,
     createdAt: "2026-11-07T10:00:00Z",
@@ -106,9 +106,9 @@ export const posts: Post[] = [
   {
     id: "post-11",
     authorId: "user-2",
-    imageUrl: "/images/post-cafe.svg",
-    imageAlt: "창가 테이블 위 커피잔을 표현한 샘플 일러스트",
-    caption: "경기 전 커피 한 잔",
+    imageUrl: "/images/funnymessi.png",
+    imageAlt: "잔디를 배경으로 활짝 웃는 메시",
+    caption: "2",
     likeCount: 347,
     isLikedByMe: false,
     createdAt: "2026-11-02T06:30:00Z",
@@ -116,11 +116,21 @@ export const posts: Post[] = [
   {
     id: "post-12",
     authorId: "user-2",
-    imageUrl: "/images/post-walk.svg",
-    imageAlt: "나무 사이로 이어진 산책길을 표현한 샘플 일러스트",
-    caption: "휴식",
+    imageUrl: "/images/mylove.png",
+    imageAlt: "간식을 든 두 사람이 장난스러운 표정으로 함께 찍은 셀카",
+    caption: "3",
     likeCount: 689,
     isLikedByMe: false,
     createdAt: "2026-10-26T09:15:00Z",
+  },
+  {
+    id: "post-13",
+    authorId: "user-2",
+    imageUrl: "/images/thegoat.png",
+    imageAlt: "손을 내민 메시와 무릎을 꿇은 호날두 사이로 빛이 나는 합성 이미지",
+    caption: "4",
+    likeCount: 1010,
+    isLikedByMe: false,
+    createdAt: "2026-10-20T08:30:00Z",
   },
 ];

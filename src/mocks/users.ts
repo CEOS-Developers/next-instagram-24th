@@ -4,18 +4,18 @@ import type { User } from "@/types/user";
 export const users: User[] = [
   {
     id: "user-1",
-    username: "ronaldo7",
+    username: "cristiano",
     displayName: "호날두",
     avatarUrl: "/images/siu.png",
     bio: "나 국대 안해.",
-    followerCount: 120,
+    followerCount: 7,
     followingCount: 85,
     followedByIds: ["user-2"],
     isFollowedByMe: false,
   },
   {
     id: "user-2",
-    username: "messi",
+    username: "leomessi",
     displayName: "메시",
     avatarUrl: "/images/messigimotti.jpeg",
     bio: "메시기모띠",
