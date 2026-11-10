@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { getPost, getPosts } from "@/data/posts";
@@ -14,6 +15,10 @@ export default async function PostDetailPage({
 }) {
   const { postId } = await params;
   const post = getPost(postId);
+
+  if (!post) {
+    notFound();
+  }
 
   return (
     <main className="mx-auto w-full max-w-[430px]">
