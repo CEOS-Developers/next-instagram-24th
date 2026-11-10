@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { CommentWithAuthor } from "@/lib/posts";
 import { currentUser } from "@/mocks/users";
 import type { Post } from "@/types/post";
@@ -8,6 +7,7 @@ import CommentList from "./CommentList";
 import PostActions from "./PostActions";
 import PostAuthorHeader from "./PostAuthorHeader";
 import PostCaption from "./PostCaption";
+import PostImageCarousel from "./PostImageCarousel";
 
 export type PostDetailProps = {
   post: Post;
@@ -49,16 +49,11 @@ export default function PostDetail({
       className={`overflow-hidden bg-surface ${classNames.article}`}
     >
       {/* 왼쪽: 이미지. 정사각형 영역 안에서 비율을 유지하고 남는 공간은 검은 배경입니다. */}
-      <div className={`relative bg-black ${classNames.image}`}>
-        <Image
-          src={post.imageUrl}
-          alt={post.imageAlt}
-          fill
-          priority
-          sizes="(min-width: 1024px) 717px, 100vw"
-          className="object-contain"
-        />
-      </div>
+      <PostImageCarousel
+        images={[{ url: post.imageUrl, alt: post.imageAlt }, ...(post.extraImages ?? [])]}
+        sizes="(min-width: 1024px) 717px, 100vw"
+        className={classNames.image}
+      />
 
       {/* 오른쪽: 정보 패널. 데스크톱에서는 이미지 높이에 맞추고 본문만 스크롤됩니다. */}
       <div className={`relative ${classNames.panel}`}>
