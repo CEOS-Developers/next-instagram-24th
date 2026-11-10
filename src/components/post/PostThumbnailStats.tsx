@@ -1,17 +1,20 @@
 "use client";
 
 import Icon from "@/components/ui/Icon";
+import { useAddedComments } from "@/lib/commentStorage";
 import { usePostLike } from "@/lib/likeStorage";
 import type { Post } from "@/types/post";
 
 export type PostThumbnailStatsProps = {
   post: Post;
+  /** 목업 데이터의 댓글 수입니다. 내가 작성한 댓글 수는 여기에 더해집니다. */
   commentCount: number;
 };
 
-/** 썸네일 호버 시 보이는 좋아요·댓글 수입니다. 좋아요는 상세에서 누른 상태를 반영합니다. */
+/** 썸네일 호버 시 보이는 좋아요·댓글 수입니다. 상세에서 누른 좋아요와 작성한 댓글을 반영합니다. */
 export default function PostThumbnailStats({ post, commentCount }: PostThumbnailStatsProps) {
   const { likeCount } = usePostLike(post);
+  const totalCommentCount = commentCount + useAddedComments(post.id).length;
 
   return (
     <div
@@ -24,7 +27,7 @@ export default function PostThumbnailStats({ post, commentCount }: PostThumbnail
       </span>
       <span className="flex items-center gap-1.5">
         <Icon name="comment" size={20} className="fill-current" />
-        {commentCount.toLocaleString()}
+        {totalCommentCount.toLocaleString()}
       </span>
     </div>
   );
