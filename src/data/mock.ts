@@ -12,10 +12,11 @@ export const CURRENT_USER_ID = "u1";
 export const users: User[] = [
   {
     id: "u1",
-    username: "ceos.front",
-    name: "CEOS 프론트",
-    avatarUrl: avatar("ceos"),
-    bio: "CEOS 24기 프론트엔드 🧑‍💻\nNext.js로 인스타그램 만드는 중",
+    username: "ceos24.front",
+    name: "프론트",
+    // 프로필 사진·게시물 그림: @bdemgmr 작가님 (사용 허락 받음)
+    avatarUrl: "/images/me/avatar.jpeg",
+    bio: "CEOS 24기 프론트엔드 🧑‍💻\nNext.js로 인스타그램 만드는 중\n🎨 그림 @bdemgmr (허락 받고 사용)",
     website: "https://github.com",
     followerCount: 312,
     followingCount: 4,
@@ -63,7 +64,7 @@ export const users: User[] = [
 export const initialFollowingIds: User["id"][] = ["u2", "u3", "u4"];
 
 export const posts: Post[] = [
-  // u1 ceos.front
+  // u1 ceos24.front
   {
     id: "ceos-front-days",
     authorId: "u1",
@@ -71,6 +72,39 @@ export const posts: Post[] = [
     caption: "세오스 프론트 📸\n한 학기동안 화이팅 !! 플젝도 화이팅 !!\n\n#세오스24기 #CEOS #프론트엔드",
     likeCount: 124,
     createdAt: "2026-11-10T15:50:00+09:00",
+  },
+  // 아래 그림 게시물: @bdemgmr 작가님 그림 (사용 허락 받음)
+  {
+    id: "me-dance",
+    authorId: "u1",
+    imageUrls: ["/images/me/dance.jpeg"],
+    caption: "과제 끝나면 덩실덩 🕺\n\n🎨 @bdemgmr",
+    likeCount: 88,
+    createdAt: "2026-11-09T22:10:00+09:00",
+  },
+  {
+    id: "me-suit",
+    authorId: "u1",
+    imageUrls: ["/images/me/suit.jpeg"],
+    caption: "발표날 출근 룩\n\n🎨 @bdemgmr",
+    likeCount: 64,
+    createdAt: "2026-11-08T09:30:00+09:00",
+  },
+  {
+    id: "me-sleepy",
+    authorId: "u1",
+    imageUrls: ["/images/me/sleepy.jpeg"],
+    caption: "새벽 3시의 프론트엔드…\n\n🎨 @bdemgmr",
+    likeCount: 51,
+    createdAt: "2026-11-07T03:00:00+09:00",
+  },
+  {
+    id: "me-cry",
+    authorId: "u1",
+    imageUrls: ["/images/me/cry.jpeg"],
+    caption: "빌드 에러 났을 때 😭\n\n🎨 @bdemgmr",
+    likeCount: 73,
+    createdAt: "2026-11-06T20:45:00+09:00",
   },
 ];
 
