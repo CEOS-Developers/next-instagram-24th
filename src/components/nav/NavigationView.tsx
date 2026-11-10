@@ -61,7 +61,7 @@ export default function NavigationView({ currentUser, pathname }: NavigationView
   return (
     <>
       {/* 데스크톱 사이드바 */}
-      <nav className="fixed inset-y-0 left-0 z-20 hidden w-[72px] flex-col items-center overflow-y-auto bg-white py-4 md:flex">
+      <nav className="desktop-rail fixed inset-y-0 left-0 z-20 hidden w-[72px] flex-col items-center overflow-y-auto bg-white py-4 md:flex">
         <Link href="/" aria-label="Instagram 홈" className={railItem + " mt-2"}>
           <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="size-6">
             <rect x="3" y="3" width="18" height="18" rx="5" />

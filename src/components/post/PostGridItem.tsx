@@ -17,13 +17,13 @@ export default function PostGridItem({ post, commentCount }: PostGridItemProps) 
   return (
     <Link
       href={`/p/${post.id}`}
-      className="group relative block aspect-square overflow-hidden bg-neutral-100"
+      className="group relative block aspect-square overflow-hidden md:aspect-[3/4] bg-neutral-100"
     >
       <Image
         src={post.imageUrls[0]}
         alt={post.caption || "게시물 이미지"}
         fill
-        sizes="(max-width: 935px) 33vw, 300px"
+        sizes="(min-width: 1280px) 17vw, 33vw"
         className="object-cover"
       />
 

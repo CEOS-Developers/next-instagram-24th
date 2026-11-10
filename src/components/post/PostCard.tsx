@@ -36,7 +36,7 @@ export default function PostCard({ post, commentCount, preload = false }: PostCa
           src={post.imageUrls[0]}
           alt={post.caption || `${post.author.username}님의 게시물`}
           fill
-          sizes="(max-width: 680px) 100vw, 680px"
+          sizes="(min-width: 1280px) 31vw, (max-width: 680px) 100vw, 680px"
           className="object-cover"
           preload={preload}
         />

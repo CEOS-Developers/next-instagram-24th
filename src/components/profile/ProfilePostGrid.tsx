@@ -6,9 +6,9 @@ import type { Post } from "@/types";
 // 로딩 중 회색 칸 6개
 export function ProfilePostGridSkeleton() {
   return (
-    <div aria-hidden className="grid animate-pulse grid-cols-3 gap-0.5 border-t border-neutral-200 pt-12 md:gap-1">
-      {Array.from({ length: 6 }, (_, i) => (
-        <div key={i} className="aspect-square bg-neutral-200" />
+    <div aria-hidden className="grid animate-pulse grid-cols-3 gap-px xl:grid-cols-4 border-t border-neutral-200 pt-12">
+      {Array.from({ length: 4 }, (_, i) => (
+        <div key={i} className="aspect-square bg-neutral-200 md:aspect-[3/4]" />
       ))}
     </div>
   );
@@ -27,7 +27,7 @@ export default function ProfilePostGrid({ posts, isMe }: { posts: Post[]; isMe: 
           <p className="text-sm text-neutral-600">공유한 사진이 이곳에 표시됩니다.</p>
         </div>
       ) : (
-        <ul className="grid grid-cols-3 gap-0.5 md:gap-1">
+        <ul className="grid grid-cols-3 gap-px xl:grid-cols-4">
           {posts.map((post) => (
             <li key={post.id}>
               <PostGridItem post={post} commentCount={getCommentCount(post.id)} />
