@@ -20,12 +20,15 @@
   --text-nav--line-height: 24px;
   --text-username: 20px;
   --text-username--line-height: 28px;
+  --text-profile-title: 24px;
+  --text-profile-title--line-height: 32px;
 
   --font-weight-regular: 400;
   --font-weight-semibold: 600;
   --spacing: 4px;
   --spacing-sidebar: 244px;
   --container-profile: 936px;
+  --container-profile-header: 600px;
   --container-desktop: 1440px;
   --radius-button: 8px;
   --radius-avatar: 9999px;

@@ -1,4 +1,4 @@
-import type { User } from "@/types/instagram";
+import type { User } from "@/types/user";
 
 // 화면의 초기 데이터입니다. 이후 팔로우 변경 상태는 별도로 관리합니다.
 export const users: User[] = [
