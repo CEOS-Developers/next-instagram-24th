@@ -46,7 +46,8 @@ export default function ProfileHeader({ user, postCount, isMe, suggestions = [] 
       </button>
       <details>
         <summary aria-label="추천 계정 보기" title="추천 계정 보기" className="grid h-full w-12 cursor-pointer list-none place-items-center rounded-xl bg-neutral-100 hover:bg-neutral-200 md:w-[52px]">
-          <svg aria-hidden="true" viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="9" cy="8" r="3"/><path d="M2 20v-2a6 6 0 0112 0v2m4-15v8m-4-4h8"/></svg>
+          {/* 왼쪽 + / 오른쪽 사람 모양 (실제 인스타그램 추천 계정 버튼과 같은 배치) */}
+          <svg aria-hidden="true" viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round"><path d="M1.5 12.5h6M4.5 9.5v6"/><circle cx="15" cy="7.5" r="3.6"/><path d="M8.8 20.2c.4-3.9 3-6.3 6.2-6.3s5.8 2.4 6.2 6.3a.8.8 0 0 1-.8.8H9.6a.8.8 0 0 1-.8-.8z"/></svg>
         </summary>
         <div className="absolute right-0 z-10 mt-2 grid gap-2 rounded-xl border border-neutral-200 bg-white p-4 text-sm shadow">
           <strong>추천 계정</strong>
