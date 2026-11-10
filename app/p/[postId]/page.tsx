@@ -113,8 +113,21 @@ export default async function PostDetailPage({
     </button>
   </section>
 
-  <p>{post.caption}</p>
+  {/* F. 본문 */}
+<p className="text-sm">
+  <span className="font-?">{defaultUsername}</span> {post.caption}
+</p>
+
+{/* G. 날짜 */}
+<time dateTime={post.createdAt} className="mt-? block text-xs text-[#a8a8a8]">
+  {formatDate(post.createdAt)}
+</time>
 </div>
     </main>
   );
+}
+
+function formatDate(date: string) {
+  const [year, month, day] = date.split("-");
+  return `${year}년 ${Number(month)}월 ${Number(day)}일`;
 }
