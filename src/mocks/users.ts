@@ -18,7 +18,7 @@ export const users: User[] = [
     username: "leomessi",
     displayName: "메시",
     avatarUrl: "/images/messigimotti.jpeg",
-    bio: "메시기모띠",
+    bio: "messi of soccer",
     followerCount: 980,
     followingCount: 12,
     followedByIds: ["user-1"],
