@@ -78,7 +78,43 @@ export default async function PostDetailPage({
         />
       </div>
 
-      <p>{post.caption}</p>
+      {/* 사진 아래 정보 영역 */}
+<div className="px-4 pt-1.5 pb-4">
+  {/* D. 아이콘 줄 */}
+  <section className="mt-1 flex h-10 items-center">
+    <button
+      type="button"
+      disabled
+      aria-label="좋아요"
+      className="flex items-center gap-? disabled:cursor-not-allowed"
+    >
+      <Image
+        src="/icons/heart.svg"
+        alt=""
+        width={24}
+        height={24}
+        className="dark:invert"
+      />
+      <span className="text-?">{post.likes}</span>
+    </button>
+    <button
+      type="button"
+      disabled
+      aria-label="저장"
+      className="ml-auto disabled:cursor-not-allowed"
+    >
+      <Image
+        src="/icons/bookmark.svg"
+        alt=""
+        width={24}
+        height={24}
+        className="dark:invert"
+      />
+    </button>
+  </section>
+
+  <p>{post.caption}</p>
+</div>
     </main>
   );
 }
