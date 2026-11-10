@@ -21,7 +21,11 @@ export default function AppHeader() {
         height={24}
         className="dark:invert"
       />
-      <div className="flex min-w-0 items-center justify-center gap-1 font-semibold">
+      <button
+        type="button"
+        disabled
+        className="flex min-w-0 items-center justify-center gap-1 font-semibold enabled:cursor-pointer disabled:cursor-not-allowed"
+      >
         <Suspense fallback={<span className="truncate">{defaultUsername}</span>}>
           <HeaderUsername />
         </Suspense>
@@ -32,7 +36,7 @@ export default function AppHeader() {
           height={16}
           className="shrink-0 rotate-180 dark:invert"
         />
-      </div>
+      </button>
       <Image
         src="/icons/thread.svg"
         alt="Threads"
