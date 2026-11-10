@@ -6,6 +6,9 @@ import "@/styles/globals.css";
 export const metadata: Metadata = {
   title: "Instagram",
   description: "배고프다",
+  icons: {
+    icon: "/images/instagram.ico",
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
