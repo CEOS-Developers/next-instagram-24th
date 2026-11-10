@@ -4,7 +4,7 @@ import Sidebar from "@/components/layout/Sidebar";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = {
-  title: "프로필 | Instagram",
+  title: "Instagram",
   description: "배고프다",
 };
 

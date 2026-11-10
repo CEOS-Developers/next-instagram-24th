@@ -1,11 +1,13 @@
 import Avatar from "@/components/ui/Avatar";
 import type { User } from "@/types/user";
 import ProfileActions from "./ProfileActions";
+import ProfileFollowedBy from "./ProfileFollowedBy";
 import ProfileStats from "./ProfileStats";
 
 export type ProfileHeaderProps = {
   user: User;
   postCount: number;
+  followedByUsers: User[];
   isFollowing: boolean;
   onToggleFollow: () => void;
   onMessage?: () => void;
@@ -14,6 +16,7 @@ export type ProfileHeaderProps = {
 export default function ProfileHeader({
   user,
   postCount,
+  followedByUsers,
   isFollowing,
   onToggleFollow,
   onMessage,
@@ -50,6 +53,8 @@ export default function ProfileHeader({
           <p className="whitespace-pre-wrap wrap-anywhere text-body">
             {user.bio}
           </p>
+
+          <ProfileFollowedBy users={followedByUsers} />
         </div>
       </div>
 
