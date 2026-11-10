@@ -9,7 +9,7 @@ export default function HomePage() {
   const suggested = getAllUsers().filter(user => user.id !== current.id).slice(0, 3);
 
   return (
-    <div className="home-layout xl:mr-[calc(1.5vw-72px)] xl:grid xl:grid-cols-[minmax(0,1fr)_minmax(260px,19vw)] xl:items-start xl:gap-6">
+    <div className="home-layout xl:pr-[max(24px,1.5vw)] xl:grid xl:grid-cols-[minmax(0,1fr)_minmax(260px,19vw)] xl:items-start xl:gap-6">
       <HomeFeed initial={getFeedPage()} />
       <aside aria-label="계정 추천" className="sticky top-8 mt-8 hidden min-w-0 xl:block">
         <Link href={`/${current.username}`} className="flex items-center gap-3">
@@ -23,7 +23,7 @@ export default function HomePage() {
         <ul className="space-y-4">
           {suggested.map(user => (
             <li key={user.id} className="flex items-center justify-between gap-3">
-              <Link href={`/${user.username}`} className="flex items-center gap-3">
+              <Link href={`/${user.username}`} className="flex min-w-0 items-center gap-3">
                 <Avatar user={user} size={44} />
                 <span className="min-w-0 text-sm">
                   <strong className="block truncate">{user.username}</strong>
