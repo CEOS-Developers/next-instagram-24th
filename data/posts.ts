@@ -1,50 +1,31 @@
 import type { Post } from "@/types/post";
+
 const posts: Post[] = [
   {
     id: "1",
-    images: [
-      "/posts/1-1.jpg",
-      "/posts/1-2.jpg",
-      "/posts/1-3.jpg",
-      "/posts/1-4.jpg",
-    ],
-    caption: "크리스마스 기대 하나도 안돼",
+    images: ["/posts/1-1.jpeg"],
+    caption: "먼직귀: 먼가 직장다니고 귀신 들린거..",
     likes: 155,
     createdAt: "2025-12-25",
   },
   {
     id: "2",
-    images: [
-      "/posts/2-1.jpg",
-      "/posts/2-2.jpg",
-      "/posts/2-3.jpg",
-      "/posts/2-4.jpg",
-    ],
-    caption: "강아지 키우고 싶음 ㅠ",
+    images: ["/posts/2-1.jpeg", "/posts/2-2.jpeg"],
+    caption: "나애 일상",
     likes: 123,
     createdAt: "2025-08-10",
   },
   {
     id: "3",
-    images: [
-      "/posts/3-1.jpg",
-      "/posts/3-2.jpg",
-      "/posts/3-3.jpg",
-      "/posts/3-4.jpg",
-    ],
-    caption: "양재천 가고싶다",
+    images: ["/posts/3-1.jpeg", "/posts/3-2.jpeg"],
+    caption: "나애 꿈",
     likes: 102,
     createdAt: "2025-06-29",
   },
   {
     id: "4",
-    images: [
-      "/posts/4-1.jpg",
-      "/posts/4-2.jpg",
-      "/posts/4-3.jpg",
-      "/posts/4-4.jpg",
-    ],
-    caption: "반포한강공원도 가고싶음",
+    images: ["/posts/4-1.jpeg"],
+    caption: "요즘 내 정신상태 헤헤",
     likes: 88,
     createdAt: "2025-05-20",
   },
