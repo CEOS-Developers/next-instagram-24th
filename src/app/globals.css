@@ -1,0 +1,27 @@
+@import 'tailwindcss';
+
+:root {
+  --ig-primary-background: 12, 16, 20;
+  --ig-primary-text: 245, 245, 245;
+  --ig-secondary-text: 168, 168, 168;
+  --ig-secondary-button-background: 37, 41, 46;
+  --font-family-system:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif;
+}
+
+@theme inline {
+  --color-ig-primary-background: rgb(var(--ig-primary-background));
+  --color-ig-primary-text: rgb(var(--ig-primary-text));
+  --color-ig-secondary-text: rgb(var(--ig-secondary-text));
+  --color-ig-secondary-button-background: rgb(
+    var(--ig-secondary-button-background)
+  );
+  --font-sans: var(--font-family-system);
+}
+
+body {
+  background-color: rgb(var(--ig-primary-background));
+  color: rgb(var(--ig-primary-text));
+  font-family: var(--font-family-system);
+}

@@ -1,0 +1,16 @@
+import type { IconProps } from './types';
+
+export default function PlusIcon(props: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width={24}
+      height={24}
+      fill="currentColor"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M21 11h-8V3a1 1 0 1 0-2 0v8H3a1 1 0 1 0 0 2h8v8a1 1 0 1 0 2 0v-8h8a1 1 0 1 0 0-2Z" />
+    </svg>
+  );
+}

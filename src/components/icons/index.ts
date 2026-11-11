@@ -1,0 +1,14 @@
+export { default as BookmarkIcon } from './BookmarkIcon';
+export { default as CommentIcon } from './CommentIcon';
+export { default as HeartIcon } from './HeartIcon';
+export { default as HomeIcon } from './HomeIcon';
+export { default as InstagramIcon } from './InstagramIcon';
+export { default as MessageIcon } from './MessageIcon';
+export { default as MetaIcon } from './MetaIcon';
+export { default as MoreIcon } from './MoreIcon';
+export { default as OptionsIcon } from './OptionsIcon';
+export { default as PlusIcon } from './PlusIcon';
+export { default as ReelsIcon } from './ReelsIcon';
+export { default as RepostIcon } from './RepostIcon';
+export { default as SearchIcon } from './SearchIcon';
+export type { IconProps } from './types';
