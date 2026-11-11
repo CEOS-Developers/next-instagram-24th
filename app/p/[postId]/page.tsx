@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getPost, getPosts } from "@/data/posts";
 import { defaultUsername, myPageHref, profileImage } from "@/app/_lib/profile";
+import PostImageSlider from "./_components/PostImageSlider";
 
 export function generateStaticParams() {
   return getPosts().map((post) => ({ postId: post.id }));
@@ -68,15 +69,7 @@ export default async function PostDetailPage({
       </div>
 
       {/* C. 사진 */}
-      <div className="relative aspect-[3/4]">
-        <Image
-          src={post.images[0]}
-          alt={post.caption}
-          fill
-          sizes="(max-width: 430px) 100vw, 430px"
-          className="object-cover"
-        />
-      </div>
+      <PostImageSlider images={post.images} alt={post.caption} />
 
       {/* 사진 아래 정보 영역 */}
 <div className="px-4 pt-1.5 pb-4">
