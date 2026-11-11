@@ -1,9 +1,5 @@
-import type { Comment, Post, Story, User } from "@/types";
+import type { Comment, Post, User } from "@/types";
 
-// 이미지는 picsum.photos 의 seed URL을 사용합니다.
-// 같은 seed 는 항상 같은 이미지를 돌려주므로 새로고침해도 사진이 바뀌지 않습니다.
-const img = (seed: string, w = 1080, h = 1080) =>
-  `https://picsum.photos/seed/${seed}/${w}/${h}`;
 // 프로필 사진이 없는 계정에 쓰는 기본 프로필 (회색 사람 모양)
 const DEFAULT_AVATAR = "/images/default-avatar.svg";
 
@@ -54,8 +50,26 @@ export const users: User[] = [
     name: "배승윤",
     avatarUrl: DEFAULT_AVATAR,
     bio: "안녕하세요. 프론트엔드 개발자입니다.",
-    followerCount: 207,
-    followingCount: 190,
+    followerCount: 12900000000,
+    followingCount: 0,
+  },
+  {
+    id: "u6",
+    username: "table_min2",
+    name: "이상민",
+    avatarUrl: DEFAULT_AVATAR,
+    bio: "영화평론가 이상민입니다/ 가장 낮은 별점은 한개입니다",
+    followerCount: 158,
+    followingCount: 172,
+  },
+  {
+    id: "u7",
+    username: "j2nooh",
+    name: "홍진우",
+    avatarUrl: DEFAULT_AVATAR,
+    bio: "내 방안은 푸른 바다",
+    followerCount: 231,
+    followingCount: 205,
   },
 ];
 
@@ -201,39 +215,80 @@ export const posts: Post[] = [
     likeCount: 80,
     createdAt: "2026-11-07T23:13:00+09:00",
   },
+
+  // u7 j2nooh
+  {
+    id: "jinwoo-concert",
+    authorId: "u7",
+    imageUrls: [
+      "/images/jinwoo/tickets.jpg",
+      "/images/jinwoo/concert-1.jpg",
+      "/images/jinwoo/concert-2.jpg",
+    ],
+    caption: "pretender ...",
+    likeCount: 96,
+    createdAt: "2026-11-09T22:30:00+09:00",
+  },
+  {
+    id: "jinwoo-doraemon",
+    authorId: "u7",
+    imageUrls: ["/images/jinwoo/doraemon.jpg"],
+    caption: "진구야",
+    likeCount: 64,
+    createdAt: "2026-11-03T14:20:00+09:00",
+  },
+  // u6 table_min2
+  {
+    id: "sangmin-movie1",
+    authorId: "u6",
+    imageUrls: ["/images/sangmin/images-16.jpeg"],
+    caption: "3.5/5. 마침내 여백이 말하고 침묵이 그려내는 감정의 일생.",
+    likeCount: 45,
+    createdAt: "2026-11-08T19:00:00+09:00",
+  },
+  {
+    id: "sangmin-movie2",
+    authorId: "u6",
+    imageUrls: ["/images/sangmin/images-17.jpeg"],
+    caption:
+      "5/5. 영화가 끝나면 흘려보냈던 장면들까지 가만가만 모두 되짚게 된다.",
+    likeCount: 55,
+    createdAt: "2026-11-09T20:00:00+09:00",
+  },
+  {
+    id: "sangmin-movie3",
+    authorId: "u6",
+    imageUrls: ["/images/sangmin/images-18.jpeg"],
+    caption:
+      "3/5. 깨물어주고 싶게 귀여운 세계를 깨물었을 때 시큼쌉쌀하게 흘러내리는 비애.",
+    likeCount: 55,
+    createdAt: "2026-11-01T20:00:00+09:00",
+  },
+  {
+    id: "sangmin-movie4",
+    authorId: "u6",
+    imageUrls: ["/images/sangmin/images-19.jpeg"],
+    caption: "4.5/5. 장엄하게 쌓아올린 육각형 영화의 금자탑.",
+    likeCount: 55,
+    createdAt: "2026-11-02T20:00:00+09:00",
+  },
+  {
+    id: "sangmin-movie5",
+    authorId: "u6",
+    imageUrls: ["/images/sangmin/images-20.jpeg"],
+    caption: "4/5. 완전한 사랑이라는 호러, 자기부정의 헌신이라는 망상.",
+    likeCount: 55,
+    createdAt: "2026-11-03T20:00:00+09:00",
+  },
+  {
+    id: "sangmin-movie6",
+    authorId: "u6",
+    imageUrls: ["/images/sangmin/images-21.jpeg"],
+    caption:
+      "4/5. 기괴한 난장판 속에서 대담하게 질주하는, 영화 전체가 거대한 크레센도.",
+    likeCount: 55,
+    createdAt: "2026-11-04T20:00:00+09:00",
+  },
 ];
 
 export const comments: Comment[] = [];
-
-export const stories: Story[] = [
-  {
-    id: "s1",
-    authorId: "u2",
-    imageUrl: img("story-jiwoo", 1080, 1920),
-    createdAt: "2026-11-07T08:00:00+09:00",
-  },
-  {
-    id: "s2",
-    authorId: "u3",
-    imageUrl: img("story-minjun", 1080, 1920),
-    createdAt: "2026-11-07T12:10:00+09:00",
-  },
-  {
-    id: "s3",
-    authorId: "u3",
-    imageUrl: img("story-minjun-2", 1080, 1920),
-    createdAt: "2026-11-07T13:30:00+09:00",
-  },
-  {
-    id: "s4",
-    authorId: "u4",
-    imageUrl: img("story-seoyeon", 1080, 1920),
-    createdAt: "2026-11-07T10:45:00+09:00",
-  },
-  {
-    id: "s5",
-    authorId: "u5",
-    imageUrl: img("story-hyun", 1080, 1920),
-    createdAt: "2026-11-07T06:30:00+09:00",
-  },
-];

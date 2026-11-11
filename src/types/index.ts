@@ -29,14 +29,6 @@ export type Comment = {
   createdAt: string;
 };
 
-export type Story = {
-  id: string;
-  authorId: User["id"];
-  imageUrl: string;
-  createdAt: string;
-};
-
 // 화면에서 자주 쓰는 "작성자 정보가 합쳐진" 형태
 export type PostWithAuthor = Post & { author: User };
 export type CommentWithAuthor = Comment & { author: User };
-export type StoryWithAuthor = Story & { author: User };
