@@ -17,9 +17,33 @@ function read(key: string) {
   catch { return fallback.get(key) ?? false; }
 }
 
+const PREFIX = "instagram:follow:";
+
+// 지금 내가 팔로우 중인 계정 수 (localStorage + 저장 실패 시 임시 기록)
+function countFollowed() {
+  const keys = new Set<string>();
+  try {
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key?.startsWith(PREFIX) && localStorage.getItem(key) === "1") keys.add(key);
+    }
+  } catch { /* localStorage 를 못 쓰는 환경이면 임시 기록만 사용 */ }
+  for (const [key, value] of fallback) {
+    if (value) keys.add(key);
+    else keys.delete(key);
+  }
+  return keys.size;
+}
+
+// 내가 팔로우한 계정 수 hook (내 프로필의 "팔로잉" 숫자에 더해짐)
+// 다른 프로필에서 팔로우 버튼을 누르면 follow-change 이벤트로 바로 다시 계산됩니다.
+export function useFollowedCount() {
+  return useSyncExternalStore(subscribe, countFollowed, () => 0);
+}
+
 // 팔로우 상태를 읽고 바꾸는 hook (버튼과 팔로워 수가 같은 상태를 공유)
 export function useFollowing(userId: string) {
-  const key = "instagram:follow:" + userId;
+  const key = PREFIX + userId;
   const following = useSyncExternalStore(subscribe, () => read(key), () => false);
   function toggle() {
     const next = !read(key);
