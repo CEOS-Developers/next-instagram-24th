@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import Link from "next/link";
-import FollowButton, { useFollowing } from "@/components/FollowButton";
+import FollowButton, { useFollowedCount, useFollowing } from "@/components/FollowButton";
 import ProfileEditor, { useProfileFields } from "./ProfileEditor";
 import ProfileNote from "./ProfileNote";
 import Avatar from "@/components/Avatar";
@@ -22,10 +22,12 @@ export default function ProfileHeader({ user, postCount, isMe, suggestions = [] 
   const fields = useProfileFields(user, isMe);
   // 팔로우하면 이 사람의 팔로워 수 +1 (버튼과 같은 상태를 보므로 누르는 즉시 반영)
   const { following } = useFollowing(user.id);
+  // 내 프로필이면 내가 팔로우한 계정 수만큼 팔로잉 수 +
+  const followedCount = useFollowedCount();
   const stats = [
     { label: "게시물", value: postCount },
     { label: "팔로워", value: user.followerCount + (!isMe && following ? 1 : 0) },
-    { label: "팔로잉", value: user.followingCount },
+    { label: "팔로잉", value: user.followingCount + (isMe ? followedCount : 0) },
   ];
 
   const button = isMe ? (
