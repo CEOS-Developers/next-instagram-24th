@@ -86,7 +86,7 @@ export default async function PostDetailPage({
       type="button"
       disabled
       aria-label="좋아요"
-      className="flex items-center gap-? disabled:cursor-not-allowed"
+      className="flex items-center gap-1.5 disabled:cursor-not-allowed"
     >
       <Image
         src="/icons/heart.svg"
@@ -95,7 +95,7 @@ export default async function PostDetailPage({
         height={24}
         className="dark:invert"
       />
-      <span className="text-?">{post.likes}</span>
+      <span className="text-sm font-semibold">{post.likes}</span>
     </button>
     <button
       type="button"
@@ -115,11 +115,11 @@ export default async function PostDetailPage({
 
   {/* F. 본문 */}
 <p className="text-sm">
-  <span className="font-?">{defaultUsername}</span> {post.caption}
+  <span className="font-semibold">{defaultUsername}</span> {post.caption}
 </p>
 
 {/* G. 날짜 */}
-<time dateTime={post.createdAt} className="mt-? block text-xs text-[#a8a8a8]">
+<time dateTime={post.createdAt} className="mt-1 block text-xs text-[#a8a8a8]">
   {formatDate(post.createdAt)}
 </time>
 </div>

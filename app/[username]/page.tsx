@@ -6,6 +6,7 @@ import { profileImage } from "../_lib/profile";
 import ProfileTabs from "./_components/ProfileTabs";
 
 const profileStats = [
+  { label: "게시물", count: getPosts().length, interactive: false },
   { label: "팔로워", count: 120, interactive: true },
   { label: "팔로우", count: 300, interactive: true },
 ];
