@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function HomeHeader() {
   return (
-    <header className="sticky top-0 z-10 flex h-15 shrink-0 items-center justify-between bg-background px-4">
+    <header className="sticky top-0 z-10 flex h-15 shrink-0 items-center justify-between bg-background px-4 md:hidden">
       <Image
         src="/icons/instagram-wordmark.svg"
         alt="Instagram"

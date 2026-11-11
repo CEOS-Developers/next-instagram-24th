@@ -4,10 +4,10 @@ export default function Home() {
   return (
     <>
       <HomeHeader />
-      <main className="flex-1">
-        <h2 className="text-center text-lg font-bold">
-          홈은 미구현 상태입니다.
-        </h2>
+      <main className="flex flex-1 items-center justify-center px-4">
+        <h1 className="text-center text-2xl font-bold">
+          홈화면은 미구현입니다.
+        </h1>
       </main>
     </>
   );

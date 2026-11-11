@@ -13,7 +13,7 @@ function HeaderUsername() {
 
 export default function ProfileHeader() {
   return (
-    <header className="sticky top-0 z-10 grid h-[44px] shrink-0 grid-cols-[24px_minmax(0,1fr)_24px] items-center gap-3 bg-background px-[16px]">
+    <header className="sticky top-0 z-10 grid h-[44px] shrink-0 grid-cols-[24px_minmax(0,1fr)_24px] items-center gap-3 bg-background px-[16px] md:hidden">
       <button
         type="button"
         disabled
