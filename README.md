@@ -1,68 +1,77 @@
-# 5주차 과제: next-instagram-24th
+# Next Instagram
 
-<br>
+CEOS 24기 프론트엔드 5주차 과제로, Next.js App Router를 사용해 인스타그램의 프로필과 게시물 상세 화면을 모바일 기준으로 구현했습니다.
 
-# 서론
+- [5주차 과제 안내](docs/assignment-week5.md)
+- [배포 링크](https://next-instagram-24th-theta.vercel.app/)
 
-안녕하세요 🙌🏻 24기 프론트엔드 운영진 **권오진**입니다.
+## 👥 팀원 및 역할
+| 이름 | 역할 |
+|---|---|
+| 이상민 | 공통 UI (하단 내비게이션), 프로필 페이지 (헤더, 프로필 정보, 탭), 배포 |
+| 이상빈 | 게시물 목데이터, 게시물 그리드, 게시물 상세 페이지, 이슈/PR 템플릿 |
 
-다들 중간고사 휴회 기간을 포함하여 긴 기간 동안 팀 단위 미션을 진행하시느라 정말 수고 많으셨습니다. 지난 미션에서는 React와 TypeScript를 활용하여 서비스를 구현하고, API 연동과 상태 관리, 팀원 간 협업을 경험해보셨을 것이라 생각합니다.
+## 🛠 기술 스택
+| 구분 | 기술 |
+|---|---|
+| 프레임워크 | Next.js 16 (App Router) |
+| 언어 | TypeScript |
+| 스타일 | Tailwind CSS v4 |
+| 패키지 매니저 | pnpm |
+| 배포 | Vercel |
 
-이번 미션은 **Next.js를 사용하여 인스타그램의 주요 기능을 구현하는 클론 코딩 프로젝트**를 진행하고자 합니다❗️
+## ✅ 구현 기능
+- [x] App Router로 프로젝트 생성
+- [x] 공통 UI 컴포넌트 분리 (BottomNav)
+- [x] 프로필 페이지 (`/[username]`)
+- [x] 게시물 그리드 (3열, 3:4 비율)
+- [x] 게시물 상세 페이지 (`/p/[postId]`)
+- [x] 프로필 ↔ 게시물 상세 페이지 이동
+- [x] 없는 게시물 404 처리
 
-**Next.js는 React를 기반으로 만들어진 웹 애플리케이션 프레임워크**입니다. React에서 직접 구성해야 했던 라우팅 등의 기능을 프레임워크 차원에서 제공하고, 서버에서 컴포넌트를 렌더링하는 기능과 다양한 렌더링 방식을 지원하여 보다 체계적으로 개발할 수 있도록 도와줍니다.
+## 📁 폴더 구조
+```
+app/
+├── [username]/      # 프로필 페이지
+│   └── _components/ # 프로필에서만 쓰는 컴포넌트
+├── p/[postId]/      # 게시물 상세 페이지
+└── layout.tsx       # 공통 레이아웃 (BottomNav)
+components/          # 공통 컴포넌트
+data/                # 목데이터
+types/               # 타입 (도메인별)
+public/              # 이미지, 아이콘
+docs/                # 과제 안내
+```
 
-이번 미션에서는 Next.js의 **App Router를 활용한 파일 시스템 기반 라우팅**과 **Server Component 및 Client Component의 차이**을 이해하고, 인스타그램의 피드와 프로필 등 익숙한 화면을 직접 구현해보는 것이 목표입니다.
+## 📏 컨벤션
 
-과제를 진행하다가 막히는 부분이 있더라도, 우선은 스스로 공부하고 찾아보며 해결해보는 과정을 권장드립니다. 다만 미션과 관련해 운영진의 도움이 필요하다면, 언제든 프론트엔드 카카오톡 및 팀별 멘토에게 질문을 남겨주세요!
+### Branch
+- `feature/작업내용`, `docs/작업내용`
+- master에 직접 push하지 않고 PR로 머지
 
-<br>
+### Commit
+| 타입 | 설명 |
+|---|---|
+| feat | 새로운 기능 |
+| fix | 버그 수정 |
+| style | 스타일 수정 |
+| refactor | 리팩토링 |
+| docs | 문서 수정 |
+| chore | 설정, 파일 추가 등 |
 
-# 과제
+### Issue / PR
+- 이슈 제목: `Feat: 기능설명`
+- PR 제목은 커밋 메시지 형식, 본문에 `Close #이슈번호`
+- 리뷰 → Approve → 머지 → 브랜치 삭제
 
-## 🎯 목표
+### Code
+- 컴포넌트 파일은 PascalCase (`PostGrid.tsx`)
+- import는 `@/` 절대경로 사용
+- 타입은 도메인별로 분리 (`types/post.ts`)
 
-- **Next.js의 기본 개념**을 이해하고 학습합니다.
-- **App Router**를 활용하여 파일 시스템 기반 라우팅과 동적 라우팅을 구현합니다.
-- **Server Component와 Client Component**의 차이를 이해하고 적절하게 구분하여 사용합니다.
-- **TypeScript와 Tailwind CSS**를 활용하여 재사용 가능한 컴포넌트와 UI를 구현합니다.
-- 사용자 상호작용에 따른 **상태 관리 및 데이터 처리 방식**을 학습합니다.
-
-## 📅 기한
-
-- 2026년 11월 11일 수요일 14:00까지
-
-## 💬 Review Questions
-
-- React 18 버전의 변경점에 대해 설명해주세요.
-  - 서버 컴포넌트와 클라이언트 컴포넌트
-  - lazy loading과 Suspense 컴포넌트
-  - automatic batching, Concurrent Rendering 등 추가적으로 더 설명해주셔도 됩니다!
-
-
-## 💡 필수 요건
-- Next.js의 App Router를 사용하여 프로젝트를 생성합니다.
-- 공통 UI를 재사용 가능한 컴포넌트로 분리합니다.
-- 사용자의 프로필 페이지를 구현합니다.
-- 게시물 상세 페이지를 구현하고 사용자 프로필에서 게시물을 그리드 형태로 표시합니다.
-- 프로필, 게시물 상세 페이지 간 이동을 구현합니다.
-
-
-## ✅ 선택 요건
-- 댓글 작성 기능을 통해 게시물에 댓글을 작성하고 목록에 반영합니다.
-- 게시물을 저장하거나 저장을 취소하는 기능을 구현합니다.
-- Instagram의 스토리 영역과 스토리 조회 화면을 구현합니다.
-- 이미지와 본문을 입력해 새로운 게시물을 작성합니다.
-- 프로필 페이지에서 팔로우 및 언팔로우 상태를 변경합니다.
-- 이 외에도 추가하고 싶은 기능이 있다면 마음껏 추가하셔도 됩니다.
-
-<br>
-
-# 링크 및 참고자료
-
-- [Next.js 공식 문서](https://nextjs.org/docs)
-- [Next.js 13에서 변한 것들](https://velog.io/@hang_kem_0531/Next.js-13%EC%9D%B4-%EB%82%98%EC%99%80%EB%B2%84%EB%A0%B8%EB%8B%A4)
-- [Next.js 14에서 변한 것들](https://velog.io/@lee_1124/Next.js-14-%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8)
-- [Next.js 15, 16](https://beam307.github.io/2026/03/18/nextjs16-vs15/)
-- [React & Next.js에서 발견된 취약점-(CVE-2025-55182(React2Shell)](https://news.hada.io/topic?id=24874)
-- [Next.js 이렇게 쓰면 느립니다](https://velog.io/@k-svelte-master/nextjs-slow-1-dynamic-rsc-prefetch)
+## ▶️ 실행 방법
+```bash
+pnpm install
+pnpm dev
+```
+[localhost:3000](http://localhost:3000)으로 접속
