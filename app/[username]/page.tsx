@@ -1,10 +1,12 @@
+import PostGrid from "@/components/PostGrid";
+import { getPosts } from "@/data/posts";
 import Image from "next/image";
 import { Suspense } from "react";
 import { profileImage } from "../_lib/profile";
 import ProfileTabs from "./_components/ProfileTabs";
 
 const profileStats = [
-  { label: "게시물", count: 4, interactive: false },
+  { label: "게시물", count: getPosts().length, interactive: false },
   { label: "팔로워", count: 120, interactive: true },
   { label: "팔로우", count: 300, interactive: true },
 ];
@@ -90,6 +92,7 @@ export default function MyPage({ params }: PageProps<"/[username]">) {
       </section>
       <ProfileTabs />
       <hr className="border-t border-[#dbdfe4]" />
+      <PostGrid />
     </main>
   );
 }
