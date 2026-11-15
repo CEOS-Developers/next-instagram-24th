@@ -1,0 +1,58 @@
+{
+  "tool": "built-in image_gen; original-photo AppKit collage for images 02 and 05",
+  "images": [
+    {
+      "file": "public/images/funny-01-build-siu.png",
+      "reference": "public/images/siu.png",
+      "prompt": "Use case: identity-preserve. Create one square 1024x1024 humorous Korean developer meme using the supplied photo as the edit target. Preserve Cristiano Ronaldo’s recognizable face, hair, and wide-open-mouth surprised celebration expression. Put him seated at a tiny developer desk, still wearing a suit, joyfully screaming at his laptop as an absurd stadium-sized shower of green checkmarks and confetti erupts around him. Laptop screen shows a simple green successful build check. Intentionally funny polished photo collage with realistic textures and exaggerated scale, unmistakable fictional meme. Large bold perfectly legible white Hangul with black outline at the top, verbatim: \"빌드 한 번에 성공\". Bottom caption verbatim: \"SIIIIUUU!\". Clean composition, face prominent, no extra limbs, no watermark. One single finished image, not a contact sheet."
+    },
+    {
+      "file": "public/images/funny-02-review-faces.png",
+      "references": [
+        "public/images/siu.png",
+        "public/images/funnymessi.png"
+      ],
+      "method": "Original-photo collage with captions, rendered using AppKit",
+      "renderer": "output/imagegen/render-face-memes.js",
+      "captions": [
+        "내 코드 리뷰 받을 때",
+        "이 코드는... 제가 짠 게 맞긴 한데요",
+        "남의 코드 리뷰할 때",
+        "여기 왜 이렇게 짜셨어요? ^^"
+      ]
+    },
+    {
+      "file": "public/images/funny-03-css-statue.png",
+      "reference": "public/images/goatnaldo.png",
+      "prompt": "Use case: compositing. Create one square 1024x1024 funny Korean CSS meme using the supplied bronze Ronaldo bust collage as reference. Use the distinctive awkward bronze bust face from the top panel as the main subject; retain its metallic copper look and odd wide-eyed grin. Make a clean two-column BEFORE/AFTER fictional museum display: left is a tasteful realistic classical bronze Ronaldo bust; right is the supplied awkward bronze bust with an impossibly long accordion neck, its pedestal shifted sideways and tiny web browser layout guides crossing it. Keep it lighthearted, absurd and obvious parody. Elegant museum lighting contrasts with disastrous web layout. Top large bold white Hangul with black outline, verbatim: \"CSS 한 줄만 수정했는데\". Small column titles: \"수정 전\" and \"수정 후\". Right bust much funnier and larger. Clear meme design, no watermarks, two columns within one image, not multiple generated assets."
+    },
+    {
+      "file": "public/images/funny-04-kitty-review.png",
+      "reference": "public/images/kitinaldo.png",
+      "prompt": "Use case: identity-preserve. Create one square 1024x1024 humorous Korean developer meme editing the supplied pink Hello Kitty Cristiano Ronaldo image. Preserve Ronaldo’s recognizable serious expression and slick dark hair, and the existing over-the-top pink hearts, bows, cute white cat motifs and glitter collage aesthetic. Put a small pastel pink laptop and a neat pink keyboard in front of him, with a giant pink toy rubber stamp labeled \"LGTM\" held in one hand over a stack of review papers. Absurd contrast between extremely stern face and aggressively cute code reviewer. Top large bold Hangul, dark pink on a cream banner, verbatim: \"코드 리뷰는 냉정하게\". Bottom banner verbatim: \"승인해쪄요 ♡\". Make it adorable and funny, balanced legible layout, no extra fingers, no watermark, one single finished image."
+    },
+    {
+      "file": "public/images/funny-05-dolphin-debug.png",
+      "references": [
+        "public/images/messi-dolphin.png",
+        "public/images/funnymessi.png",
+        "public/images/siu.png"
+      ],
+      "method": "Original-photo collage with captions, rendered using AppKit",
+      "renderer": "output/imagegen/render-face-memes.js",
+      "captions": [
+        "시니어한테 코드 설명하는 나",
+        "아까까진 됐는데요...",
+        "설명 시작",
+        "진짜 간단해요 ㅎㅎ",
+        "버그 발견",
+        "설명하다가 내가 고침"
+      ]
+    },
+    {
+      "file": "public/images/funny-06-friday-escape.png",
+      "reference": "public/images/horangnaldo.jpeg",
+      "prompt": "Use case: identity-preserve. Create one square 1024x1024 funny Korean developer meme using the supplied photo of Ronaldo running sideways with both arms raised in a red training top and black shorts. Preserve his recognizable face, mischievous smile and the unusual raised-hands running pose. Transplant him into a modern office, comically sprinting on tiptoe toward a glowing exit while an office desk behind him has a laptop with a huge red alert icon. A wall digital clock reads \"17:59\". His long Ethernet cable trails behind like a superhero cape, clear playful visual exaggeration. Top large bold white Korean text with black outline verbatim: \"금요일 오후 5시 59분\". Bottom caption verbatim: \"배포 완료. 퇴근합니다.\". Dynamic polished photoreal meme collage, flattering playful humor, no additional people, no extra limbs, no watermarks, one finished image."
+    }
+  ]
+}

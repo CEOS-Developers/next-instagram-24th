@@ -44,4 +44,19 @@ export const comments: Comment[] = [
     content: "안녕하세요",
     createdAt: "2026-11-07T12:20:00Z",
   },
+  {
+    id: "comment-7",
+    postId: "post-17",
+    authorId: "user-2",
+    content: "messi of Mixed Martial Arts",
+    createdAt: "2026-11-07T12:20:00Z",
+  },
+  {
+    id: "comment-8",
+    postId: "post-17",
+    authorId: "user-1",
+    content: "오타니 팬인데 살살 해주세요 은가누님ㅠㅠ 제가 코딩 알려드리겠습니다.",
+    createdAt: "2026-11-07T12:20:00Z",
+  },
+  
 ];
