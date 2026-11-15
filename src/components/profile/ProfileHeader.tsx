@@ -8,6 +8,7 @@ export type ProfileHeaderProps = {
   user: User;
   postCount: number;
   followedByUsers: User[];
+  isOwnProfile: boolean;
   isFollowing: boolean;
   onToggleFollow: () => void;
   onMessage?: () => void;
@@ -17,13 +18,15 @@ export default function ProfileHeader({
   user,
   postCount,
   followedByUsers,
+  isOwnProfile,
   isFollowing,
   onToggleFollow,
   onMessage,
 }: ProfileHeaderProps) {
   // 목데이터의 팔로워 수에 현재 상태와 초기 상태의 차이만 반영합니다.
-  const followerCount =
-    user.followerCount + Number(isFollowing) - Number(user.isFollowedByMe);
+  const followerCount = isOwnProfile
+    ? user.followerCount
+    : user.followerCount + Number(isFollowing) - Number(user.isFollowedByMe);
 
   return (
     <header className="mx-auto w-full max-w-profile-header space-y-6 font-sans text-text-primary">
@@ -59,6 +62,7 @@ export default function ProfileHeader({
       </div>
 
       <ProfileActions
+        isOwnProfile={isOwnProfile}
         isFollowing={isFollowing}
         onToggleFollow={onToggleFollow}
         onMessage={onMessage}

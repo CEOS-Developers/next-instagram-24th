@@ -21,7 +21,7 @@ export default function Sidebar() {
         "flex h-dvh w-[72px] flex-col overflow-x-hidden overflow-y-auto",
         "bg-surface px-3 py-4 text-text-primary",
         "transition-[width] duration-200 motion-reduce:transition-none",
-        "hover:w-sidebar",
+        "hover:w-sidebar focus-within:w-sidebar",
       ].join(" ")}
     >
       <div
@@ -49,6 +49,7 @@ export default function Sidebar() {
         <SidebarItem
           icon={<Avatar src={currentUser.avatarUrl} alt="" size="sm" />}
           label="프로필"
+          href={`/${encodeURIComponent(currentUser.username)}`}
         />
       </ul>
 

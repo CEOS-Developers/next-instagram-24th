@@ -43,8 +43,6 @@ export default function CommentList({ postId, comments, currentUser }: CommentLi
           ref={index === allComments.length - 1 ? lastItemRef : undefined}
           comment={comment}
           author={author}
-          // 게스트는 프로필 페이지가 없어 이름에 링크를 걸지 않습니다.
-          linkToProfile={author.id !== currentUser.id}
         />
       ))}
     </ul>

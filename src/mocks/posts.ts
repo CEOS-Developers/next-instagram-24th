@@ -1,7 +1,7 @@
 import type { Post } from "@/types/post";
 
 // 이미지 파일은 public/images/에서 관리합니다.
-// 메시는 저장된 사진을, 호날두는 레이아웃 확인용 샘플 이미지를 사용합니다.
+// 사용자별 사진과 개발자 밈을 게시물 목데이터로 사용합니다.
 export const posts: Post[] = [
   {
     id: "post-1",
@@ -48,6 +48,36 @@ export const posts: Post[] = [
     likeCount: 57,
     isLikedByMe: false,
     createdAt: "2026-11-04T11:00:00Z",
+  },
+  {
+    id: "post-5",
+    authorId: "user-1",
+    imageUrl: "/images/funny-01-build-siu.png",
+    imageAlt: "빌드 한 번에 성공하자 노트북 앞에서 환호하는 호날두 밈",
+    caption: "빌드 한 번에 성공. 오늘 발롱도르는 내 거다. SIIIIUUU! ✅",
+    likeCount: 777,
+    isLikedByMe: false,
+    createdAt: "2026-11-13T03:00:00Z",
+  },
+  {
+    id: "post-6",
+    authorId: "user-1",
+    imageUrl: "/images/funny-04-kitty-review.png",
+    imageAlt: "분홍색 키티 노트북 앞에서 LGTM 도장을 든 진지한 호날두",
+    caption: "코드 리뷰는 냉정하게. 하지만 승인은 귀엽게 해쪄요 ♡ ",
+    likeCount: 1004,
+    isLikedByMe: false,
+    createdAt: "2026-11-14T03:00:00Z",
+  },
+  {
+    id: "post-7",
+    authorId: "user-1",
+    imageUrl: "/images/funny-06-friday-escape.png",
+    imageAlt: "금요일 오후 5시 59분에 배포를 마치고 사무실을 뛰쳐나가는 호날두",
+    caption: "siuuuuuuuuuuuuu 도망가~",
+    likeCount: 1759,
+    isLikedByMe: false,
+    createdAt: "2026-11-15T03:00:00Z",
   },
   {
     id: "post-10",
@@ -101,5 +131,45 @@ export const posts: Post[] = [
     likeCount: 1010,
     isLikedByMe: false,
     createdAt: "2026-10-20T08:30:00Z",
+  },
+  {
+    id: "post-14",
+    authorId: "user-2",
+    imageUrl: "/images/funny-02-review-faces.png",
+    imageAlt: "코드 리뷰를 받을 때 당황한 호날두와 남의 코드를 리뷰할 때 웃는 메시",
+    caption: "메시 기모찌",
+    likeCount: 1010,
+    isLikedByMe: false,
+    createdAt: "2026-11-13T04:00:00Z",
+  },
+  {
+    id: "post-15",
+    authorId: "user-2",
+    imageUrl: "/images/funny-03-css-statue.png",
+    imageAlt: "CSS 한 줄을 수정하자 목이 아코디언처럼 길어진 호날두 동상 비교 밈",
+    caption: "날두야 네 동상에 CSS 한 줄만 추가했어.",
+    likeCount: 999,
+    isLikedByMe: false,
+    createdAt: "2026-11-14T04:00:00Z",
+  },
+  {
+    id: "post-16",
+    authorId: "user-2",
+    imageUrl: "/images/funny-05-dolphin-debug.png",
+    imageAlt: "돌고래에게 코드를 설명하는 메시와 버그 발견 전후 메시·호날두의 표정 비교",
+    caption: "시니어한테 설명하다가 내가 버그 찾음. 돌고래 선배님 오늘도 한 수 배웠습니다.",
+    likeCount: 404,
+    isLikedByMe: false,
+    createdAt: "2026-11-15T04:00:00Z",
+  },
+  {
+    id: "post-17",
+    authorId: "user-guest",
+    imageUrl: "/images/otani-vs-ngannou.png",
+    imageAlt: "빠따든 오타니 vs 그냥 은가누",
+    caption: "오타니 저 만나면 진짜 죽습니다.",
+    likeCount: 404,
+    isLikedByMe: true,
+    createdAt: "2026-11-15T04:00:00Z",
   },
 ];
