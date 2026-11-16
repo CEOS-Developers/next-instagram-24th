@@ -3,8 +3,8 @@ import Icon, { type IconName } from "@/components/ui/Icon";
 import { currentUser } from "@/mocks/users";
 import SidebarItem from "./SidebarItem";
 
-const menuItems: { icon: IconName; label: string; active?: boolean }[] = [
-  { icon: "home", label: "홈" },
+const menuItems: { icon: IconName; label: string; href?: string; active?: boolean }[] = [
+  { icon: "home", label: "홈", href: "/" },
   { icon: "reels", label: "릴스" },
   { icon: "share", label: "메시지" },
   { icon: "search", label: "검색" },
@@ -38,11 +38,12 @@ export default function Sidebar() {
         aria-label="주 메뉴"
         className="mt-[clamp(24px,6vh,64px)] flex shrink-0 flex-col gap-1"
       >
-        {menuItems.map(({ icon, label, active }) => (
+        {menuItems.map(({ icon, label, href, active }) => (
           <SidebarItem
             key={icon}
             icon={<Icon name={icon} filled={active} />}
             label={label}
+            href={href}
             active={active}
           />
         ))}
