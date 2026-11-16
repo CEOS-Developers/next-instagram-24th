@@ -52,20 +52,11 @@ export default function PostActions({ post, commentInputId }: PostActionsProps) 
           onClick={() => setIsSaved((value) => !value)}
           className="ml-auto enabled:hover:bg-transparent"
         >
-          <svg
-            width={24}
-            height={24}
-            viewBox="0 0 24 24"
-            fill={isSaved ? "currentColor" : "none"}
-            stroke="currentColor"
-            strokeWidth="1.8"
-            strokeLinejoin="round"
-            aria-hidden="true"
-            focusable="false"
+          <Icon
+            name="save"
+            filled={isSaved}
             className={isSaved ? "" : "hover:text-text-secondary"}
-          >
-            <path d="M19 21 12 15.5 5 21V3h14v18Z" />
-          </svg>
+          />
         </IconButton>
       </div>
 
