@@ -4,7 +4,7 @@ import ProfileClient from "@/components/profile/ProfileClient";
 import ProfilePosts from "@/components/profile/ProfilePosts";
 import { comments } from "@/mocks/comments";
 import { posts } from "@/mocks/posts";
-import { users } from "@/mocks/users";
+import { currentUser, users } from "@/mocks/users";
 
 type ProfilePageProps = {
   params: Promise<{ username: string }>;
@@ -19,6 +19,7 @@ async function ProfileContent({ params }: ProfilePageProps) {
   const user = users.find((user) => user.username === username);
 
   if (!user) notFound();
+  const isOwnProfile = user.id === currentUser.id;
 
   const followedByUsers = users.filter(
     (candidate) =>
@@ -44,9 +45,15 @@ async function ProfileContent({ params }: ProfilePageProps) {
         followedByUsers={followedByUsers}
       />
       <ProfilePosts
+        key={`posts-${user.id}`}
         posts={userPosts}
         username={user.username}
         commentCounts={commentCounts}
+        isOwnProfile={isOwnProfile}
+        savedPostCandidates={isOwnProfile ? posts : []}
+        usernamesById={isOwnProfile
+          ? Object.fromEntries(users.map((author) => [author.id, author.username]))
+          : undefined}
       />
     </>
   );

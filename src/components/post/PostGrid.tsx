@@ -6,6 +6,9 @@ export type PostGridProps = {
   posts: Post[];
   /** 게시물 작성자의 username입니다. 상세 페이지 주소에 사용합니다. */
   username: User["username"];
+  /** 여러 작성자의 게시물을 표시할 때 사용할 사용자 ID별 username입니다. */
+  usernamesById?: Record<User["id"], User["username"]>;
+  openAsPage?: boolean;
   /** 게시물 id별 댓글 수입니다. 값이 없으면 0으로 표시합니다. */
   commentCounts?: Record<Post["id"], number>;
 };
@@ -13,6 +16,8 @@ export type PostGridProps = {
 export default function PostGrid({
   posts,
   username,
+  usernamesById,
+  openAsPage = false,
   commentCounts = {},
 }: PostGridProps) {
   return (
@@ -21,8 +26,9 @@ export default function PostGrid({
         <li key={post.id}>
           <PostThumbnail
             post={post}
-            username={username}
+            username={usernamesById?.[post.authorId] ?? username}
             commentCount={commentCounts[post.id] ?? 0}
+            openAsPage={openAsPage}
           />
         </li>
       ))}

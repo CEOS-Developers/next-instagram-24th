@@ -45,7 +45,7 @@ npm run dev
 
 - [x] 댓글 작성 및 목록 반영
 - [x] 팔로우 / 언팔로우
-- [ ] 게시물 저장 (버튼 토글 UI만 구현, 새로고침 시 초기화)
+- [x] 게시물 저장 / 저장 취소 (`localStorage` 유지, 본인 프로필의 저장됨 탭)
 - [ ] 스토리
 - [ ] 새 게시물 작성
 
@@ -59,7 +59,9 @@ npm run dev
 - 프로필의 "OO님이 팔로우합니다" 표시
 - 프로필 탭 (게시물 / 리포스트 / 태그됨, 리포스트·태그됨은 빈 상태 화면)
 
-좋아요, 댓글, 팔로우 상태는 `localStorage`에 저장되어 새로고침해도 유지됩니다.
+좋아요, 댓글, 팔로우, 게시물 저장 상태는 `localStorage`에 저장되어 새로고침해도 유지됩니다.
+저장한 게시물은 본인 프로필(`/ngannou`)의 저장됨 탭에서 최근 저장한 순서로 확인할 수 있습니다.
+홈 피드와 상세 화면의 저장 버튼, 저장됨 탭은 같은 상태를 공유합니다.
 
 <br>
 
@@ -85,6 +87,7 @@ src/
 ├── lib/
 │   ├── posts.ts           # 게시물·작성자·댓글 조회
 │   ├── likeStorage.ts     # 좋아요 상태 저장
+│   ├── saveStorage.ts     # 사용자별 저장한 게시물 관리
 │   ├── commentStorage.ts  # 작성한 댓글 저장
 │   ├── followStorage.ts   # 팔로우 상태 저장
 │   └── formatTime.ts      # 날짜·상대 시간 포맷
@@ -118,7 +121,7 @@ src/
 
 ### localStorage 상태와 `useSyncExternalStore`
 
-좋아요, 댓글, 팔로우 상태는 `localStorage`에 저장하고 `useSyncExternalStore`로 구독합니다.
+좋아요, 댓글, 팔로우, 게시물 저장 상태는 `localStorage`에 저장하고 `useSyncExternalStore`로 구독합니다.
 
 - 서버 렌더링과 첫 클라이언트 렌더링은 목업 초기값을 사용해 hydration 불일치를 막습니다.
 - 값이 바뀌면 커스텀 이벤트로 알려서, 상세에서 누른 좋아요가 그리드 숫자에도 바로 반영됩니다.

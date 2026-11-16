@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import Icon from "@/components/ui/Icon";
 import IconButton from "@/components/ui/IconButton";
 import { formatDate, formatFullDate } from "@/lib/formatTime";
 import { usePostLike } from "@/lib/likeStorage";
+import { usePostSave } from "@/lib/saveStorage";
 import type { Post } from "@/types/post";
 
 export type PostActionsProps = {
@@ -15,8 +15,7 @@ export type PostActionsProps = {
 
 export default function PostActions({ post, commentInputId }: PostActionsProps) {
   const { isLiked, likeCount, toggleLike } = usePostLike(post);
-  // 저장은 UI만 구현합니다. 새로고침하면 초기화됩니다.
-  const [isSaved, setIsSaved] = useState(false);
+  const { isSaved, toggleSave } = usePostSave(post.id);
 
   function focusCommentInput() {
     if (commentInputId) document.getElementById(commentInputId)?.focus();
@@ -49,7 +48,7 @@ export default function PostActions({ post, commentInputId }: PostActionsProps) 
         <IconButton
           aria-label={isSaved ? "저장 취소" : "저장"}
           aria-pressed={isSaved}
-          onClick={() => setIsSaved((value) => !value)}
+          onClick={toggleSave}
           className="ml-auto enabled:hover:bg-transparent"
         >
           <Icon
