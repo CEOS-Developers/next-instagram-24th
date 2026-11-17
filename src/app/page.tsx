@@ -1,13 +1,8 @@
-import FeedPost from "@/components/feed/FeedPost";
+import FeedList from "@/components/feed/FeedList";
 import SuggestedAccounts from "@/components/feed/SuggestedAccounts";
-import { posts } from "@/data/posts";
-import { currentUser } from "@/data/profiles";
+import { getFeedPage } from "@/data/feed";
 
 export default function Home() {
-  const feedPosts = posts
-    .filter((post) => post.authorUsername !== currentUser.username)
-    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
-
   return (
     <main className="min-h-screen bg-white text-neutral-950">
       <h1 className="sr-only">홈 피드</h1>
@@ -17,9 +12,7 @@ export default function Home() {
           aria-label="홈 게시물"
           className="w-full min-w-0 max-w-117 space-y-8"
         >
-          {feedPosts.map((post, index) => (
-            <FeedPost key={post.id} post={post} isFirst={index === 0} />
-          ))}
+          <FeedList initialPage={getFeedPage()} />
         </section>
 
         <SuggestedAccounts />
