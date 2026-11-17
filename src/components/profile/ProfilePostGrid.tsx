@@ -1,6 +1,7 @@
 import ProfileTabs from "./ProfileTabs";
 import PostGridItem from "@/components/post/PostGridItem";
-import { getCommentCount } from "@/lib/data";
+import SavedGrid from "./SavedGrid";
+import { getFeedPosts, getCommentCount } from "@/lib/data";
 import type { Post } from "@/types";
 
 // 로딩 중 회색 칸 6개
@@ -14,10 +15,25 @@ export function ProfilePostGridSkeleton() {
   );
 }
 
-// 프로필 하단: "게시물" 탭 + 3열 그리드
-export default function ProfilePostGrid({ posts, isMe }: { posts: Post[]; isMe: boolean }) {
+function PostTiles({ posts }: { posts: Post[] }) {
   return (
-    <ProfileTabs isMe={isMe}>
+    <ul className="grid grid-cols-3 gap-px xl:grid-cols-4">
+  {posts.map((post) => (
+    <li key={post.id}>
+      <PostGridItem post={post} commentCount={getCommentCount(post.id)} />
+    </li>
+  ))}
+</ul>
+  );
+}
+
+// 프로필 하단: "게시물" 탭 + 3열 그리드
+export default function ProfilePostGrid({ posts, isMe, userId }: { posts: Post[]; isMe: boolean; userId: string }) {
+  const allPosts = getFeedPosts();
+  const reposts = allPosts.filter(post => post.repostedBy?.includes(userId));
+  const tagged = allPosts.filter(post => post.taggedUserIds?.includes(userId));
+  return (
+    <ProfileTabs repostGrid={reposts.length ? <PostTiles posts={reposts} /> : null} taggedGrid={tagged.length ? <PostTiles posts={tagged} /> : null} isMe={isMe} savedGrid={isMe && <SavedGrid items={allPosts.map(post => ({ post, commentCount: getCommentCount(post.id) }))} />}>
       {posts.length === 0 ? (
         <div className="flex flex-col items-center gap-4 px-4 py-16 text-center">
           <span className="grid size-16 place-items-center rounded-full border border-current">
@@ -27,13 +43,7 @@ export default function ProfilePostGrid({ posts, isMe }: { posts: Post[]; isMe: 
           <p className="text-sm text-neutral-600">공유한 사진이 이곳에 표시됩니다.</p>
         </div>
       ) : (
-        <ul className="grid grid-cols-3 gap-px xl:grid-cols-4">
-          {posts.map((post) => (
-            <li key={post.id}>
-              <PostGridItem post={post} commentCount={getCommentCount(post.id)} />
-            </li>
-          ))}
-        </ul>
+        <PostTiles posts={posts} />
       )}
     </ProfileTabs>
   );

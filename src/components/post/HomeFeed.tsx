@@ -51,7 +51,7 @@ export default function HomeFeed({ initial }: { initial: Page }) {
       ))}
       <div ref={marker} className="py-5 text-center text-sm text-neutral-500">
         <span role="status">
-          {status === "loading" && <><span aria-hidden className="mr-2 inline-block size-4 rounded-full border-2 border-neutral-200 border-t-neutral-600 align-middle motion-safe:animate-spin" />게시물 불러오는 중…</>}
+          {status === "loading" && <><span className="sr-only">게시물 불러오는 중…</span><span aria-hidden className="block motion-safe:animate-pulse"><span className="mb-3 flex items-center gap-2"><span className="size-8 rounded-full bg-neutral-200" /><span className="h-3 w-24 rounded bg-neutral-200" /></span><span className="block aspect-[4/5] rounded bg-neutral-200" /><span className="mt-3 block h-3 w-1/3 rounded bg-neutral-200" /></span></>}
           {status === "error" && "게시물을 불러오지 못했어요. "}
           {feed.items.length === 0 && "아직 게시물이 없어요."}
         </span>

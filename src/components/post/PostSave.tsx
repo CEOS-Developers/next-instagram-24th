@@ -10,7 +10,8 @@ function read(key: string) {
   try { return fallback.get(key) ?? (localStorage.getItem(key) === "1"); }
   catch { return fallback.get(key) ?? false; }
 }
-function subscribe(update: () => void) {
+export function isPostSaved(id: string) { return read("instagram:save:" + id); }
+export function subscribeToSaves(update: () => void) {
   window.addEventListener("storage", update);
   window.addEventListener("post-save", update);
   return () => {
@@ -21,7 +22,7 @@ function subscribe(update: () => void) {
 
 export function SaveButton({ id, className = "" }: { id: string; className?: string }) {
   const key = "instagram:save:" + id;
-  const saved = useSyncExternalStore(subscribe, () => read(key), () => false);
+  const saved = useSyncExternalStore(subscribeToSaves, () => isPostSaved(id), () => false);
   function toggle() {
     const next = !read(key);
     try {
