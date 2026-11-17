@@ -2,8 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useParams, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { myPageHref, profileImage } from "@/app/_lib/profile";
+import ProfileAvatar from "./ProfileAvatar";
 
 type NavigationItem = {
   label: string;
@@ -73,13 +74,15 @@ function NavigationList({
         const item: NavigationItem = navigationItems[id];
         const isActive = id === activeItem;
         const isProfile = id === "profile";
-        const image = (
+        const image = isProfile ? (
+          <ProfileAvatar src={item.src} size={24} />
+        ) : (
           <Image
             src={isActive && item.activeSrc ? item.activeSrc : item.src}
             alt=""
             width={24}
             height={24}
-            className={isProfile ? "size-6 rounded-full object-cover" : "size-6 dark:invert"}
+            className="size-6 dark:invert"
           />
         );
         const icon = isProfile && isActive ? (
@@ -128,8 +131,7 @@ export function NavigationItemsFallback({ variant }: NavigationProps) {
 
 export default function NavigationItems({ variant }: NavigationProps) {
   const pathname = usePathname();
-  const { username } = useParams<{ username?: string }>();
-  const activeItem = username ? "profile" : navigationOrder.sidebar.find((id) => {
+  const activeItem = navigationOrder.sidebar.find((id) => {
     const { href }: NavigationItem = navigationItems[id];
     return href && (pathname === href || (href !== "/" && pathname.startsWith(`${href}/`)));
   });
