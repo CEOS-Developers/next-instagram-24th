@@ -106,6 +106,12 @@ function toggleAction(postId: string, action: PostAction) {
   updatePost(postId, (post) => ({ ...post, [action]: post[action] !== true }));
 }
 
+export function likePost(postId: string) {
+  updatePost(postId, (post) =>
+    post.liked === true ? post : { ...post, liked: true },
+  );
+}
+
 function addComment(postId: string, text: string, replyToId?: string) {
   const trimmedText = text.trim();
   if (!trimmedText || trimmedText.length > MAX_COMMENT_LENGTH) return false;

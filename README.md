@@ -4,6 +4,7 @@ Next.js의 App Router를 사용해 Instagram의 홈 피드, 사용자 프로필�
 CEOS 24기 프론트엔드 5주차 클론 코딩 프로젝트입니다.
 
 - [5주차 과제 안내](docs/assignment-week5.md)
+- [6주차 과제 안내](docs/assignment-week6.md)
 - [배포 링크](https://next-instagram-24th.vercel.app/)
 
 ## 역할 분담

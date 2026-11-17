@@ -20,7 +20,7 @@ export default function PostDetails({ post }: { post: Post }) {
       aria-label={`${post.authorUsername}님의 게시물`}
       className="overflow-hidden rounded-xl border border-neutral-200 bg-white text-neutral-950 sm:grid sm:aspect-[36/25] sm:grid-cols-[minmax(0,5fr)_minmax(0,4fr)] sm:grid-rows-[minmax(0,1fr)]"
     >
-      <PostGallery key={post.id} images={post.images} />
+      <PostGallery key={post.id} postId={post.id} images={post.images} />
 
       <div className="flex min-h-0 min-w-0 flex-col">
         <header className="flex shrink-0 items-center justify-between gap-3 border-b border-neutral-200 px-4 py-3">
