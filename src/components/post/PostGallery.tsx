@@ -9,6 +9,7 @@ type PostGalleryProps = {
   images: Post["images"];
   variant?: "detail" | "feed";
   eager?: boolean;
+  onFirstImageSettled?: () => void;
 };
 
 const arrowClassName =
@@ -18,6 +19,7 @@ export default function PostGallery({
   images,
   variant = "detail",
   eager = true,
+  onFirstImageSettled,
 }: PostGalleryProps) {
   const [index, setIndex] = useState(0);
   const isFeed = variant === "feed";
@@ -52,6 +54,8 @@ export default function PostGallery({
                 src={photo.src}
                 alt={photo.alt}
                 fill
+                onLoad={photoIndex === 0 ? onFirstImageSettled : undefined}
+                onError={photoIndex === 0 ? onFirstImageSettled : undefined}
                 loading={photoIndex === 0 && eager ? "eager" : "lazy"}
                 sizes={
                   isFeed
