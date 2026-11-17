@@ -50,6 +50,7 @@ export default function FeedPost({ post, isFirst = false }: FeedPostProps) {
 
         <PostGallery
           key={post.id}
+          postId={post.id}
           images={post.images}
           variant="feed"
           eager={isFirst}
