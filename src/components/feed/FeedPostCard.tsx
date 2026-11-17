@@ -8,6 +8,7 @@ import Icon from "@/components/ui/Icon";
 import IconButton from "@/components/ui/IconButton";
 import { useAddedComments } from "@/lib/commentStorage";
 import { usePostLike } from "@/lib/likeStorage";
+import { usePostSave } from "@/lib/saveStorage";
 import type { Post } from "@/types/post";
 import type { User } from "@/types/user";
 
@@ -26,8 +27,7 @@ const linkFocusClassName =
 export default function FeedPostCard({ post, author, commentCount }: FeedPostCardProps) {
   const { isLiked, likeCount, toggleLike } = usePostLike(post);
   const totalCommentCount = commentCount + useAddedComments(post.id).length;
-  // 저장은 상세 화면과 같이 UI만 구현합니다.
-  const [isSaved, setIsSaved] = useState(false);
+  const { isSaved, toggleSave } = usePostSave(post.id);
   const [isCaptionOpen, setIsCaptionOpen] = useState(false);
 
   const profileHref = `/${encodeURIComponent(author.username)}`;
@@ -77,7 +77,7 @@ export default function FeedPostCard({ post, author, commentCount }: FeedPostCar
         <IconButton
           aria-label={isSaved ? "저장 취소" : "저장"}
           aria-pressed={isSaved}
-          onClick={() => setIsSaved((value) => !value)}
+          onClick={toggleSave}
           className="ml-auto enabled:hover:bg-transparent"
         >
           <Icon

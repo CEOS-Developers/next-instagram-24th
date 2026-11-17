@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import Button from "@/components/ui/Button";
+import { useCallback, useEffect, useRef, useState } from "react";
+import useInfiniteScroll from "@/hooks/useInfiniteScroll";
 import type { Post } from "@/types/post";
 import type { User } from "@/types/user";
 import FeedPostCard from "./FeedPostCard";
@@ -20,17 +20,34 @@ const FAKE_DELAY_MS = 800;
 export default function FeedList({ items }: { items: FeedItem[] }) {
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [isLoading, setIsLoading] = useState(false);
+  const loadTimerRef = useRef<number | null>(null);
   const hasMore = visibleCount < items.length;
 
-  function loadMore() {
-    if (isLoading || !hasMore) return;
+  const loadMore = useCallback(() => {
+    if (isLoading || !hasMore || loadTimerRef.current !== null) return;
 
     setIsLoading(true);
-    window.setTimeout(() => {
+    loadTimerRef.current = window.setTimeout(() => {
+      loadTimerRef.current = null;
       setVisibleCount((count) => count + PAGE_SIZE);
       setIsLoading(false);
     }, FAKE_DELAY_MS);
-  }
+  }, [isLoading, hasMore]);
+
+  const sentinelRef = useInfiniteScroll({
+    onLoadMore: loadMore,
+    isLoading,
+    hasMore,
+  });
+
+  useEffect(() => {
+    return () => {
+      if (loadTimerRef.current !== null) {
+        window.clearTimeout(loadTimerRef.current);
+        loadTimerRef.current = null;
+      }
+    };
+  }, []);
 
   return (
     <>
@@ -51,12 +68,7 @@ export default function FeedList({ items }: { items: FeedItem[] }) {
         )}
       </div>
 
-      {/* useInfiniteScroll 훅이 생기면 이 버튼 대신 맨 아래 div에 훅의 ref를 붙여 loadMore를 부릅니다. */}
-      {hasMore && !isLoading && (
-        <div className="mt-2 flex justify-center">
-          <Button onClick={loadMore}>더 보기</Button>
-        </div>
-      )}
+      <div ref={sentinelRef} className="h-px" aria-hidden="true" />
 
       {!hasMore && (
         <p className="py-8 text-center text-body text-text-secondary">

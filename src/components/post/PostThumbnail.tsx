@@ -9,15 +9,20 @@ export type PostThumbnailProps = {
   /** 상세 페이지 주소(/[username]/post/[postId])를 만들 때 사용합니다. */
   username: User["username"];
   commentCount: number;
+  /** 다른 작성자의 게시물은 프로필 모달을 거치지 않고 상세 페이지로 이동합니다. */
+  openAsPage?: boolean;
 };
 
 export default function PostThumbnail({
   post,
   username,
   commentCount,
+  openAsPage = false,
 }: PostThumbnailProps) {
+  const ThumbnailLink = openAsPage ? "a" : Link;
+
   return (
-    <Link
+    <ThumbnailLink
       href={`/${encodeURIComponent(username)}/post/${encodeURIComponent(post.id)}`}
       aria-label={`${post.caption} 게시물 보기`}
       className="group relative block aspect-[3/4] overflow-hidden bg-surface-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
@@ -47,6 +52,6 @@ export default function PostThumbnail({
       )}
 
       <PostThumbnailStats post={post} commentCount={commentCount} />
-    </Link>
+    </ThumbnailLink>
   );
 }

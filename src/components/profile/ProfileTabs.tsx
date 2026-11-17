@@ -1,12 +1,13 @@
 import type { KeyboardEvent, ReactNode } from "react";
 
-export type ProfileTab = "posts" | "reposts" | "tagged";
+export type ProfileTab = "posts" | "reposts" | "tagged" | "saved";
 
 export type ProfileTabsProps = {
   activeTab: ProfileTab;
   onChange: (tab: ProfileTab) => void;
   /** 탭 패널 요소의 id 앞부분입니다. 패널 id는 `${panelIdPrefix}-${tab}` 형태입니다. */
   panelIdPrefix: string;
+  showSaved?: boolean;
 };
 
 // 탭 전용 아이콘입니다. 공통 Icon에 추가할지는 A와 상의 후 정합니다.
@@ -35,11 +36,13 @@ const tabIcons: Record<ProfileTab, ReactNode> = {
       <path d="M6.5 19.5a6 6 0 0 1 11 0" />
     </>
   ),
+  saved: <path d="M20 21 12 13.44 4 21V3h16Z" />,
 };
 
 const tabs: { id: ProfileTab; label: string }[] = [
   { id: "posts", label: "게시물" },
   { id: "reposts", label: "리포스트" },
+  { id: "saved", label: "저장됨" },
   { id: "tagged", label: "태그됨" },
 ];
 
@@ -47,14 +50,20 @@ export default function ProfileTabs({
   activeTab,
   onChange,
   panelIdPrefix,
+  showSaved = false,
 }: ProfileTabsProps) {
+  const visibleTabs = showSaved ? tabs : tabs.filter((tab) => tab.id !== "saved");
+
   // 좌우 방향키로 탭을 이동합니다. (WAI-ARIA 탭 패턴)
   function handleKeyDown(event: KeyboardEvent<HTMLButtonElement>) {
     if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+    event.preventDefault();
 
-    const currentIndex = tabs.findIndex((tab) => tab.id === activeTab);
+    const currentIndex = visibleTabs.findIndex((tab) => tab.id === activeTab);
     const direction = event.key === "ArrowRight" ? 1 : -1;
-    const nextTab = tabs[(currentIndex + direction + tabs.length) % tabs.length];
+    const nextTab = visibleTabs[
+      (currentIndex + direction + visibleTabs.length) % visibleTabs.length
+    ];
 
     onChange(nextTab.id);
     document.getElementById(`${panelIdPrefix}-tab-${nextTab.id}`)?.focus();
@@ -67,7 +76,7 @@ export default function ProfileTabs({
         aria-label="프로필 게시물 탭"
         className="mx-auto flex max-w-profile-header"
       >
-        {tabs.map((tab) => {
+        {visibleTabs.map((tab) => {
           const isActive = tab.id === activeTab;
 
           return (
