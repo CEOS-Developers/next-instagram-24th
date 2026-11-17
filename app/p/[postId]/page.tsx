@@ -4,6 +4,7 @@ import Link from "next/link";
 import ProfileAvatar from "@/components/ProfileAvatar";
 import { getPost, getPosts } from "@/data/posts";
 import { getProfile } from "@/data/profiles";
+import PostBookmarkButton from "./_components/PostBookmarkButton";
 import PostImageSlider from "./_components/PostImageSlider";
 import PostLikeButton from "./_components/PostLikeButton";
 
@@ -75,25 +76,8 @@ export default async function PostDetailPage({
       <div className="px-4 pt-1.5 pb-4">
         {/* D. 아이콘 줄 */}
         <section className="mt-1 flex h-10 items-center">
-          <PostLikeButton
-            postId={post.id}
-            initialLikes={post.likes}
-            initiallyLiked={post.likedByMe}
-          />
-          <button
-            type="button"
-            disabled
-            aria-label="저장"
-            className="ml-auto disabled:cursor-not-allowed"
-          >
-            <Image
-              src="/icons/bookmark.svg"
-              alt=""
-              width={24}
-              height={24}
-              className="dark:invert"
-            />
-          </button>
+          <PostLikeButton postId={post.id} initialLikes={post.likes} />
+          <PostBookmarkButton postId={post.id} />
         </section>
 
         {/* F. 본문 */}

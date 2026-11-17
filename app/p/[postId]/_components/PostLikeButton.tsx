@@ -1,61 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import { useId, useSyncExternalStore } from "react";
-import { defaultUsername } from "@/app/_lib/profile";
-
-const likeChangeEvent = "next-instagram:like-change";
-const inMemoryLikes = new Map<string, boolean>();
-
-function readLike(key: string, initiallyLiked: boolean) {
-  const inMemory = inMemoryLikes.get(key);
-  if (inMemory !== undefined) return inMemory;
-
-  try {
-    const saved = window.localStorage.getItem(key);
-    if (saved === "1") return true;
-    if (saved === "0") return false;
-  } catch {
-    return initiallyLiked;
-  }
-  return initiallyLiked;
-}
-
-function subscribe(onChange: () => void) {
-  window.addEventListener(likeChangeEvent, onChange);
-  window.addEventListener("storage", onChange);
-  return () => {
-    window.removeEventListener(likeChangeEvent, onChange);
-    window.removeEventListener("storage", onChange);
-  };
-}
+import { useId } from "react";
+import { usePostAction } from "../_lib/usePostAction";
 
 type PostLikeButtonProps = {
   postId: string;
   initialLikes: number;
-  initiallyLiked?: boolean;
 };
 
-export default function PostLikeButton({ postId, initialLikes, initiallyLiked = false }: PostLikeButtonProps) {
+export default function PostLikeButton({ postId, initialLikes }: PostLikeButtonProps) {
   const countId = useId();
-  const storageKey = `next-instagram:${defaultUsername}:like:${postId}`;
-  const isLiked = useSyncExternalStore(
-    subscribe,
-    () => readLike(storageKey, initiallyLiked),
-    () => initiallyLiked,
-  );
-  const likes = initialLikes + Number(isLiked) - Number(initiallyLiked);
-
-  function toggleLike() {
-    const nextLiked = !readLike(storageKey, initiallyLiked);
-    try {
-      window.localStorage.setItem(storageKey, nextLiked ? "1" : "0");
-      inMemoryLikes.delete(storageKey);
-    } catch {
-      inMemoryLikes.set(storageKey, nextLiked);
-    }
-    window.dispatchEvent(new Event(likeChangeEvent));
-  }
+  const [isLiked, toggleLike] = usePostAction("like", postId);
+  const likes = initialLikes + Number(isLiked);
 
   return (
     <button
