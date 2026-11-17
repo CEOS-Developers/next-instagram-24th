@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import PostCard from "@/components/PostCard";
 import type { FeedPage } from "@/types/post";
+import PostCardSkeleton from "@/components/PostCardSkeleton";
 
 type FeedListProps = {
   initialPage: FeedPage;
@@ -49,7 +50,12 @@ export default function FeedList({ initialPage }: FeedListProps) {
         <PostCard key={post.id} post={post} />
       ))}
 
-      {loading && <p className="py-6 text-center text-sm text-[#a8a8a8]">불러오는 중…</p>}
+      {loading && (
+  <div role="status" aria-label="게시물 불러오는 중">
+    <PostCardSkeleton />
+    <PostCardSkeleton />
+  </div>
+)}
       {error && <p className="py-6 text-center text-sm text-[#a8a8a8]">게시물을 불러오지 못했어요.</p>}
 
       {/* 바닥 표시: 이게 화면에 들어오면 다음 페이지를 불러옴 */}
