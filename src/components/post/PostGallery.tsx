@@ -13,7 +13,7 @@ type GalleryProps = {
 
 export default function PostGallery({ images, caption, postHref, preload }: GalleryProps) {
   const [index, setIndex] = useState(0);
-  const buttonStyle = "absolute top-1/2 -translate-y-1/2 rounded-full bg-black/65 px-3 py-1 text-xl text-white";
+  const buttonStyle = "absolute top-1/2 grid size-8 -translate-y-1/2 place-items-center rounded-full bg-white/75 text-black shadow-sm hover:bg-white/90";
   const photo = (
     <Image src={images[index]} alt={caption || "게시물 사진"} fill
       sizes={postHref ? "(min-width: 1280px) 31vw, (max-width: 680px) 100vw, 680px" : "(min-width: 768px) 55vw, 100vw"}
@@ -27,8 +27,16 @@ export default function PostGallery({ images, caption, postHref, preload }: Gall
           <span aria-live="polite" className="absolute right-3 top-3 rounded-full bg-black/65 px-2 py-1 text-xs text-white">
             {index + 1} / {images.length}
           </span>
-          {index > 0 && <button aria-label="이전 사진" className={buttonStyle + " left-2"} onClick={() => setIndex(index - 1)}>‹</button>}
-          {index < images.length - 1 && <button aria-label="다음 사진" className={buttonStyle + " right-2"} onClick={() => setIndex(index + 1)}>›</button>}
+          {index > 0 && <button aria-label="이전 사진" className={buttonStyle + " left-2"} onClick={() => setIndex(index - 1)}>
+            <svg aria-hidden="true" viewBox="0 0 16 16" className="size-4" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="10.5,2 4.5,8 10.5,14" />
+            </svg>
+          </button>}
+          {index < images.length - 1 && <button aria-label="다음 사진" className={buttonStyle + " right-2"} onClick={() => setIndex(index + 1)}>
+            <svg aria-hidden="true" viewBox="0 0 16 16" className="size-4" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="5.5,2 11.5,8 5.5,14" />
+            </svg>
+          </button>}
         </>
       )}
     </div>

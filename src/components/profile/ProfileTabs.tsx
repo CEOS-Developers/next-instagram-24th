@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import type { ReactNode } from "react";
+import { useSearchParams } from "next/navigation";
 import { BookmarkIcon, GridIcon } from "@/components/icons";
 
 function TaggedIcon() {
@@ -8,20 +9,29 @@ function TaggedIcon() {
 }
 
 export default function ProfileTabs({ isMe, children, savedGrid, repostGrid, taggedGrid }: { isMe: boolean; savedGrid: ReactNode; repostGrid: ReactNode; taggedGrid: ReactNode; children: ReactNode }) {
-  const [active, setActive] = useState("게시물");
+  const searchParams = useSearchParams();
   const tabs = [
     { label: "게시물", icon: <GridIcon className="size-6" /> },
     ...(isMe ? [{ label: "저장됨", icon: <BookmarkIcon className="size-6" /> }] : []),
     { label: "리포스트", icon: <svg aria-hidden="true" viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="2"><path d="m2 9 4-4 4 4M6 5v10a3 3 0 003 3h4m9-3-4 4-4-4m4 4V9a3 3 0 00-3-3h-4"/></svg> },
     { label: "태그됨", icon: <TaggedIcon /> },
   ];
+  const active = tabs.find(tab => tab.label === searchParams.get("tab"))?.label ?? "게시물";
+
+  function selectTab(label: string) {
+    const url = new URL(window.location.href);
+    if (label === "게시물") url.searchParams.delete("tab");
+    else url.searchParams.set("tab", label);
+    window.history.replaceState(null, "", url);
+  }
+
   const relatedGrid = active === "리포스트" ? repostGrid : taggedGrid;
   return (
     <section id="profile-posts">
       <div role="group" aria-label="프로필 게시물 분류" className="mx-auto flex max-w-[740px] justify-around border-b border-neutral-200">
         {tabs.map(({ label, icon }) => (
           <button key={label} type="button" aria-label={label} title={label} aria-pressed={active === label}
-            onClick={() => setActive(label)}
+            onClick={() => selectTab(label)}
             className={`flex h-[72px] w-20 [&>svg]:size-8 items-center justify-center border-b-2 ${active === label ? "border-neutral-950 text-neutral-950" : "border-transparent text-neutral-500 hover:text-neutral-900"}`}>
             {icon}
           </button>

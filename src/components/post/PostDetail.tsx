@@ -1,3 +1,4 @@
+import { SaveButton } from "./PostSave";
 import PostCloseButton from "./PostCloseButton";
 import { PostImageIcon } from "@/components/icons";
 import { LikeButton, LikeCount } from "@/components/post/PostLike";
@@ -33,6 +34,7 @@ export default function PostDetail({ postId, standalone = false }: { postId: str
           <footer className="flex flex-wrap items-center gap-2 border-t border-neutral-200 p-4 text-sm">
             <LikeButton id={post.id} />
             <label htmlFor={`comment-input-${post.id}`} title="댓글 달기" className="cursor-pointer"><PostImageIcon name="comment" className="size-6" /><span className="sr-only">댓글 달기</span></label>
+            <SaveButton id={post.id} className="ml-auto" />
             <p className="w-full font-semibold">좋아요 <LikeCount id={post.id} count={post.likeCount} />개</p>
             <time className="text-xs text-neutral-500" dateTime={post.createdAt}>{formatDate(post.createdAt)}</time>
           </footer>
