@@ -41,6 +41,17 @@ export function useFollowedCount() {
   return useSyncExternalStore(subscribe, countFollowed, () => 0);
 }
 
+// 주어진 계정들 중 내가 팔로우 중인 계정 id 목록 (추천 목록에서 팔로우한 사람을 빼는 데 사용)
+// useSyncExternalStore 는 같은 값이면 같은 결과를 돌려줘야 해서, 배열 대신 문자열로 비교합니다.
+export function useFollowedIds(userIds: string[]) {
+  const joined = useSyncExternalStore(
+    subscribe,
+    () => userIds.filter(id => read(PREFIX + id)).join(","),
+    () => "",
+  );
+  return joined ? joined.split(",") : [];
+}
+
 // 팔로우 상태를 읽고 바꾸는 hook (버튼과 팔로워 수가 같은 상태를 공유)
 export function useFollowing(userId: string) {
   const key = PREFIX + userId;
