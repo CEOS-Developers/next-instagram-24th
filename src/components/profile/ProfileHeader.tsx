@@ -1,9 +1,11 @@
 "use client";
 
 import { Ellipsis, Settings, UserPlus } from "lucide-react";
+import Link from "next/link";
 import Avatar from "@/components/Avatar";
 import { currentUser, type Profile } from "@/data/profiles";
 import { useFollowing } from "@/hooks/useFollowing";
+import { useProfileBio } from "@/hooks/useProfileBio";
 
 type ProfileHeaderProps = {
   profile: Profile;
@@ -15,6 +17,8 @@ const profileButtonClassName =
 
 export default function ProfileHeader({ profile, postCount }: ProfileHeaderProps) {
   const isOwnProfile = profile.username === currentUser.username;
+  const { bio: savedBio } = useProfileBio(profile.bio);
+  const bio = isOwnProfile ? savedBio : profile.bio;
   const { followingUsernames, toggleFollow } = useFollowing();
   const isFollowing = followingUsernames.includes(profile.username);
   const wasFollowing = currentUser.followingUsernames.includes(profile.username);
@@ -73,13 +77,13 @@ export default function ProfileHeader({ profile, postCount }: ProfileHeaderProps
               </div>
             ))}
           </dl>
-          {profile.bio && <p className="mt-3 whitespace-pre-wrap">{profile.bio}</p>}
+          {bio && <p className="mt-3 whitespace-pre-wrap wrap-break-word">{bio}</p>}
         </div>
       </div>
 
       {isOwnProfile ? (
         <div className="mt-6 grid grid-cols-2 gap-2">
-          <button type="button" disabled className={profileButtonClassName}>프로필 편집</button>
+          <Link href="/accounts/edit" className={profileButtonClassName + " text-center hover:bg-neutral-200 focus-visible:outline-2 dark:hover:bg-neutral-700"}>프로필 편집</Link>
           <button type="button" disabled className={profileButtonClassName}>보관함 보기</button>
         </div>
       ) : (
