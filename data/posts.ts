@@ -1,5 +1,5 @@
-import type { Post } from "@/types/post";
-import { diaryProfile } from "@/data/profiles";
+import type { FeedPage, Post, PostWithAuthor } from "@/types/post";
+import { diaryProfile, getProfile } from "@/data/profiles";
 
 const posts: Post[] = [
   {
@@ -158,4 +158,22 @@ export function getPosts(authorId?: string): Post[] {
 
 export function getPost(id: string): Post | undefined {
   return posts.find((post) => post.id === id);
+}
+
+
+const PAGE_SIZE = 5;
+
+// 피드 한 페이지: 최신순으로 offset번째부터 5개 + 작성자 정보 붙이기
+export function getFeedPage(offset: number): FeedPage {
+  const feed = [...posts].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+  const page = feed.slice(offset, offset + PAGE_SIZE);
+
+  const pagePosts: PostWithAuthor[] = [];
+  for (const post of page) {
+    const author = getProfile(post.authorId);
+    if (author) pagePosts.push({ ...post, author });
+  }
+
+  const nextOffset = offset + PAGE_SIZE < feed.length ? offset + PAGE_SIZE : null;
+  return { posts: pagePosts, nextOffset };
 }
