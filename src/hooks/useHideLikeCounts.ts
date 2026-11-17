@@ -4,7 +4,7 @@ import { useSyncExternalStore } from "react";
 import { currentUser } from "@/data/profiles";
 
 const storagePrefix = `instagram:hide-like-counts:${currentUser.username}:`;
-const listeners = new Set<() => void>();
+const preferenceChangeEvent = "instagram:like-count-visibility-change";
 const memoryPreferences = new Map<string, boolean>();
 
 function getSnapshot(storageKey: string) {
@@ -23,15 +23,14 @@ function getServerSnapshot() {
 }
 
 function subscribe(listener: () => void) {
-  listeners.add(listener);
-
   function handleStorage(event: StorageEvent) {
     if (event.key === null || event.key.startsWith(storagePrefix)) listener();
   }
 
+  window.addEventListener(preferenceChangeEvent, listener);
   window.addEventListener("storage", handleStorage);
   return () => {
-    listeners.delete(listener);
+    window.removeEventListener(preferenceChangeEvent, listener);
     window.removeEventListener("storage", handleStorage);
   };
 }
@@ -48,7 +47,7 @@ function setPreference(storageKey: string, hide: boolean) {
     memoryPreferences.set(storageKey, hide);
   }
 
-  listeners.forEach((listener) => listener());
+  window.dispatchEvent(new Event(preferenceChangeEvent));
 }
 
 export function useHideLikeCounts(postId: string) {
