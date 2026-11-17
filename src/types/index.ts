@@ -16,6 +16,8 @@ export type Post = {
   id: string;
   authorId: User["id"];
   imageUrls: string[]; // 여러 장이면 캐러셀, 그리드에는 첫 장만 표시
+  repostedBy?: User["id"][];
+  taggedUserIds?: User["id"][];
   caption: string;
   likeCount: number;
   createdAt: string; // ISO 8601 문자열

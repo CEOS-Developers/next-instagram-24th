@@ -51,7 +51,7 @@ async function ProfileContent({ params }: Pick<PageProps<"/[username]">, "params
   return (
     <>
       <ProfileHeader user={user} postCount={posts.length} isMe={isMe} suggestions={isMe ? [] : getAllUsers().filter(u => u.id !== user.id && u.id !== getCurrentUser().id).slice(0, 3).map(({ username }) => ({ username }))} />
-      <ProfilePostGrid key={user.id} isMe={isMe} posts={posts} />
+      <ProfilePostGrid key={user.id} isMe={isMe} userId={user.id} posts={posts} />
     </>
   );
 }
