@@ -8,6 +8,7 @@ import PostGallery from "@/components/post/PostGallery";
 import Avatar from "@/components/Avatar";
 import FeedPostSkeleton from "@/components/feed/FeedPostSkeleton";
 import type { Post } from "@/data/posts";
+import { useHideLikeCounts } from "@/hooks/useHideLikeCounts";
 import { usePostInteractions } from "@/hooks/usePostInteractions";
 
 type FeedPostProps = {
@@ -28,6 +29,7 @@ export default function FeedPost({ post, isFirst = false }: FeedPostProps) {
   const { liked, saved, toggleLike, toggleSave } =
     usePostInteractions(post.id);
 
+  const { hideLikeCounts } = useHideLikeCounts();
   const [isFirstImageLoaded, setIsFirstImageLoaded] = useState(false);
   const isLoading = post.images.length > 0 && !isFirstImageLoaded;
 
@@ -101,9 +103,11 @@ export default function FeedPost({ post, isFirst = false }: FeedPostProps) {
             </button>
           </div>
 
-          <p className="mt-2 text-sm font-semibold">
-            좋아요 {(post.likeCount + Number(liked)).toLocaleString("ko-KR")}개
-          </p>
+          {!hideLikeCounts && (
+            <p className="mt-2 text-sm font-semibold">
+              좋아요 {(post.likeCount + Number(liked)).toLocaleString("ko-KR")}개
+            </p>
+          )}
 
           <p className="mt-2 text-sm whitespace-pre-wrap wrap-break-word">
             <Link href={profileHref} className="mr-2 font-semibold">
