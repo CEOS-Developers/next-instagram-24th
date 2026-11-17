@@ -1,8 +1,9 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import ProfileAvatar from "@/components/ProfileAvatar";
 import { getPost, getPosts } from "@/data/posts";
-import { defaultUsername, myPageHref, profileImage } from "@/app/_lib/profile";
+import { getProfile } from "@/data/profiles";
 import PostImageSlider from "./_components/PostImageSlider";
 
 export function generateStaticParams() {
@@ -20,12 +21,16 @@ export default async function PostDetailPage({
   if (!post) {
     notFound();
   }
+  const author = getProfile(post.author);
+  if (!author) notFound();
+
+  const authorHref = `/${author.username}`;
 
   return (
     <main className="mx-auto w-full max-w-[430px]">
       {/* A. 헤더 */}
       <header className="grid h-11 grid-cols-[24px_minmax(0,1fr)_24px] items-center px-4">
-        <Link href={myPageHref} aria-label="뒤로 가기">
+        <Link href={authorHref} aria-label="작성자 프로필로 돌아가기">
           <Image
             src="/icons/arrow.svg"
             alt=""
@@ -40,16 +45,10 @@ export default async function PostDetailPage({
 
       {/* B. 작성자 줄 */}
       <div className="flex h-14 items-center pl-3">
-        <Link href={myPageHref} className="flex items-center gap-3.5">
-          <Image
-            src={profileImage}
-            alt=""
-            width={32}
-            height={32}
-            className="size-8 rounded-full object-cover"
-          />
+        <Link href={authorHref} className="flex items-center gap-3.5">
+          <ProfileAvatar src={author.avatar} size={32} />
           <span className="text-sm leading-[18px] font-semibold">
-            {defaultUsername}
+            {author.username}
           </span>
         </Link>
         <button
@@ -69,53 +68,59 @@ export default async function PostDetailPage({
       </div>
 
       {/* C. 사진 */}
-      <PostImageSlider images={post.images} alt={post.caption} />
+      <PostImageSlider key={post.id} images={post.images} />
 
       {/* 사진 아래 정보 영역 */}
-<div className="px-4 pt-1.5 pb-4">
-  {/* D. 아이콘 줄 */}
-  <section className="mt-1 flex h-10 items-center">
-    <button
-      type="button"
-      disabled
-      aria-label="좋아요"
-      className="flex items-center gap-1.5 disabled:cursor-not-allowed"
-    >
-      <Image
-        src="/icons/heart.svg"
-        alt=""
-        width={24}
-        height={24}
-        className="dark:invert"
-      />
-      <span className="text-sm font-semibold">{post.likes}</span>
-    </button>
-    <button
-      type="button"
-      disabled
-      aria-label="저장"
-      className="ml-auto disabled:cursor-not-allowed"
-    >
-      <Image
-        src="/icons/bookmark.svg"
-        alt=""
-        width={24}
-        height={24}
-        className="dark:invert"
-      />
-    </button>
-  </section>
+      <div className="px-4 pt-1.5 pb-4">
+        {/* D. 아이콘 줄 */}
+        <section className="mt-1 flex h-10 items-center">
+          <button
+            type="button"
+            disabled
+            aria-label="좋아요"
+            className="flex items-center gap-1.5 disabled:cursor-not-allowed"
+          >
+            <Image
+              src="/icons/heart.svg"
+              alt=""
+              width={24}
+              height={24}
+              className="dark:invert"
+            />
+            <span className="text-sm font-semibold">{post.likes}</span>
+          </button>
+          <button
+            type="button"
+            disabled
+            aria-label="저장"
+            className="ml-auto disabled:cursor-not-allowed"
+          >
+            <Image
+              src="/icons/bookmark.svg"
+              alt=""
+              width={24}
+              height={24}
+              className="dark:invert"
+            />
+          </button>
+        </section>
 
-  {/* F. 본문 */}
-<p className="text-sm">
-  <span className="font-semibold">{defaultUsername}</span> {post.caption}
-</p>
+        {/* F. 본문 */}
+        <p className="text-sm">
+          <Link href={authorHref} className="font-semibold ">
+            {author.username}
+          </Link>{" "}
+          {post.caption}
+        </p>
 
-{/* G. 날짜 */}
-<time dateTime={post.createdAt} className="mt-1 block text-xs text-[#a8a8a8]">
-  {formatDate(post.createdAt)}
-</time>
-</div>
+        {/* G. 날짜 */}
+        <time
+          dateTime={post.createdAt}
+          className="mt-1 block text-xs text-[#a8a8a8]"
+        >
+          {formatDate(post.createdAt)}
+        </time>
+      </div>
     </main>
   );
 }
