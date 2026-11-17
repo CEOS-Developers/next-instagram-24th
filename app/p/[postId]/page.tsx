@@ -5,6 +5,7 @@ import ProfileAvatar from "@/components/ProfileAvatar";
 import { getPost, getPosts } from "@/data/posts";
 import { getProfile } from "@/data/profiles";
 import PostImageSlider from "./_components/PostImageSlider";
+import PostLikeButton from "./_components/PostLikeButton";
 
 export function generateStaticParams() {
   return getPosts().map((post) => ({ postId: post.id }));
@@ -74,21 +75,11 @@ export default async function PostDetailPage({
       <div className="px-4 pt-1.5 pb-4">
         {/* D. 아이콘 줄 */}
         <section className="mt-1 flex h-10 items-center">
-          <button
-            type="button"
-            disabled
-            aria-label="좋아요"
-            className="flex items-center gap-1.5 disabled:cursor-not-allowed"
-          >
-            <Image
-              src="/icons/heart.svg"
-              alt=""
-              width={24}
-              height={24}
-              className="dark:invert"
-            />
-            <span className="text-sm font-semibold">{post.likes}</span>
-          </button>
+          <PostLikeButton
+            postId={post.id}
+            initialLikes={post.likes}
+            initiallyLiked={post.likedByMe}
+          />
           <button
             type="button"
             disabled

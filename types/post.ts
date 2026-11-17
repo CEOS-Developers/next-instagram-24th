@@ -11,5 +11,6 @@ export type Post = {
   images: [PostImage, ...PostImage[]];
   caption: string; // 본문
   likes: number; // 좋아요 수
+  likedByMe?: boolean; // 기본 계정의 좋아요가 likes에 포함되어 있는지
   createdAt: string; // 작성 날짜 (YYYY-MM-DD)
 };

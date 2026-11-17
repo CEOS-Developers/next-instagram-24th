@@ -53,6 +53,7 @@ const posts: Post[] = [
     ],
     caption: "큰 화면으로 보고 싶은 두 편. 한 편은 우주 한복판, 한 편은 트로이의 목마 앞. 포스터만 봐도 앞자리보다 가운데 자리를 잡아야 할 것 같다.",
     likes: 155,
+    likedByMe: true,
     createdAt: "2026-11-16",
   },
   {
