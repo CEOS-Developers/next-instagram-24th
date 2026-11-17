@@ -3,11 +3,12 @@
 import { useSyncExternalStore } from "react";
 import { currentUser } from "@/data/profiles";
 
-const storageKey = `instagram:hide-like-counts:${currentUser.username}`;
+const storagePrefix = `instagram:hide-like-counts:${currentUser.username}:`;
 const listeners = new Set<() => void>();
-let memoryPreference: boolean | undefined;
+const memoryPreferences = new Map<string, boolean>();
 
-function getSnapshot() {
+function getSnapshot(storageKey: string) {
+  const memoryPreference = memoryPreferences.get(storageKey);
   if (memoryPreference !== undefined) return memoryPreference;
 
   try {
@@ -25,7 +26,7 @@ function subscribe(listener: () => void) {
   listeners.add(listener);
 
   function handleStorage(event: StorageEvent) {
-    if (event.key === storageKey || event.key === null) listener();
+    if (event.key === null || event.key.startsWith(storagePrefix)) listener();
   }
 
   window.addEventListener("storage", handleStorage);
@@ -35,19 +36,31 @@ function subscribe(listener: () => void) {
   };
 }
 
-function setHideLikeCounts(hide: boolean) {
+function setPreference(storageKey: string, hide: boolean) {
   try {
-    window.localStorage.setItem(storageKey, String(hide));
-    memoryPreference = undefined;
+    if (hide) {
+      window.localStorage.setItem(storageKey, "true");
+    } else {
+      window.localStorage.removeItem(storageKey);
+    }
+    memoryPreferences.delete(storageKey);
   } catch {
-    memoryPreference = hide;
+    memoryPreferences.set(storageKey, hide);
   }
 
   listeners.forEach((listener) => listener());
 }
 
-export function useHideLikeCounts() {
-  const hideLikeCounts = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+export function useHideLikeCounts(postId: string) {
+  const storageKey = storagePrefix + postId;
+  const hideLikeCounts = useSyncExternalStore(
+    subscribe,
+    () => getSnapshot(storageKey),
+    getServerSnapshot,
+  );
 
-  return { hideLikeCounts, setHideLikeCounts };
+  return {
+    hideLikeCounts,
+    setHideLikeCounts: (hide: boolean) => setPreference(storageKey, hide),
+  };
 }

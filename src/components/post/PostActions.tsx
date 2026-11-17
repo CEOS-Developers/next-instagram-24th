@@ -1,6 +1,7 @@
 "use client";
 
 import { Bookmark, Heart, MessageCircle } from "lucide-react";
+import PostLikeSummary from "@/components/post/PostLikeSummary";
 import { usePostInteractions } from "@/hooks/usePostInteractions";
 
 const buttonClassName = "grid size-8 place-items-center rounded-md";
@@ -40,7 +41,7 @@ export default function PostActions({ postId, likeCount, onComment }: PostAction
           <Bookmark aria-hidden="true" className="size-6" fill={saved ? "currentColor" : "none"} />
         </button>
       </div>
-      <p className="font-semibold">좋아요 {(likeCount + Number(liked)).toLocaleString("ko-KR")}개</p>
+      <PostLikeSummary postId={postId} likeCount={likeCount + Number(liked)} className="font-semibold" />
     </>
   );
 }
