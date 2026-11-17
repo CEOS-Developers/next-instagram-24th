@@ -4,6 +4,7 @@ import Link from "next/link";
 import ProfileAvatar from "@/components/ProfileAvatar";
 import { getPost, getPosts } from "@/data/posts";
 import { getProfile } from "@/data/profiles";
+import PostBackButton from "./_components/PostBackButton";
 import PostBookmarkButton from "./_components/PostBookmarkButton";
 import PostImageSlider from "./_components/PostImageSlider";
 import PostLikeButton from "./_components/PostLikeButton";
@@ -32,15 +33,7 @@ export default async function PostDetailPage({
     <main className="mx-auto w-full max-w-[430px]">
       {/* A. 헤더 */}
       <header className="grid h-11 grid-cols-[24px_minmax(0,1fr)_24px] items-center px-4">
-        <Link href={authorHref} aria-label="작성자 프로필로 돌아가기">
-          <Image
-            src="/icons/arrow.svg"
-            alt=""
-            width={24}
-            height={24}
-            className="-rotate-90 dark:invert"
-          />
-        </Link>
+        <PostBackButton fallbackHref={authorHref} />
         <h1 className="text-center">게시물</h1>
         <span />
       </header>
