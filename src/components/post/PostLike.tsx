@@ -1,7 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import { HeartIcon } from "@/components/icons";
+import { HeartIcon, PostImageIcon } from "@/components/icons";
 import { formatCount } from "@/lib/format";
 
 const memory = new Map<string, boolean>();
@@ -37,7 +37,8 @@ export function LikeButton({ id }: { id: string }) {
   return (
     <button type="button" onClick={toggle} aria-label="좋아요" aria-pressed={liked}
       className={`inline-flex cursor-pointer items-center justify-center rounded motion-safe:transition-transform active:scale-90 ${liked ? "text-red-500" : "hover:text-neutral-600"}`}>
-      <HeartIcon filled={liked} className="size-6" />
+      {/* 누르기 전: 잘라낸 빈 하트 이미지 / 누른 뒤: 빨간 채워진 하트 */}
+      {liked ? <HeartIcon filled className="size-6" /> : <PostImageIcon name="like" className="size-6" />}
     </button>
   );
 }

@@ -84,3 +84,12 @@ export function MultipleIcon({ className }: IconProps) {
     </svg>
   );
 }
+
+// 게시물 버튼 아이콘: 인스타그램 화면에서 잘라낸 이미지 (public/icons/post/*.png, 투명 배경)
+export function PostImageIcon({ name, className }: { name: "like" | "comment" | "share"; className?: string }) {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 54 54" className={className}>
+      <image href={`/icons/post/${name}.png`} width="54" height="54" />
+    </svg>
+  );
+}
