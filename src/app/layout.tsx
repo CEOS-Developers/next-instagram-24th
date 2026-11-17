@@ -19,6 +19,9 @@ export const metadata: Metadata = {
     template: "%s • Instagram",
   },
   description: "CEOS 24기 Next.js 인스타그램 클론",
+  icons: {
+    icon: "/icon.svg",
+  },
 };
 
 export default function RootLayout({ children, modal }: LayoutProps<"/">) {
@@ -29,7 +32,11 @@ export default function RootLayout({ children, modal }: LayoutProps<"/">) {
     <html lang="ko" className={`${geistSans.variable} h-full antialiased`}>
       <body className="min-h-full bg-white text-neutral-900">
         {/* 메뉴 강조는 주소를 알아야 하므로, 알기 전에는 강조 없는 메뉴를 먼저 보여줌 */}
-        <Suspense fallback={<NavigationView currentUser={currentUser} pathname={null} />}>
+        <Suspense
+          fallback={
+            <NavigationView currentUser={currentUser} pathname={null} />
+          }
+        >
           <Navigation currentUser={currentUser} />
         </Suspense>
 
