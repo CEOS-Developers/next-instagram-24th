@@ -19,11 +19,11 @@ export const metadata: Metadata = {
     template: "%s • Instagram",
   },
   description: "CEOS 24기 Next.js 인스타그램 클론",
-  // favicon: 브라우저마다 지원 형식이 달라서 여러 개를 함께 연결
-  // - SVG: 크롬·파이어폭스 / PNG·ICO: SVG favicon 을 잘 못 쓰는 Safari / apple: 아이폰 홈 화면
+  // favicon: 인스타그램 로고 이미지 (public/icon.png 를 크기별로 줄여서 사용)
+  // - PNG: 대부분의 브라우저 / ICO: 예전 방식(16·32·48px) / apple: 아이폰 홈 화면
   icons: {
     icon: [
-      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/icon.png", type: "image/png", sizes: "330x330" },
       { url: "/favicon-32.png", type: "image/png", sizes: "32x32" },
       { url: "/favicon.ico", sizes: "48x48" },
     ],
