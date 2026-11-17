@@ -2,7 +2,9 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Post } from "@/types/post";
 
-export default function PostGrid({ posts }: { posts: Post[] }) {
+export type PostGridItem = Pick<Post, "id" | "images">;
+
+export default function PostGrid({ posts }: { posts: PostGridItem[] }) {
   return (
     <div className="grid grid-cols-3 gap-[1px]">
       {posts.map(({ id, images: [cover] }) => (

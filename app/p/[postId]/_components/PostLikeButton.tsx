@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useId } from "react";
-import { usePostAction } from "../_lib/usePostAction";
+import { usePostAction } from "@/app/_lib/postActions";
 
 type PostLikeButtonProps = {
   postId: string;

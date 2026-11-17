@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { usePostAction } from "../_lib/usePostAction";
+import { usePostAction } from "@/app/_lib/postActions";
 
 type PostBookmarkButtonProps = {
   postId: string;

@@ -1,4 +1,5 @@
-import PostGrid from "@/components/PostGrid";
+import { defaultUsername } from "@/app/_lib/profile";
+import PostGrid, { type PostGridItem } from "@/components/PostGrid";
 import { getPosts } from "@/data/posts";
 import { getProfile } from "@/data/profiles";
 import { notFound } from "next/navigation";
@@ -12,15 +13,18 @@ async function ProfileContent({ params }: Pick<PageProps<"/[username]">, "params
   if (!profile) notFound();
 
   const posts = getPosts(profile.username);
+  const bookmarkCandidates = profile.username === defaultUsername
+    ? getPosts().map<PostGridItem>(({ id, images: [cover] }) => ({ id, images: [cover] }))
+    : undefined;
 
   return (
     <>
       <section aria-label="프로필" className="mt-4 mb-2 h-48.5">
         <Profile profile={profile} postCount={posts.length} />
       </section>
-      <ProfileTabs />
-      <hr className="border-t border-[#dbdfe4]" />
-      <PostGrid posts={posts} />
+      <ProfileTabs key={profile.username} bookmarkCandidates={bookmarkCandidates}>
+        <PostGrid posts={posts} />
+      </ProfileTabs>
     </>
   );
 }
