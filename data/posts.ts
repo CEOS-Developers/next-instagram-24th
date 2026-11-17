@@ -4,7 +4,7 @@ import { diaryProfile } from "@/data/profiles";
 const posts: Post[] = [
   {
     id: "1",
-    author: "demo",
+    authorId: "demo",
     images: [
       { src: "/posts/1-1.jpeg", alt: "먼직귀: 먼가 직장다니고 귀신 들린거.." },
     ],
@@ -14,7 +14,7 @@ const posts: Post[] = [
   },
   {
     id: "2",
-    author: "demo",
+    authorId: "demo",
     images: [
       { src: "/posts/2-1.jpeg", alt: "나애 일상" },
       { src: "/posts/2-2.jpeg", alt: "나애 일상" },
@@ -25,7 +25,7 @@ const posts: Post[] = [
   },
   {
     id: "3",
-    author: "demo",
+    authorId: "demo",
     images: [
       { src: "/posts/3-1.jpeg", alt: "나애 꿈" },
       { src: "/posts/3-2.jpeg", alt: "나애 꿈" },
@@ -36,7 +36,7 @@ const posts: Post[] = [
   },
   {
     id: "4",
-    author: "demo",
+    authorId: "demo",
     images: [
       { src: "/posts/4-1.jpeg", alt: "요즘 내 정신상태 헤헤" },
     ],
@@ -46,7 +46,7 @@ const posts: Post[] = [
   },
   {
     id: "11",
-    author: "film_notes",
+    authorId: "film_notes",
     images: [
       { src: "/posts/film/project-hail-mary.webp", alt: "우주선 안에 거꾸로 떠 있는 인물이 담긴 프로젝트 헤일메리 포스터" },
       { src: "/posts/film/the-odyssey.webp", alt: "불길 속 목마와 병사가 담긴 오디세이 포스터" },
@@ -57,7 +57,7 @@ const posts: Post[] = [
   },
   {
     id: "12",
-    author: "film_notes",
+    authorId: "film_notes",
     images: [
       { src: "/posts/film/hope.webp", alt: "어두운 숲 사이로 말을 타고 달리는 인물들이 담긴 호프 포스터" },
     ],
@@ -67,7 +67,7 @@ const posts: Post[] = [
   },
   {
     id: "13",
-    author: "film_notes",
+    authorId: "film_notes",
     images: [
       { src: "/posts/film/the-kings-warden.webp", alt: "기와 대문 아래 두 사람이 나란히 서 있는 왕과 사는 남자 포스터" },
     ],
@@ -77,7 +77,7 @@ const posts: Post[] = [
   },
   {
     id: "14",
-    author: "film_notes",
+    authorId: "film_notes",
     images: [
       { src: "/posts/film/la-la-land.webp", alt: "보랏빛 밤하늘과 가로등 아래 두 사람이 포옹하는 라라랜드 포스터" },
     ],
@@ -87,7 +87,7 @@ const posts: Post[] = [
   },
   {
     id: "5",
-    author: "slow_walks",
+    authorId: "slow_walks",
     images: [
       { src: "/posts/landscape/park-walk.webp", alt: "소나무 사이로 햇빛이 들고 두 사람이 산책로를 걷는 풍경" },
       { src: "/posts/landscape/quiet-street.webp", alt: "파란 하늘 아래 전신주와 빨간 신호등이 늘어선 한적한 도로" },
@@ -98,7 +98,7 @@ const posts: Post[] = [
   },
   {
     id: "6",
-    author: "slow_walks",
+    authorId: "slow_walks",
     images: [
       { src: "/posts/landscape/coastal-sunset.webp", alt: "노을 진 바다와 암석 해안이 비치는 차량 사이드미러" },
       { src: "/posts/landscape/underwater-light.webp", alt: "얕은 바닷물 아래 모래에 일렁이는 햇빛" },
@@ -109,7 +109,7 @@ const posts: Post[] = [
   },
   {
     id: "7",
-    author: diaryProfile.username,
+    authorId: diaryProfile.username,
     images: [
       { src: "/posts/diary/headphones.webp", alt: "길가에서 헤드폰을 쓴 인물 사진과 음악에 관한 글" },
       { src: "/posts/diary/music-player.webp", alt: "음악 플레이어를 손에 든 인물 사진과 옛 미니홈피 글" },
@@ -121,7 +121,7 @@ const posts: Post[] = [
   },
   {
     id: "8",
-    author: diaryProfile.username,
+    authorId: diaryProfile.username,
     images: [
       { src: "/posts/diary/anime-pose.webp", alt: "손가락 없는 장갑을 낀 손으로 한쪽 눈을 가린 애니메이션 인물" },
       { src: "/posts/diary/winter-scene.webp", alt: "눈을 감고 검은 모자 챙을 잡은 인물의 드라마 장면" },
@@ -132,7 +132,7 @@ const posts: Post[] = [
   },
   {
     id: "9",
-    author: diaryProfile.username,
+    authorId: diaryProfile.username,
     images: [
       { src: "/posts/diary/mirror-selfie.webp", alt: "디지털카메라와 하늘색 가방을 든 거울 셀카" },
     ],
@@ -142,7 +142,7 @@ const posts: Post[] = [
   },
   {
     id: "10",
-    author: diaryProfile.username,
+    authorId: diaryProfile.username,
     images: [
       { src: "/posts/diary/living-room.webp", alt: "냄비와 음료병을 앞에 두고 방바닥에 편하게 누운 사람들" },
     ],
@@ -152,8 +152,8 @@ const posts: Post[] = [
   },
 ];
 
-export function getPosts(username?: string): Post[] {
-  return username === undefined ? posts : posts.filter((post) => post.author === username);
+export function getPosts(authorId?: string): Post[] {
+  return authorId === undefined ? posts : posts.filter((post) => post.authorId === authorId);
 }
 
 export function getPost(id: string): Post | undefined {

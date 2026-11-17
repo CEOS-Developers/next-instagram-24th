@@ -7,7 +7,7 @@ export type PostImage = {
 
 export type Post = {
   id: string; // 상세 페이지 주소에 쓰이는 값 (/p/1)
-  author: MockProfile["username"];
+  authorId: MockProfile["username"];
   images: [PostImage, ...PostImage[]];
   caption: string; // 본문
   likes: number; // 좋아요 수

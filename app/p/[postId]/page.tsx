@@ -24,7 +24,7 @@ export default async function PostDetailPage({
   if (!post) {
     notFound();
   }
-  const author = getProfile(post.author);
+  const author = getProfile(post.authorId);
   if (!author) notFound();
 
   const authorHref = `/${author.username}`;
