@@ -37,6 +37,7 @@ export default function PostDialog({ children, previousId, nextId }: PostDialogP
       ref={dialogRef}
       aria-label="게시물 상세"
       onCancel={(event) => {
+        if (event.target !== event.currentTarget) return;
         event.preventDefault();
         router.back();
       }}

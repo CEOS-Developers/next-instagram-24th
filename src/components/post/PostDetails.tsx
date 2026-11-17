@@ -3,7 +3,9 @@ import Link from "next/link";
 import Avatar from "@/components/Avatar";
 import PostDiscussion from "@/components/post/PostDiscussion";
 import PostGallery from "@/components/post/PostGallery";
+import PostOptions from "@/components/post/PostOptions";
 import type { Post } from "@/data/posts";
+import { currentUser } from "@/data/profiles";
 
 const dateFormatter = new Intl.DateTimeFormat("ko-KR", {
   year: "numeric",
@@ -28,9 +30,13 @@ export default function PostDetails({ post }: { post: Post }) {
             <Avatar className="size-9" />
             <span className="truncate">{post.authorUsername}</span>
           </Link>
-          <button type="button" disabled aria-label="게시물 더 보기" className="grid size-9 shrink-0 place-items-center">
-            <Ellipsis aria-hidden="true" className="size-5" />
-          </button>
+          {post.authorUsername === currentUser.username ? (
+            <PostOptions key={post.id} postId={post.id} />
+          ) : (
+            <button type="button" disabled aria-label="게시물 더 보기" className="grid size-9 shrink-0 place-items-center">
+              <Ellipsis aria-hidden="true" className="size-5" />
+            </button>
+          )}
         </header>
 
         <PostDiscussion

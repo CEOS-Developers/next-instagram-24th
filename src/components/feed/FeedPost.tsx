@@ -8,6 +8,7 @@ import PostGallery from "@/components/post/PostGallery";
 import Avatar from "@/components/Avatar";
 import FeedPostSkeleton from "@/components/feed/FeedPostSkeleton";
 import type { Post } from "@/data/posts";
+import PostLikeSummary from "@/components/post/PostLikeSummary";
 import { usePostInteractions } from "@/hooks/usePostInteractions";
 
 type FeedPostProps = {
@@ -101,9 +102,11 @@ export default function FeedPost({ post, isFirst = false }: FeedPostProps) {
             </button>
           </div>
 
-          <p className="mt-2 text-sm font-semibold">
-            좋아요 {(post.likeCount + Number(liked)).toLocaleString("ko-KR")}개
-          </p>
+          <PostLikeSummary
+            postId={post.id}
+            likeCount={post.likeCount + Number(liked)}
+            className="mt-2 text-sm font-semibold"
+          />
 
           <p className="mt-2 text-sm whitespace-pre-wrap wrap-break-word">
             <Link href={profileHref} className="mr-2 font-semibold">
