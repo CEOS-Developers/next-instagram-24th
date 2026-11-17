@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 import Avatar from "@/components/Avatar";
-import { HeartIcon, HomeIcon, SendIcon } from "@/components/icons";
 import type { User } from "@/types";
 
 type NavigationViewProps = {
@@ -12,6 +11,16 @@ type NavigationViewProps = {
 // 화면에 그려지는 부분만 담당하는 컴포넌트 (hook 없음)
 // - md 이상: 왼쪽 고정 사이드바
 // - md 미만: 하단 탭바
+// 사이드바 아이콘: 인스타그램 화면에서 잘라낸 이미지 (public/icons/nav/*.png, 투명 배경)
+// <svg> 로 감싸서 globals.css 의 사이드바 아이콘 크기 규칙(.desktop-rail svg)이 그대로 적용되게 함
+function NavIcon({ name }: { name: "home" | "reels" | "direct" | "search" | "heart" | "plus" }) {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 56 56" className="size-7">
+      <image href={`/icons/nav/${name}.png`} width="56" height="56" />
+    </svg>
+  );
+}
+
 export default function NavigationView({ currentUser, pathname }: NavigationViewProps) {
   const profileHref = `/${currentUser.username}`;
   const isHome = pathname === "/";
@@ -22,7 +31,7 @@ export default function NavigationView({ currentUser, pathname }: NavigationView
       href: "/",
       label: "홈",
       active: isHome,
-      icon: <HomeIcon filled={isHome} className="size-6" />,
+      icon: <NavIcon name="home" />,
     },
     {
       href: profileHref,
@@ -49,11 +58,11 @@ export default function NavigationView({ currentUser, pathname }: NavigationView
     </svg>
   );
   const shortcuts = [
-    ["릴스", glyph("M8 2.5h8q5.5 0 5.5 5.5v8q0 5.5-5.5 5.5H8q-5.5 0-5.5-5.5V8q0-5.5 5.5-5.5Z M9.5 7.5v9l7-4.5Z")],
-    ["메시지", <SendIcon key="send" className="size-6" />],
-    ["검색", glyph("M18 10.5a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z M16 16l6 6")],
-    ["알림", <HeartIcon key="heart" className="size-6" />],
-    ["만들기", glyph("M12 3v18M3 12h18")],
+    ["릴스", <NavIcon key="reels" name="reels" />],
+    ["메시지", <NavIcon key="direct" name="direct" />],
+    ["검색", <NavIcon key="search" name="search" />],
+    ["알림", <NavIcon key="heart" name="heart" />],
+    ["만들기", <NavIcon key="plus" name="plus" />],
   ] as const;
   const railLink = (item: (typeof items)[number]) => (
     <Link href={item.href} aria-label={item.label}

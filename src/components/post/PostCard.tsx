@@ -4,7 +4,7 @@ import PostGallery from "./PostGallery";
 import Link from "next/link";
 
 import Avatar from "@/components/Avatar";
-import { CommentIcon, SendIcon } from "@/components/icons";
+import { PostImageIcon } from "@/components/icons";
 import { SaveButton } from "@/components/post/PostSave";
 import UserLink from "@/components/UserLink";
 import { formatDate } from "@/lib/format";
@@ -38,9 +38,9 @@ export default function PostCard({ post, commentCount, preload = false }: PostCa
       <div className="flex items-center gap-4 pt-3">
         <LikeButton id={post.id} />
         <Link href={postHref} aria-label="댓글 보기">
-          <CommentIcon className="size-6" />
+          <PostImageIcon name="comment" className="size-6" />
         </Link>
-        <SendIcon className="size-6" />
+        <PostImageIcon name="share" className="size-6" />
         <SaveButton id={post.id} className="ml-auto" />
       </div>
 

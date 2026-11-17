@@ -1,5 +1,5 @@
 import PostCloseButton from "./PostCloseButton";
-import { CommentIcon } from "@/components/icons";
+import { PostImageIcon } from "@/components/icons";
 import { LikeButton, LikeCount } from "@/components/post/PostLike";
 import { notFound } from "next/navigation";
 import PostComments from "@/components/post/PostComments";
@@ -32,7 +32,7 @@ export default function PostDetail({ postId, standalone = false }: { postId: str
           <PostComments key={post.id} id={post.id} initial={comments} username={getCurrentUser().username}>
           <footer className="flex flex-wrap items-center gap-2 border-t border-neutral-200 p-4 text-sm">
             <LikeButton id={post.id} />
-            <label htmlFor={`comment-input-${post.id}`} title="댓글 달기" className="cursor-pointer"><CommentIcon className="size-6" /><span className="sr-only">댓글 달기</span></label>
+            <label htmlFor={`comment-input-${post.id}`} title="댓글 달기" className="cursor-pointer"><PostImageIcon name="comment" className="size-6" /><span className="sr-only">댓글 달기</span></label>
             <p className="w-full font-semibold">좋아요 <LikeCount id={post.id} count={post.likeCount} />개</p>
             <time className="text-xs text-neutral-500" dateTime={post.createdAt}>{formatDate(post.createdAt)}</time>
           </footer>
