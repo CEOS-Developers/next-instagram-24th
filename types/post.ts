@@ -22,3 +22,8 @@ export type FeedPage = {
   posts: PostWithAuthor[];
   nextOffset: number | null; // 더 없으면 null
 };
+
+export type ProfilePostPage = {
+  posts: Post[];
+  nextOffset: number | null;
+};
