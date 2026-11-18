@@ -13,3 +13,12 @@ export type Post = {
   likes: number; // 좋아요 수
   createdAt: string; // 작성 날짜 (YYYY-MM-DD)
 };
+
+// 작성자 정보가 붙은 게시물 (피드에서 사용)
+export type PostWithAuthor = Post & { author: MockProfile };
+
+// 피드 한 페이지
+export type FeedPage = {
+  posts: PostWithAuthor[];
+  nextOffset: number | null; // 더 없으면 null
+};
