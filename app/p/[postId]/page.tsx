@@ -70,10 +70,10 @@ export default async function PostDetailPage({
       <div className="px-4 pt-1.5 pb-4">
         {/* D. 아이콘 줄 */}
         <section className="mt-1 flex h-10 items-center gap-4">
-  <PostLikeButton postId={post.id} initialLikes={post.likes} />
-  <PostExtraActions />
-  <PostBookmarkButton postId={post.id} />
-</section>
+          <PostLikeButton postId={post.id} initialLikes={post.likes} />
+          <PostExtraActions />
+          <PostBookmarkButton postId={post.id} />
+        </section>
 
         {/* F. 본문 */}
         <p className="text-sm">
