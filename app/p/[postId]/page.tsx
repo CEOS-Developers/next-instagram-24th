@@ -8,6 +8,7 @@ import PostBackButton from "./_components/PostBackButton";
 import PostBookmarkButton from "./_components/PostBookmarkButton";
 import PostImageSlider from "./_components/PostImageSlider";
 import PostLikeButton from "./_components/PostLikeButton";
+import PostExtraActions from "@/components/PostExtraActions";
 
 export function generateStaticParams() {
   return getPosts().map((post) => ({ postId: post.id }));
@@ -68,10 +69,11 @@ export default async function PostDetailPage({
       {/* 사진 아래 정보 영역 */}
       <div className="px-4 pt-1.5 pb-4">
         {/* D. 아이콘 줄 */}
-        <section className="mt-1 flex h-10 items-center">
-          <PostLikeButton postId={post.id} initialLikes={post.likes} />
-          <PostBookmarkButton postId={post.id} />
-        </section>
+        <section className="mt-1 flex h-10 items-center gap-4">
+  <PostLikeButton postId={post.id} initialLikes={post.likes} />
+  <PostExtraActions />
+  <PostBookmarkButton postId={post.id} />
+</section>
 
         {/* F. 본문 */}
         <p className="text-sm">

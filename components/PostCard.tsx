@@ -5,6 +5,7 @@ import PostLikeButton from "@/app/p/[postId]/_components/PostLikeButton";
 import PostBookmarkButton from "@/app/p/[postId]/_components/PostBookmarkButton";
 import { formatDate } from "@/utils/formatDate";
 import type { PostWithAuthor } from "@/types/post";
+import PostExtraActions from "@/components/PostExtraActions";
 
 type PostCardProps = {
   post: PostWithAuthor;
@@ -30,10 +31,11 @@ export default function PostCard({ post }: PostCardProps) {
 
       {/* 좋아요·북마크, 본문, 날짜 */}
       <div className="px-4 pt-1.5">
-        <section className="mt-1 flex h-10 items-center">
-          <PostLikeButton postId={post.id} initialLikes={post.likes} />
-          <PostBookmarkButton postId={post.id} />
-        </section>
+        <section className="mt-1 flex h-10 items-center gap-4">
+  <PostLikeButton postId={post.id} initialLikes={post.likes} />
+  <PostExtraActions />
+  <PostBookmarkButton postId={post.id} />
+</section>
         <p className="text-sm">
           <Link href={authorHref} className="font-semibold">
             {author.username}
