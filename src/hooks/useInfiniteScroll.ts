@@ -7,11 +7,9 @@ export type UseInfiniteScrollOptions = {
   onLoadMore: () => void;
   isLoading: boolean;
   hasMore: boolean;
-  /** 화면 하단에 도달하기 전에 미리 불러올 거리입니다. */
   rootMargin?: string;
 };
 
-/** 목록 맨 아래에 항상 렌더링하는 div에 반환한 ref를 연결합니다. */
 export default function useInfiniteScroll({
   onLoadMore,
   isLoading,
