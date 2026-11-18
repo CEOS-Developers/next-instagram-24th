@@ -1,7 +1,7 @@
-import PostGrid from "@/components/PostGrid";
-import { getPosts } from "@/data/posts";
+import { getProfilePage } from "@/data/posts";
+import ProfilePostList from "./_components/ProfilePostList";
 
 export default async function ProfilePostsPage({ params }: PageProps<"/[username]">) {
   const { username } = await params;
-  return <PostGrid posts={getPosts(username)} />;
+  return <ProfilePostList username={username} initialPage={getProfilePage(username, 0)} />;
 }

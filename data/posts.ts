@@ -1,5 +1,5 @@
-import type { FeedPage, Post, PostWithAuthor } from "@/types/post";
 import { diaryProfile, getProfile } from "@/data/profiles";
+import type { FeedPage, Post, PostWithAuthor, ProfilePostPage } from "@/types/post";
 
 const posts: Post[] = [
   {
@@ -176,4 +176,15 @@ export function getFeedPage(offset: number): FeedPage {
 
   const nextOffset = offset + PAGE_SIZE < feed.length ? offset + PAGE_SIZE : null;
   return { posts: pagePosts, nextOffset };
+}
+
+const PROFILE_PAGE_SIZE = 3;
+
+// 프로필 그리드 한 페이지: 그 사람 게시물을 offset번째부터 3개(한 줄)
+export function getProfilePage(username: string, offset: number): ProfilePostPage {
+  const userPosts = getPosts(username);
+  const page = userPosts.slice(offset, offset + PROFILE_PAGE_SIZE);
+  const nextOffset =
+    offset + PROFILE_PAGE_SIZE < userPosts.length ? offset + PROFILE_PAGE_SIZE : null;
+  return { posts: page, nextOffset };
 }
